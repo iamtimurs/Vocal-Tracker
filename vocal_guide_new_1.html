@@ -859,46 +859,141 @@
 
 
 
-function searchScore(text, query){
+function searchScore(problem, query){
 
     if(!query.trim()) return 1;
 
-    text = text
+    query=query
         .toLowerCase()
         .replace(/ё/g,"е");
 
-    const words = query
-        .toLowerCase()
-        .replace(/ё/g,"е")
+    const title=problem.title.toLowerCase().replace(/ё/g,"е");
+
+    const symptoms=problem.problem.toLowerCase().replace(/ё/g,"е");
+
+    const reason=problem.reason.toLowerCase().replace(/ё/g,"е");
+
+    const necessary=problem.necessary.toLowerCase().replace(/ё/g,"е");
+
+    const solution=problem.solution.toLowerCase().replace(/ё/g,"е");
+
+    const words=query
         .split(/\s+/)
         .filter(Boolean);
 
-    let score = 0;
+    let score=0;
 
     words.forEach(word=>{
 
-        // точное слово
-        if(text.includes(word)){
-            score += 100;
+        const root=word.substring(0,4);
+
+        // ======= НАЗВАНИЕ =======
+        if(title.includes(word)){
+
+            score+=250;
             return;
+
         }
 
-        // первые 4 буквы
-        const root = word.slice(0,4);
+        if(root.length>=3 && title.includes(root)){
 
-        if(root.length>=3 && text.includes(root)){
-            score += 70;
+            score+=180;
             return;
+
         }
 
-        // синонимы
+        // ======= СИМПТОМЫ =======
+        if(symptoms.includes(word)){
+
+            score+=150;
+            return;
+
+        }
+
+        if(root.length>=3 && symptoms.includes(root)){
+
+            score+=120;
+            return;
+
+        }
+
+        // ======= ПРИЧИНА =======
+        if(reason.includes(word)){
+
+            score+=100;
+            return;
+
+        }
+
+        if(root.length>=3 && reason.includes(root)){
+
+            score+=80;
+            return;
+
+        }
+
+        // ======= ЧТО НЕОБХОДИМО =======
+        if(necessary.includes(word)){
+
+            score+=40;
+            return;
+
+        }
+
+        // ======= РЕШЕНИЕ =======
+        if(solution.includes(word)){
+
+            score+=20;
+            return;
+
+        }
+
+        // ======= СИНОНИМЫ =======
         for(const key in synonyms){
 
             if(word.startsWith(key) || key.startsWith(root)){
 
-                if(synonyms[key].some(s=>text.includes(s))){
+                if(
 
-                    score += 60;
+                    synonyms[key].some(s=>
+
+                        title.includes(s)
+
+                    )
+
+                ){
+
+                    score+=180;
+                    return;
+
+                }
+
+                if(
+
+                    synonyms[key].some(s=>
+
+                        symptoms.includes(s)
+
+                    )
+
+                ){
+
+                    score+=120;
+                    return;
+
+                }
+
+                if(
+
+                    synonyms[key].some(s=>
+
+                        reason.includes(s)
+
+                    )
+
+                ){
+
+                    score+=80;
                     return;
 
                 }
@@ -951,7 +1046,7 @@ function searchScore(text, query){
     return {
 
         problem,
-        score: searchScore(searchableText,searchInput.value)
+        score: searchScore(problem,searchInput.value)
 
     };
 
