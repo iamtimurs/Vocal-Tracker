@@ -824,10 +824,17 @@
             let totalVisible = 0;
 
             categories.forEach(cat => {
-                const categoryProblems = problems.filter(p => 
-                    (currentFilter === 'all' || p.category === currentFilter) &&
-                    fuzzyMatch(p.problem + ' ' + p.reason + ' ' + p.solution + ' ' + p.title, searchInput.value)
-                );
+               const categoryProblems = problems.filter(p =>
+    p.category === cat.key &&
+    (currentFilter === "all" || currentFilter === cat.key) &&
+    fuzzyMatch(
+        p.problem + " " +
+        p.reason + " " +
+        p.solution + " " +
+        p.title,
+        searchInput.value
+    )
+);
 
                 if (categoryProblems.length > 0) {
                     const section = document.createElement('div');
