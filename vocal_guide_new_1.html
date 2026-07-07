@@ -789,24 +789,48 @@
         }
 
         // Fuzzy search function
-        function fuzzyMatch(text, pattern) {
-            if (!pattern) return true;
-            
-            const patternLower = pattern.toLowerCase();
-            const textLower = text.toLowerCase();
-            
-            // Direct substring match (highest priority)
-            if (textLower.includes(patternLower)) return true;
-            
-            // Fuzzy character match
-            let patternIdx = 0;
-            for (let i = 0; i < textLower.length && patternIdx < patternLower.length; i++) {
-                if (textLower[i] === patternLower[patternIdx]) {
-                    patternIdx++;
+       function fuzzyMatch(text, query){
+
+    if(!query) return true;
+
+    text = text.toLowerCase();
+
+    const words = query
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(Boolean);
+
+    for(const word of words){
+
+        if(text.includes(word))
+            continue;
+
+        let found = false;
+
+        if(synonyms[word]){
+
+            for(const alt of synonyms[word]){
+
+                if(text.includes(alt.toLowerCase())){
+
+                    found = true;
+                    break;
+
                 }
+
             }
-            return patternIdx === patternLower.length;
+
         }
+
+        if(!found){
+            return false;
+        }
+
+    }
+
+    return true;
+
+}
 
         // Render problems grouped by category
         function renderProblems() {
@@ -830,53 +854,17 @@
         return;
     }
                  
-               const categoryProblems = problems.filter(p =>
+              const categoryProblems = problems.filter(p =>
     p.category === cat.key &&
     (currentFilter === "all" || currentFilter === cat.key) &&
-    function fuzzyMatch(text, query){
-
-    if(!query) return true;
-
-    text = text.toLowerCase();
-
-    const words = query
-        .toLowerCase()
-        .split(/\s+/)
-        .filter(Boolean);
-
-    for(const word of words){
-
-        if(text.includes(word))
-            continue;
-
-        let found=false;
-
-        if(synonyms[word]){
-
-            for(const alt of synonyms[word]){
-
-                if(text.includes(alt.toLowerCase())){
-
-                    found=true;
-                    break;
-
-                }
-
-            }
-
-        }
-
-        if(!found){
-
-            return false;
-
-        }
-
-    }
-
-    return true;
-
-}
+    fuzzyMatch(
+        p.problem + " " +
+        p.reason + " " +
+        p.solution + " " +
+        p.title,
+        searchInput.value
+    )
+);
 
                 if (categoryProblems.length > 0) {
                     const section = document.createElement('div');
