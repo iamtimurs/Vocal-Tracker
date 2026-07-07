@@ -833,14 +833,50 @@
                const categoryProblems = problems.filter(p =>
     p.category === cat.key &&
     (currentFilter === "all" || currentFilter === cat.key) &&
-    fuzzyMatch(
-        p.problem + " " +
-        p.reason + " " +
-        p.solution + " " +
-        p.title,
-        searchInput.value
-    )
-);
+    function fuzzyMatch(text, query){
+
+    if(!query) return true;
+
+    text = text.toLowerCase();
+
+    const words = query
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(Boolean);
+
+    for(const word of words){
+
+        if(text.includes(word))
+            continue;
+
+        let found=false;
+
+        if(synonyms[word]){
+
+            for(const alt of synonyms[word]){
+
+                if(text.includes(alt.toLowerCase())){
+
+                    found=true;
+                    break;
+
+                }
+
+            }
+
+        }
+
+        if(!found){
+
+            return false;
+
+        }
+
+    }
+
+    return true;
+
+}
 
                 if (categoryProblems.length > 0) {
                     const section = document.createElement('div');
@@ -868,6 +904,41 @@
             counter.textContent = totalVisible;
         }
 
+        const synonyms = {
+
+    громко:["громкость","мощность","мощно","сильный","бэлт","энергия","ор"],
+    мощность:["громкость","громко","сильный","бэлт","энергия"],
+
+    тихо:["слабый","нет громкости","нет мощности"],
+
+    высоко:["верх","верхние","верхние ноты","диапазон","верхний"],
+    верх:["высоко","верхние"],
+
+    низко:["низ","нижние"],
+
+    боль:["болит","болезненно","режет","дискомфорт"],
+    болит:["боль","болезненно"],
+
+    горло:["гортань","шея"],
+    шея:["горло","гортань"],
+    гортань:["горло","шея"],
+
+    зажим:["напряжение","скованность","тяжесть"],
+    напряжение:["зажим"],
+
+    нос:["назальность","гнусавость"],
+    назальность:["нос","гнусавость"],
+
+    воздух:["воздушный","сиплый","сиплость","дыхание"],
+    сиплый:["воздух","сиплость"],
+
+    срыв:["срывы","ломается","нестабильно"],
+    срывы:["срыв"],
+
+    язык:["корень языка"],
+    челюсть:["лицо","рот"]
+};
+        
         // Create problem card
     function createProblemCard(problem) {
 
