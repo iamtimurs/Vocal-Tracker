@@ -33,10 +33,33 @@
         }
 
         .logo-container {
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-        }
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:35px;
+}
+
+.course-logo {
+
+    width:100%;
+    max-width:420px;
+
+    height:auto;
+
+    display:block;
+
+    transition:.35s ease;
+
+    filter:
+    drop-shadow(0 15px 30px rgba(0,0,0,.15));
+
+}
+
+.course-logo:hover {
+
+    transform:scale(1.03);
+
+}
 
         .logo {
             max-width: 300px;
@@ -179,109 +202,211 @@
             gap: 20px;
         }
 
-        .problem-card {
-            background: white;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border-left: 5px solid #d4731f;
-            display: none;
-        }
+        /* ---------- PROBLEM CARD ---------- */
 
-        .problem-card.visible {
-            display: block;
-            animation: slideIn 0.3s ease;
-        }
+.problem-card{
 
-        .problem-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(212, 115, 31, 0.15);
-        }
+    background:#fff;
 
-        .problem-number {
-            display: inline-block;
-            background: linear-gradient(135deg, #d4731f 0%, #e67e22 100%);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1em;
-            margin-bottom: 12px;
-        }
+    border-radius:22px;
 
-        .problem-title {
-            font-size: 1.1em;
-            font-weight: 700;
-            color: #2c2c2c;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
+    padding:28px;
 
-        .problem-item {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #f0ebe5;
-        }
+    border:none;
 
-        .problem-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
+    box-shadow:
+    0 12px 40px rgba(0,0,0,.07);
 
-        .problem-label {
-            font-weight: 700;
-            color: #d4731f;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            display: block;
-        }
+    transition:.35s;
 
-        .problem-text {
-            color: #5a5a5a;
-            font-size: 0.95em;
-            line-height: 1.5;
-        }
+    display:none;
 
-        .expand-btn {
-            margin-top: 12px;
-            padding: 10px 15px;
-            background: #fef5e7;
-            border: 1.5px solid #d4731f;
-            color: #d4731f;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-        }
+    overflow:hidden;
 
-        .expand-btn:hover {
-            background: #d4731f;
-            color: white;
-            transform: translateY(-2px);
-        }
+    position:relative;
 
-        .expanded-content {
-            display: none;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #f0ebe5;
-        }
+}
 
-        .expanded-content.show {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
+.problem-card.visible{
+
+    display:block;
+
+    animation:fadeIn .4s ease;
+
+}
+
+.problem-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 22px 60px rgba(0,0,0,.12);
+
+}
+
+.problem-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:6px;
+
+    height:100%;
+
+    background:linear-gradient(
+    180deg,
+    #d4731f,
+    #ffb14b
+    );
+
+}
+
+.problem-number{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    background:#d4731f;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.problem-title{
+
+    font-size:1.35rem;
+
+    font-weight:700;
+
+    color:#2f2f2f;
+
+    line-height:1.45;
+
+    margin-bottom:18px;
+
+}
+
+.problem-category{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#fff6eb;
+
+    color:#d4731f;
+
+    padding:8px 16px;
+
+    border-radius:40px;
+
+    font-weight:600;
+
+    margin-bottom:22px;
+
+}
+
+.problem-item{
+
+    margin-top:18px;
+
+}
+
+.problem-label{
+
+    color:#d4731f;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    margin-bottom:8px;
+
+    text-transform:uppercase;
+
+}
+
+.problem-text{
+
+    color:#555;
+
+    line-height:1.75;
+
+}
+
+.expand-btn{
+
+    width:100%;
+
+    margin-top:25px;
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:15px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    background:#d4731f;
+
+    color:#fff;
+
+    transition:.3s;
+
+}
+
+.expand-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#b95d11;
+
+}
+
+.expanded-content{
+
+    display:none;
+
+    margin-top:28px;
+
+    padding-top:25px;
+
+    border-top:1px solid #ececec;
+
+}
+
+.expanded-content.show{
+
+    display:block;
+
+}
 
         /* COUNTER */
         .counter {
@@ -365,39 +490,12 @@
         <!-- HEADER -->
         <div class="header">
             <div class="logo-container">
-                <svg class="logo" viewBox="0 0 450 120" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Microphone -->
-                    <g>
-                        <!-- Mic body -->
-                        <rect x="30" y="25" width="25" height="45" rx="12" fill="#a89968" opacity="0.9"/>
-                        <ellipse cx="42.5" cy="25" rx="12.5" ry="8" fill="#a89968"/>
-                        
-                        <!-- Mic grille -->
-                        <g stroke="#a89968" stroke-width="2" fill="none">
-                            <line x1="38" y1="35" x2="47" y2="35"/>
-                            <line x1="38" y1="42" x2="47" y2="42"/>
-                            <line x1="38" y1="49" x2="47" y2="49"/>
-                            <line x1="38" y1="56" x2="47" y2="56"/>
-                        </g>
-                        
-                        <!-- Neck/Stand -->
-                        <path d="M 35 70 Q 30 75 32 85 L 52 85 Q 54 75 49 70" fill="#a89968"/>
-                        <rect x="38" y="85" width="9" height="2" fill="#a89968"/>
-                        
-                        <!-- Stand base -->
-                        <ellipse cx="42.5" cy="90" rx="12" ry="4" fill="#a89968" opacity="0.7"/>
-                    </g>
-                    
-                    <!-- Text -->
-                    <text x="80" y="45" font-family="'Copperplate', light" font-size="18" font-weight="700" fill="#5a4a3a">
-                        ОНЛАЙН-КУРС
-                    </text>
-                    <text x="80" y="70" font-family="'Kalissa', regular" font-size="20" font-weight="700" fill="#5a4a3a" font-style="italic">
-                        Система вокала
-                    </text>
-                </svg>
-            </div>
-            <h1>Гид по вокальным проблемам</h1>
+    <img src="logo.png"
+         alt="Система вокала"
+         class="course-logo">
+</div>
+            
+            <h1>Гид по решению вокальных проблем</h1>
             <p>Полный справочник симптомов, причин и решений для развития вашего голоса</p>
         </div>
 
@@ -751,43 +849,81 @@
         }
 
         // Create problem card
-        function createProblemCard(problem) {
-            const card = document.createElement('div');
-            card.className = 'problem-card visible';
+       function createProblemCard(problem) {
+    const card = document.createElement('div');
+    card.className = 'problem-card visible';
 
-            card.innerHTML = `
-                <div class="problem-number">${problem.number}</div>
-                <div class="problem-title">${problem.title}</div>
+    // Название структуры. Позже можно вынести в данные problem.structure
+    const structureMap = {
+        loudness: '💪 Мощь звука',
+        comfort: '🫁 Источник звука',
+        density: '🫁 Источник звука',
+        height: '🫁 Источник звука',
+        timbre: '🫁 Источник звука',
+        beauty: '🎭 Акустика',
+        brightness: '🎭 Акустика'
+    };
 
-                <div class="problem-item">
-                    <label class="problem-label">💬 Симптомы / Проблема</label>
-                    <div class="problem-text">${problem.problem}</div>
+    const structure = structureMap[problem.category] || '🎭 Акустика';
+
+    card.innerHTML = `
+        <div class="problem-number">${problem.number}</div>
+
+        <div class="problem-title">${problem.title}</div>
+
+        <div class="problem-category">
+            ${structure}
+        </div>
+
+        <button class="expand-btn" onclick="toggleExpanded(this)">
+            Подробнее ▼
+        </button>
+
+        <div class="expanded-content">
+
+            <div class="problem-item">
+                <label class="problem-label">💬 Симптомы</label>
+                <div class="problem-text">
+                    ${problem.problem}
+                    <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                 </div>
+            </div>
 
-                <div class="problem-item">
-                    <label class="problem-label">🔍 Причина</label>
-                    <div class="problem-text">${problem.reason}</div>
+            <div class="problem-item">
+                <label class="problem-label">🔍 Причина</label>
+                <div class="problem-text">
+                    ${problem.reason}
+                    <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                 </div>
+            </div>
 
-                <div class="problem-item">
-                    <label class="problem-label">🎯 Что нам необходимо</label>
-                    <div class="problem-text">${problem.necessary}</div>
+            <div class="problem-item">
+                <label class="problem-label">🎯 Что необходимо</label>
+                <div class="problem-text">
+                    ${problem.necessary}
+                    <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                 </div>
+            </div>
 
-                <button class="expand-btn" onclick="toggleExpanded(this)">
-                    Показать решение ▼
-                </button>
+            <button class="expand-btn" onclick="toggleSolution(this)">
+                Показать решение ▼
+            </button>
 
-                <div class="expanded-content">
-                    <div class="problem-item">
-                        <label class="problem-label">✅ Вариант решения</label>
-                        <div class="problem-text">${problem.solution}</div>
+            <div class="expanded-content">
+                <div class="problem-item">
+                    <label class="problem-label">✅ Варианты решения</label>
+                    <div class="problem-text">
+                        ${problem.solution}
+                        <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                     </div>
                 </div>
-            `;
+            </div>
 
-            return card;
-        }
+        </div>
+    `;
+
+    return card;
+}
 
         // Toggle expanded content
         window.toggleExpanded = function(btn) {
@@ -797,6 +933,7 @@
                 ? 'Скрыть решение ▲' 
                 : 'Показать решение ▼';
         };
+
 
         // Event listeners
         function attachEventListeners() {
