@@ -905,30 +905,61 @@
                 </div>
             </div>
             
-                <div class="problem-item">
-                    <label class="problem-label">✅ Варианты решения</label>
-                    <div class="problem-text">
-                        ${problem.solution}
-                        <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
-                    </div>
-                </div>
-            </div>
+                <button class="solution-btn" onclick="toggleSolution(this)">
+    Показать решение ▼
+</button>
 
+<div class="solution-content">
+
+    <div class="problem-item">
+        <label class="problem-label">✅ Варианты решения</label>
+
+        <div class="problem-text">
+            ${problem.solution}
+            <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
         </div>
+
+    </div>
+
+</div>
+           
     `;
 
     return card;
 }
 
         // Toggle expanded content
-        window.toggleExpanded = function(btn) {
-            const expanded = btn.nextElementSibling;
-            expanded.classList.toggle('show');
-            btn.textContent = expanded.classList.contains('show') 
-                ? 'Скрыть решение ▲' 
-                : 'Подробнее ▼';
-        };
+      window.toggleExpanded = function(btn) {
 
+    const expanded = btn.nextElementSibling;
+
+    expanded.classList.toggle("show");
+
+    if(expanded.classList.contains("show")){
+
+        btn.innerHTML="Скрыть ▲";
+
+    }else{
+
+        btn.innerHTML="Подробнее ▼";
+
+    }
+
+};
+
+        function toggleSolution(button) {
+
+    const content = button.nextElementSibling;
+
+    content.classList.toggle("show");
+
+    if (content.classList.contains("show")) {
+        button.innerHTML = "Скрыть решение ▲";
+    } else {
+        button.innerHTML = "Показать решение ▼";
+    }
+
+}
 
         // Event listeners
         function attachEventListeners() {
