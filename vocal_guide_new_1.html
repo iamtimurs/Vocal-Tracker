@@ -407,6 +407,17 @@
     display:block;
 
 }
+        .solution-content{
+
+    display:none;
+
+}
+
+.solution-content.show{
+
+    display:block;
+
+}
 
         /* COUNTER */
         .counter {
@@ -879,6 +890,38 @@
             Подробнее ▼
         </button>
 
+     function createProblemCard(problem) {
+
+    const card = document.createElement('div');
+    card.className = 'problem-card visible';
+
+    const structureMap = {
+        loudness: '💪 Мощь звука',
+        comfort: '🫁 Источник звука',
+        density: '🫁 Источник звука',
+        height: '🫁 Источник звука',
+        timbre: '🫁 Источник звука',
+        beauty: '🎭 Акустика',
+        brightness: '🎭 Акустика'
+    };
+
+    const structure = structureMap[problem.category] || '🎭 Акустика';
+
+    card.innerHTML = `
+        <div class="problem-number">${problem.number}</div>
+
+        <div class="problem-title">
+            ${problem.title}
+        </div>
+
+        <div class="problem-category">
+            ${structure}
+        </div>
+
+        <button class="expand-btn" onclick="toggleExpanded(this)">
+            Подробнее ▼
+        </button>
+
         <div class="expanded-content">
 
             <div class="problem-item">
@@ -904,59 +947,61 @@
                     <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                 </div>
             </div>
-            
-                <button class="solution-btn" onclick="toggleSolution(this)">
-    Показать решение ▼
-</button>
 
-<div class="solution-content">
+            <button class="solution-btn" onclick="toggleSolution(this)">
+                Показать решение ▼
+            </button>
 
-    <div class="problem-item">
-        <label class="problem-label">✅ Варианты решения</label>
+            <div class="solution-content">
 
-        <div class="problem-text">
-            ${problem.solution}
-            <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
+                <div class="problem-item">
+                    <label class="problem-label">✅ Варианты решения</label>
+
+                    <div class="problem-text">
+                        ${problem.solution}
+                        <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
+                    </div>
+                </div>
+            </div>
         </div>
-
-    </div>
-
-</div>
-           
     `;
 
     return card;
 }
 
         // Toggle expanded content
-      window.toggleExpanded = function(btn) {
-
-    const expanded = btn.nextElementSibling;
-
-    expanded.classList.toggle("show");
-
-    if(expanded.classList.contains("show")){
-
-        btn.innerHTML="Скрыть ▲";
-
-    }else{
-
-        btn.innerHTML="Подробнее ▼";
-
-    }
-
-};
-
-        function toggleSolution(button) {
+     window.toggleExpanded = function(button){
 
     const content = button.nextElementSibling;
 
     content.classList.toggle("show");
 
-    if (content.classList.contains("show")) {
-        button.innerHTML = "Скрыть решение ▲";
-    } else {
-        button.innerHTML = "Показать решение ▼";
+    if(content.classList.contains("show")){
+
+        button.innerHTML="Скрыть ▲";
+
+    }else{
+
+        button.innerHTML="Подробнее ▼";
+
+    }
+
+}
+
+     window.toggleSolution = function(button){
+
+    const content = button.nextElementSibling;
+
+    content.classList.toggle("show");
+
+    if(content.classList.contains("show")){
+
+        button.innerHTML="Скрыть решение ▲";
+
+    }else{
+
+        button.innerHTML="Показать решение ▼";
+
     }
 
 }
