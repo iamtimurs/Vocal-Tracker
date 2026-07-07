@@ -824,6 +824,12 @@
             let totalVisible = 0;
 
             categories.forEach(cat => {
+
+    if (currentFilter !== "all" && currentFilter !== cat.key) {
+
+        return;
+    }
+                 
                const categoryProblems = problems.filter(p =>
     p.category === cat.key &&
     (currentFilter === "all" || currentFilter === cat.key) &&
