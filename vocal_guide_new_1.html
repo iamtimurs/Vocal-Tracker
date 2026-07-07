@@ -854,55 +854,27 @@
         }
 
         // Create problem card
-       function createProblemCard(problem) {
-    const card = document.createElement('div');
-    card.className = 'problem-card visible';
+    function createProblemCard(problem) {
 
-    // Название структуры. Позже можно вынести в данные problem.structure
+    const card = document.createElement("div");
+    card.className = "problem-card visible";
+
     const structureMap = {
-        loudness: '💪 Мощь звука',
-        comfort: '🫁 Источник звука',
-        density: '🫁 Источник звука',
-        height: '🫁 Источник звука',
-        timbre: '🫁 Источник звука',
-        beauty: '🎭 Акустика',
-        brightness: '🎭 Акустика'
+        loudness: "💪 Мощь звука",
+        comfort: "🫁 Источник звука",
+        density: "🫁 Источник звука",
+        height: "🫁 Источник звука",
+        timbre: "🫁 Источник звука",
+        beauty: "🎭 Акустика",
+        brightness: "🎭 Акустика"
     };
 
-    const structure = structureMap[problem.category] || '🎭 Акустика';
+    const structure = structureMap[problem.category] || "";
 
     card.innerHTML = `
-        <div class="problem-number">${problem.number}</div>
-
-        <div class="problem-title">${problem.title}</div>
-
-        <div class="problem-category">
-            ${structure}
+        <div class="problem-number">
+            ${problem.number}
         </div>
-
-        <button class="expand-btn" onclick="toggleExpanded(this)">
-            Подробнее ▼
-        </button>
-
-     function createProblemCard(problem) {
-
-    const card = document.createElement('div');
-    card.className = 'problem-card visible';
-
-    const structureMap = {
-        loudness: '💪 Мощь звука',
-        comfort: '🫁 Источник звука',
-        density: '🫁 Источник звука',
-        height: '🫁 Источник звука',
-        timbre: '🫁 Источник звука',
-        beauty: '🎭 Акустика',
-        brightness: '🎭 Акустика'
-    };
-
-    const structure = structureMap[problem.category] || '🎭 Акустика';
-
-    card.innerHTML = `
-        <div class="problem-number">${problem.number}</div>
 
         <div class="problem-title">
             ${problem.title}
@@ -912,55 +884,93 @@
             ${structure}
         </div>
 
-        <button class="expand-btn" onclick="toggleExpanded(this)">
+        <button class="expand-btn">
             Подробнее ▼
         </button>
 
         <div class="expanded-content">
 
             <div class="problem-item">
-                <label class="problem-label">💬 Симптомы</label>
+                <div class="problem-label">
+                    💬 Симптомы
+                </div>
+
                 <div class="problem-text">
                     ${problem.problem}
-                    <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                 </div>
             </div>
 
             <div class="problem-item">
-                <label class="problem-label">🔍 Причина</label>
+                <div class="problem-label">
+                    🔍 Причина
+                </div>
+
                 <div class="problem-text">
                     ${problem.reason}
-                    <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                 </div>
             </div>
 
             <div class="problem-item">
-                <label class="problem-label">🎯 Что необходимо</label>
+                <div class="problem-label">
+                    🎯 Что необходимо
+                </div>
+
                 <div class="problem-text">
                     ${problem.necessary}
-                    <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                 </div>
             </div>
 
-            <button class="solution-btn" onclick="toggleSolution(this)">
+            <button class="solution-btn">
                 Показать решение ▼
             </button>
 
             <div class="solution-content">
 
                 <div class="problem-item">
-                    <label class="problem-label">✅ Варианты решения</label>
+
+                    <div class="problem-label">
+                        ✅ Варианты решения
+                    </div>
 
                     <div class="problem-text">
                         ${problem.solution}
-                        <!-- TODO: СВЕРИТЬ С PDF ДОСЛОВНО -->
                     </div>
+
                 </div>
+
             </div>
+
         </div>
     `;
 
+    const expandBtn = card.querySelector(".expand-btn");
+    const expanded = card.querySelector(".expanded-content");
+
+    expandBtn.addEventListener("click", () => {
+
+        expanded.classList.toggle("show");
+
+        expandBtn.textContent = expanded.classList.contains("show")
+            ? "Скрыть ▲"
+            : "Подробнее ▼";
+
+    });
+
+    const solutionBtn = card.querySelector(".solution-btn");
+    const solution = card.querySelector(".solution-content");
+
+    solutionBtn.addEventListener("click", () => {
+
+        solution.classList.toggle("show");
+
+        solutionBtn.textContent = solution.classList.contains("show")
+            ? "Скрыть решение ▲"
+            : "Показать решение ▼";
+
+    });
+
     return card;
+
 }
 
         // Toggle expanded content
