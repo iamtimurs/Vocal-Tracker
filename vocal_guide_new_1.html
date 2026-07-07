@@ -859,47 +859,57 @@
 
 
 
-function fuzzyMatch(text, query){
+function searchScore(text, query){
 
-    if(!query.trim()) return true;
+    if(!query.trim()) return 1;
 
-    text=text
+    text = text
         .toLowerCase()
         .replace(/ё/g,"е");
 
-    const words=query
+    const words = query
         .toLowerCase()
         .replace(/ё/g,"е")
         .split(/\s+/)
         .filter(Boolean);
 
-    return words.every(word=>{
+    let score = 0;
 
-        // ищем слово целиком
-        if(text.includes(word))
-            return true;
+    words.forEach(word=>{
 
-        // ищем первые 4 буквы слова
-        const root=word.slice(0,4);
+        // точное слово
+        if(text.includes(word)){
+            score += 100;
+            return;
+        }
 
-        if(root.length>=3 && text.includes(root))
-            return true;
+        // первые 4 буквы
+        const root = word.slice(0,4);
 
-        // ищем синонимы
+        if(root.length>=3 && text.includes(root)){
+            score += 70;
+            return;
+        }
+
+        // синонимы
         for(const key in synonyms){
 
             if(word.startsWith(key) || key.startsWith(root)){
 
-                if(synonyms[key].some(s=>text.includes(s)))
-                    return true;
+                if(synonyms[key].some(s=>text.includes(s))){
+
+                    score += 60;
+                    return;
+
+                }
 
             }
 
         }
 
-        return false;
-
     });
+
+    return score;
 
 }
         // Render problems grouped by category
@@ -924,17 +934,31 @@ function fuzzyMatch(text, query){
         return;
     }
                  
-              const categoryProblems = problems.filter(p =>
-    p.category === cat.key &&
-    (currentFilter === "all" || currentFilter === cat.key) &&
-    fuzzyMatch(
-        p.problem + " " +
-        p.reason + " " +
-        p.solution + " " +
-        p.title,
-        searchInput.value
-    )
-);
+              const categoryProblems = problems
+.map(problem=>{
+
+    if(problem.category!==cat.key)
+        return null;
+
+    const searchableText=[
+        problem.title,
+        problem.problem,
+        problem.reason,
+        problem.necessary,
+        problem.solution
+    ].join(" ");
+
+    return {
+
+        problem,
+        score: searchScore(searchableText,searchInput.value)
+
+    };
+
+})
+.filter(item=>item && item.score>0)
+.sort((a,b)=>b.score-a.score)
+.map(item=>item.problem);
 
                 if (categoryProblems.length > 0) {
                     const section = document.createElement('div');
