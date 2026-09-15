@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гид по устранению вокальных проблем — Система вокала</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --c-loudness: #d4731f;    --bg-loudness: #fff6eb;
+            --c-density: #6a4fb3;     --bg-density: #f4f0fb;
+            --c-comfort: #1f8f78;     --bg-comfort: #eafaf6;
+            --c-beauty: #c2437a;      --bg-beauty: #fdeef4;
+            --c-brightness: #c99a1f;  --bg-brightness: #fdf7e6;
+            --c-height: #2f6fd4;      --bg-height: #eaf1fd;
+            --c-timbre: #8a5a2f;      --bg-timbre: #f6efe6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #faf7f2 0%, #f0ebe5 50%, #e8dfd2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c2c2c;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* HEADER SECTION */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 0.6s ease;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .course-logo {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            display: block;
+            transition: .35s ease;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,.15));
+        }
+
+        .course-logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo-fallback {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #5a4a3a;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            font-weight: 700;
+            color: #5a4a3a;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #7a6a5a;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 18px;
+        }
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stat-chip {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid #e2d3bd;
+            border-radius: 30px;
+            padding: 7px 16px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #7a5a3a;
+        }
+
+        /* GLOSSARY */
+        .glossary-toggle {
+            display: block;
+            margin: 0 auto 20px;
+            background: none;
+            border: 2px dashed #d4a574;
+            color: #8a6a45;
+            border-radius: 12px;
+            padding: 10px 18px;
+            font-weight: 600;
+            font-size: 0.92em;
+            cursor: pointer;
+            transition: .25s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glossary-toggle:hover {
+            background: #fff6eb;
+            border-color: #d4731f;
+        }
+
+        .glossary-panel {
+            display: none;
+            background: #fffdfa;
+            border: 1px solid #eaddc7;
+            border-radius: 16px;
+            padding: 22px 26px;
+            margin-bottom: 25px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .glossary-panel.show { display: block; }
+
+        .glossary-panel h3 {
+            font-family: 'Playfair Display', serif;
+            color: #5a4a3a;
+            margin-bottom: 14px;
+            font-size: 1.3em;
+        }
+
+        .glossary-list dt {
+            font-weight: 700;
+            color: #d4731f;
+            margin-top: 10px;
+        }
+
+        .glossary-list dd {
+            color: #555;
+            line-height: 1.6;
+            margin-left: 0;
+        }
+
+        /* SEARCH SECTION */
+        .search-box {
+            margin-bottom: 14px;
+            animation: slideUp 0.6s ease 0.1s both;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 1.05em;
+            border: 2px solid #d4a574;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #d4731f;
+            box-shadow: 0 8px 30px rgba(212, 115, 31, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .search-box input::placeholder {
+            color: #b8a892;
+        }
+
+        /* SEARCH CHIPS */
+        .chips-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            animation: slideUp 0.6s ease 0.15s both;
+        }
+
+        .chips-label {
+            font-size: 0.85em;
+            color: #9a8a75;
+            align-self: center;
+            margin-right: 4px;
+        }
+
+        .search-chip {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid #e2d3bd;
+            color: #7a5a3a;
+            border-radius: 30px;
+            padding: 7px 14px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: .2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-chip:hover {
+            background: #d4731f;
+            border-color: #d4731f;
+            color: white;
+        }
+
+        /* FILTER BUTTONS */
+        .filters-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+            animation: slideUp 0.6s ease 0.2s both;
+        }
+
+        .filter-btn {
+            padding: 18px 12px;
+            border: 2px solid #d4a574;
+            background: rgba(255, 255, 255, 0.85);
+            color: #5a4a3a;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .filter-btn:hover {
+            background: linear-gradient(135deg, #e8a76a 0%, #d4a574 100%);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(212, 115, 31, 0.2);
+            border-color: #d4731f;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--cat-color, #d4731f) 0%, #e67e22 100%);
+            color: white;
+            border-color: var(--cat-color, #d4731f);
+            box-shadow: 0 8px 25px rgba(212, 115, 31, 0.3);
+        }
+
+        .filter-emoji {
+            font-size: 1.8em;
+        }
+
+        .filter-label {
+            font-size: 0.85em;
+            line-height: 1.2;
+        }
+
+        /* PROBLEMS SECTION */
+        .problems-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .category-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            font-weight: 700;
+            color: #5a4a3a;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--cat-color, #d4731f);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-emoji {
+            font-size: 1.8em;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 20px;
+        }
+
+        /* NO RESULTS */
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .no-results .nr-emoji {
+            font-size: 3em;
+            margin-bottom: 12px;
+        }
+
+        .no-results h3 {
+            font-family: 'Playfair Display', serif;
+            color: #5a4a3a;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .no-results p {
+            color: #8a7a65;
+            margin-bottom: 16px;
+        }
+
+        /* ---------- PROBLEM CARD ---------- */
+        .problem-card {
+            background: #fff;
+            border-radius: 22px;
+            padding: 28px;
+            border: none;
+            box-shadow: 0 12px 40px rgba(0,0,0,.07);
+            transition: .35s;
+            display: none;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .problem-card.visible {
+            display: block;
+            animation: fadeIn .4s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 60px rgba(0,0,0,.12);
+        }
+
+        .problem-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--cat-color, #d4731f), #ffb14b);
+        }
+
+        .card-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .problem-number {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--cat-color, #d4731f);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid #eaddc7;
+            background: #fffdfa;
+            cursor: pointer;
+            font-size: 1.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .2s;
+        }
+
+        .icon-btn:hover {
+            background: #fff6eb;
+            transform: scale(1.08);
+        }
+
+        .icon-btn.bookmarked {
+            background: #fff2d6;
+            border-color: #e0b23a;
+        }
+
+        .problem-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #2f2f2f;
+            line-height: 1.45;
+            margin-bottom: 16px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .problem-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--cat-bg, #fff6eb);
+            color: var(--cat-color, #d4731f);
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        .difficulty-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .difficulty-1 { background: #eaf7ec; color: #2f9145; }
+        .difficulty-2 { background: #fdf3df; color: #b3811a; }
+        .difficulty-3 { background: #fbe9e6; color: #c14a34; }
+
+        .problem-item {
+            margin-top: 18px;
+        }
+
+        .problem-label {
+            color: var(--cat-color, #d4731f);
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .problem-text {
+            color: #555;
+            line-height: 1.75;
+        }
+
+        .term {
+            border-bottom: 1px dotted var(--cat-color, #d4731f);
+            cursor: help;
+            font-weight: 600;
+        }
+
+        .related-row {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px dashed #ecdfc9;
+            font-size: 0.88em;
+        }
+
+        .related-row a {
+            color: var(--cat-color, #d4731f);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .related-row a:hover {
+            text-decoration: underline;
+        }
+
+        .expand-btn {
+            width: 100%;
+            margin-top: 25px;
+            border: none;
+            border-radius: 14px;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            background: var(--cat-color, #d4731f);
+            color: #fff;
+            transition: .3s;
+        }
+
+        .expand-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(0.92);
+        }
+
+        .expanded-content {
+            display: none;
+        }
+
+        .expanded-content.show {
+            display: block;
+        }
+
+        .solution-content {
+            margin-top: 18px;
+            background: var(--cat-bg, #fff6eb);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+
+        .check-result {
+            margin-top: 10px;
+            font-size: 0.92em;
+            color: #4a7a52;
+            background: #eef8ef;
+            border-radius: 10px;
+            padding: 10px 14px;
+        }
+
+        /* TOOLTIP */
+        .term-tooltip {
+            position: fixed;
+            max-width: 280px;
+            background: #2c2416;
+            color: #fdf7ec;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.88em;
+            line-height: 1.5;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            z-index: 999;
+            display: none;
+        }
+
+        .term-tooltip.show {
+            display: block;
+            animation: fadeIn 0.15s ease;
+        }
+
+        /* COUNTER */
+        .counter {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.95em;
+            color: #7a6a5a;
+            font-weight: 500;
+        }
+
+        .counter strong {
+            color: #d4731f;
+            font-weight: 700;
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2em; }
+            .filters-container { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+            .problems-grid { grid-template-columns: 1fr; }
+            .category-title { font-size: 1.6em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo.png" alt="Система вокала" class="course-logo"
+                     onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';">
+                <div class="logo-fallback" id="logoFallback">🎤 Система вокала</div>
+            </div>
+
+            <h1>Гид по решению вокальных проблем</h1>
+            <p>Полный справочник симптомов, причин и решений для развития вашего голоса</p>
+
+            <div class="stats-bar" id="statsBar"></div>
+        </div>
+
+        <!-- GLOSSARY -->
+        <button class="glossary-toggle" id="glossaryToggle">📖 Словарь терминов — не понимаете слово в тексте? Загляните сюда</button>
+        <div class="glossary-panel" id="glossaryPanel">
+            <h3>Словарь вокальных терминов</h3>
+            <dl class="glossary-list" id="glossaryList"></dl>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Опишите проблему... (например: 'боль в горле', 'плохое пение', 'тяжелый звук')">
+        </div>
+        <div class="chips-row">
+            <span class="chips-label">Частые запросы:</span>
+            <button class="search-chip" data-q="боль в горле">боль в горле</button>
+            <button class="search-chip" data-q="срывы на крике">срывы на крике</button>
+            <button class="search-chip" data-q="тяжелый звук">тяжелый звук</button>
+            <button class="search-chip" data-q="гнусавость">гнусавость</button>
+            <button class="search-chip" data-q="воздушный звук">воздушный звук</button>
+            <button class="search-chip" data-q="высокие ноты">высокие ноты</button>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters-container" id="filtersContainer">
+            <button class="filter-btn active" data-filter="all">
+                <span class="filter-emoji">📋</span>
+                <span class="filter-label">Все</span>
+            </button>
+            <button class="filter-btn cat-loudness" data-filter="loudness">
+                <span class="filter-emoji">📢</span>
+                <span class="filter-label">Громкость</span>
+            </button>
+            <button class="filter-btn cat-density" data-filter="density">
+                <span class="filter-emoji">🎯</span>
+                <span class="filter-label">Плотность</span>
+            </button>
+            <button class="filter-btn cat-comfort" data-filter="comfort">
+                <span class="filter-emoji">🛟</span>
+                <span class="filter-label">Удобство</span>
+            </button>
+            <button class="filter-btn cat-beauty" data-filter="beauty">
+                <span class="filter-emoji">🌟</span>
+                <span class="filter-label">Красота</span>
+            </button>
+            <button class="filter-btn cat-brightness" data-filter="brightness">
+                <span class="filter-emoji">✨</span>
+                <span class="filter-label">Яркость</span>
+            </button>
+            <button class="filter-btn cat-height" data-filter="height">
+                <span class="filter-emoji">🎼</span>
+                <span class="filter-label">Высота</span>
+            </button>
+            <button class="filter-btn cat-timbre" data-filter="timbre">
+                <span class="filter-emoji">🎵</span>
+                <span class="filter-label">Тембр</span>
+            </button>
+            <button class="filter-btn" data-filter="bookmarked">
+                <span class="filter-emoji">🔖</span>
+                <span class="filter-label">Избранное</span>
+            </button>
+        </div>
+
+        <!-- PROBLEMS -->
+        <div class="problems-container" id="problemsContainer"></div>
+
+        <!-- COUNTER -->
+        <div class="counter">
+            Найдено: <strong id="counter">0</strong> проблем
+        </div>
+    </div>
+
+    <div class="term-tooltip" id="termTooltip"></div>
+
+    <script>
+        // ===================== DATA =====================
+        // number, title, category, problem, reason, necessary, solution, difficulty(1-3), checkResult, related[]
+        const problems = [
+    {
+        number: 1,
+        title: "Нехватка мощности звука",
+        category: ["loudness"],
+        emoji: "📢",
+        problem: "Нехватка мощности звука, стабильности звука (срывы), слишком мягкий, тихий или неполётный звук",
+        reason: "Отсутствие анкеровки торса",
+        necessary: "Вам необходим мощный, громкий, полетный и стабильный звук без срывов для, возможно, кульминационной части вашей песни. Бэлт, Микст-Бэлт или толстое смыкание.",
+        solution: "Создайте тонус в области торса: активируйте широчайшие мышцы спины (расправьте руки в стороны, как будто хотите обнять кого-то или как будто готовитесь взять что-то тяжелое), почувствуйте тонус в корпусе, примените это положение в исполнении",
+        difficulty: 2,
+        checkResult: "Звук стал мощнее, появилась опора в корпусе, высокоинтенсивный звук не срывается.",
+        related: [2, 9]
+    },
+{
+        number: 2,
+        title: "Слишком мягкий, нежный звук",
+        category: ["loudness", "timbre"],
+        emoji: "🎯",
+        problem: "Слишком мягкий, нежный звук при необходимом мощном металлическом. (Часто встречается у тихо, мягко разговаривающих девушек)",
+        reason: "Толщина смыкания",
+        necessary: "Вам необходим плотный толстый (металлизированный) звук.",
+        solution: "Утолщите смыкание агрессивно поговорив, покричав, примените ощущение в исполнении или Усильте атаку на острую гортанную",
+        difficulty: 2,
+        checkResult: "В нужных местах звук стал плотным и «металлическим».",
+        related: [9, 20]
+    },
+     {
+        number: 3,
+        title: "Ватное начало звука, нет остроты, колкости, полётности",
+        category: ["loudness", "brightness"],
+        emoji: "🛟",
+        problem: "Ватное начало звука, отсутствие остроты, колкости, полётности",
+        reason: "Недостаток твердой атаки",
+        necessary: "Вам необходим резкий, твердый, монументальный звук. Возможно вы поете песню с темпераментным звучанием вокала.",
+        solution: "Усильте атаку на острую гортанную, исключите придыхание, сократите вдох",
+        difficulty: 2,
+        checkResult: "Звук начинается чётко и сразу, без «подъезда» и придыхания.",
+        related: [12]
+    },
+    {
+        number: 4,
+        title: "Отсутствие полётности, мощности, энергии",
+        category: ["loudness", "comfort", "timbre"],
+        emoji: "📢",
+        problem: "Отсутствие полётности, мощности, энергии в звуке",
+        reason: "Деактивированный перстневидный хрящ",
+        necessary: "Вам необходим мощный, громкий, полетный и стабильный звук без срывов для, возможно, кульминационной части вашей песни.",
+        solution: "Позовите кого-нибудь на \"Эй\" или \"Эгегей\", примените это ощущение в исполнении",
+        difficulty: 3,
+        checkResult: "Звук зазвучал легче, ушла придавленность, появилась «полётность» и энергия.",
+        related: [19]
+    },
+{
+        number: 5,
+        title: "Слишком воздушный звук",
+        category: ["density"],
+        emoji: "🎯",
+        problem: "Слишком воздушный звук при необходимом плотном",
+        reason: "Деактивированный щитовидный хрящ",
+        necessary: "Вам необходим плотный звук без признаков лишнего воздуха, без \"сиплости\" в звуке.",
+        solution: "Мягко риплакните или порыдайте на фразе, следите за гортанью (не опускайте ее), примените ощущение в исполнении",
+        difficulty: 2,
+        checkResult: "Ушла лишняя «воздушность» и сипение, звук стал плотным.",
+        related: [5, 11]
+    },
+    {
+        number: 6,
+        title: "Перенапряжение в звуке и теле",
+        category: ["comfort"],
+        emoji: "🛟",
+        problem: "Перенапряжение в звуке и в теле, отсутствие подвижности и легкости, комфорта. Зажим",
+        reason: "Избыток анкеровки торса – напряжение в теле",
+        necessary: "Вам необходим стабильный звук, легкое и подвижное тело, удобство при исполнении (в том числе и сложных технически отрезков)",
+        solution: "Снимите напряжение движением тела во время исполнения (походите на месте, покачайтесь в стороны туда-сюда), попробуйте обмануть мозг, спев сложную фразу с невиданной легкостью, в максимально расслабленном состоянии",
+        difficulty: 2,
+        checkResult: "Тело свободно двигается во время пения, зажим ушёл, звук берется легко.",
+        related: [4]
+    },
+
+    {
+        number: 7,
+        title: "Тяжесть звука и боль в шее",
+        category: ["comfort"],
+        emoji: "🛟",
+        problem: "Тяжесть звука, болезненные ощущения в области шеи и гортани, голова поднимается вверх",
+        reason: "Избыток напряжения в области шеи, отсутствие физиологичной анкеровки",
+        necessary: "Вам необходим стабильный звук, легкость в шее, удобство при исполнении (в том числе и сложных технически отрезков)",
+        solution: "Опустите голову параллельно полу и приведите шею в анкерованное положение. Можно слегка наклонить голову вниз, но не тянуть её вверх. Или поставить кулак ко лбу и слегка надавить, чтобы голова не тянулась вверх и вперед",
+        difficulty: 1,
+        checkResult: "Шея не напряжена, голова не тянется вверх, боль прошла.",
+        related: [3, 7]
+    },
+{
+        number: 8,
+        title: "Болезненные режущие ощущения над кадыком",
+        category: ["comfort"],
+        emoji: "🌟",
+        problem: "Болезненные режущие ощущения над кадыком, расщепление звука. (Иногда сопровождается 'грязью' в звучании)",
+        reason: "Неконтролируемое сужение ложных голосовых складок",
+        necessary: "Вам необходим чистый, удобный и комфортный звук без дополнительных признаков расщепления: 'грязи звука'.",
+        solution: "Сделайте маневр по расслаблению (упражнение голосовой замок) или Посмейтесь, почувствуйте свободу прохождения воздуха, примените ощущение радости в исполнении",
+        difficulty: 3,
+        checkResult: "Звук чистый, без расщепления и режущей боли над кадыком.",
+        related: [6]
+    },
+{
+        number: 9,
+        title: "Тяжесть на высоких звуках, фальш в верхнем диапазоне",
+        category: ["comfort", "height"],
+        emoji: "🎼",
+        problem: "Тяжесть на высоких звуках, 'грязь' в интонировании верхнего диапазона",
+        reason: "Заниженная гортань",
+        necessary: "Вам необходимы легкие, чистые и удобные верхние ноты в любом голосовом качестве и любой громкости, плотности и яркости.",
+        solution: "Спойте сложный отрезок более детским голосом. Сделайте маневр по расслаблению языка, поднимите корень и высуньте кончик наружу, примените в исполнении, сохраняя положение языка и гортани",
+        difficulty: 2,
+        checkResult: "Верхний диапазон интонируется чисто, без напряжения.",
+        related: [2, 7]
+    },
+    {
+        number: 10,
+        title: "Тяжесть на высоких нотах, завал звука \"назад\"",
+        category: ["comfort"],
+        emoji: "🛟",
+        problem: "Тяжесть звука, 'грязь' в интонировании высоких нот. 'Заваленные назад', тяжелые гласные звуки.",
+        reason: "Опущенный, зажатый корень языка. АНАЛОГИЧНО ОПУЩЕННОЙ ГОРТАНИ",
+        necessary: "Вам необходим свободный, яркий, полетный звук на высоких нотах без выраженных дополнительных призвуков (назальность, объем).",
+        solution: "Сделайте маневр по расслаблению языка, поднимите корень и высуньте кончик наружу, примените высокий язык исполнении",
+        difficulty: 2,
+        checkResult: "Высокие ноты звучат свободно и чисто, без «завала назад» и тяжести.",
+        related: [4, 19]
+    },
+    {
+        number: 11,
+        title: "Пение 'сквозь зубы', избыток напряжения в лице и челюсти",
+        category: ["comfort"],
+        emoji: "🛟",
+        problem: "Пение 'сквозь зубы', болезненные ощущения в лице, челюсти",
+        reason: "Зажим челюсти",
+        necessary: "Вам необходим свободный, комфортный звук и дикция, как в разговорной речи, без дополнительных сжатий, призвуков",
+        solution: "Сделайте маневр по расслаблению челюсти, проговорите фразу в расслабленном виде: 'на отвали', примените положение в исполнении",
+        difficulty: 1,
+        checkResult: "Челюсть и лицо свободны, дикция естественная, как в речи.",
+        related: [7, 16]
+    },
+
+    {
+        number: 12,
+        title: "Чрезмерная назальность, гнусавость",
+        category: ["beauty", "timbre"],
+        emoji: "🌟",
+        problem: "Чрезмерная назальность, гнусавость звука",
+        reason: "Опущенное мягкое нёбо",
+        necessary: "Вам необходим чуть объемный 'горловой' звук без признаков назализации. НЕМНОГО походит на академический вокал. Звук открытый, свободный, без эффекта гнусавости",
+        solution: "Поднимите мягкое нёбо, создав купол в глотке, позевав, (следите за гортанью, не опускайте ее)",
+        difficulty: 1,
+        checkResult: "Гнусавость ушла, звук естественный, но не потерял яркости.",
+        related: [15, 17]
+    },
+{
+        number: 13,
+        title: "Слишком 'близкий' звук, отсутствие объема",
+        category: ["beauty"],
+        emoji: "🌟",
+        problem: "Слишком 'близкий' звук, отсутствие объема звука",
+        reason: "Вытянутые губы или их зажатое состояние",
+        necessary: "Вам необходим чуть объемный, свободный звук, комфортный на разных звуковысотах. Возможно, более глубокая глоточная форма (как в Бэлте)",
+        solution: "Сделайте трель губами, расслабьте их, проговорите фразу в речевой форме, примените в исполнении. Чем более вогнутые губы вовнутрь, тем более глубокий звук. Аналогично наоборот.",
+        difficulty: 2,
+        checkResult: "В звуке появился объём, ушла излишняя «плоскость».",
+        related: [14]
+    },
+    {
+        number: 14,
+        title: "Отсутствие яркости, звонкости звука",
+        category: ["brightness", "timbre"],
+        emoji: "✨",
+        problem: "Отсутствие яркости, звонкости или назальной окраски звука",
+        reason: "Широкий СЧН",
+        necessary: "Вам необходим назализированный в разных пропорциях звук. Яркий, звонкий, пронзительный, при этом легкий.",
+        solution: "Сузьте СЧН, имитируя ведьмочку, мяукая, максимально утрированно, примените в исполнении",
+        difficulty: 1,
+        checkResult: "Звук стал звонче и ярче без потери лёгкости.",
+        related: [14]
+    },
+    {
+        number: 15,
+        title: "Слишком 'металлический', острый звук",
+        category: ["timbre"],
+        emoji: "🎵",
+        problem: "Слишком 'металлический' звук при необходимой тонкости",
+        reason: "Толщина смыкания",
+        necessary: "Вам необходим мягкий, нежный и тонкий звук, зачастую тихий, в тихом музыкальном фрагменте",
+        solution: "Утончите смыкание нежно поговорив или имитируя высокий 'девчачий' голос",
+        difficulty: 1,
+        checkResult: "Звук стал мягче и тоньше в нужном тихом фрагменте.",
+        related: [9, 10]
+    },
+    {
+        number: 16,
+        title: "Слишком 'мультяшный' детский звук",
+        category: ["timbre"],
+        emoji: "🎯",
+        problem: "Слишком 'мультяшный', сплющенный или детский звук, отсутствие объема",
+        reason: "Чрезмерно завышенная гортань",
+        necessary: "Вам необходим классический звук любого голосового качества любых параметров без ярко выраженной характерной окраски звука (мультяшности, противности, детскости)",
+        solution: "Поимитируйте 'деда мороза', опустив гортань, сократите полученную окраску на ~50%, примените в исполнении. Или Расслабьтесь, проговорите сложный отрезок обычной речью, примените это среднее положение гортани в исполнении",
+        difficulty: 2,
+        checkResult: "Звук стал спокойнее и «взрослее», характерная детскость ушла.",
+        related: [10]
+    },
+                {
+                number: 17, title: "Занижаю ноту", category: ["height"], emoji: "🎼",
+                problem: "Регулярно не дотягиваете нужную ноту, особенно на высоких или протяжных звуках. Дискомфорта и боли при этом нет.",
+                reason: "Недостаточная точность интонирования и потеря тонусной организации звука",
+                necessary: "Вам необходимо стабильно попадать точно в заданную высоту в выбранном голосовом качестве.",
+                solution: "Прослушайте нужный отрезок в оригинале. Пропойте нужную ноту отдельно и коротко на удобной громкости в целевых буквах (можно изменить голосовое качество, т.е. взять звук, например, тоньше). Затем повторите её в контексте фразы, сохраняя то же ощущение высоты. Затем постепенно увеличивайте громкость и возвращайте нужное голосовое качество.",
+                difficulty: 1,
+                checkResult: "Нота начинает звучать точно, без заметного занижения в нужном голосовом качестве.",
+                related: [5, 19]
+            },
+            {
+                number: 18, title: "Завышаю ноту", category: ["height"], emoji: "🎼",
+                problem: "Регулярно перелетаете нужную ноту вверх, особенно при эмоциональном или громком исполнении",
+                reason: "Избыточная интенсивность атаки и мышечного тонуса, как следствие – потеря контроля над высотой звука",
+                necessary: "Вам необходимо сохранять точную высоту ноты независимо от эмоциональности и громкости.",
+                solution: "Уменьшите интенсивность атаки, используйте более сбалансированные и мягкие атаки, снизьте громкость, убавьте коэффициент мышечного тонуса, спойте проблемную ноту, затем постепенно верните необходимую громкость и голосовое качество.",
+                difficulty: 2,
+                checkResult: "Высота ноты сохраняется точно даже при увеличении громкости и энергетики.",
+                related: [17]
+            },
+            {
+                number: 19, title: "Подъезд к звуку", category: ["height"], emoji: "🎼",
+                problem: "Перед нужной нотой появляется подъезд, слайд и неточное начало",
+                reason: "Нестабильная атака или недостаточная координация слуха и голосового аппарата",
+                necessary: "Вам необходимо сразу попадать в нужную ноту без подъезда и лишних попыток.",
+                solution: "Примените более острую и твердую атаку. Возьмите проблемную ноту отдельно, коротко и на удобной громкости, затем повторите её в контексте фразы, сохраняя то же ощущение острой атаки и высоты. Острая атака характеризуется быстрым и точным началом звука без подъезда, лишнего воздуха, с звукового \"хлопка\" в начале.",
+                difficulty: 1,
+                checkResult: "Нота начинается сразу на нужной высоте.",
+                related: [17,18]
+            },
+            {
+                number: 20, title: "Голос ломается на переходе", category: ["height", "comfort"], emoji: "🎼",
+                problem: "При движении вверх или вниз голос внезапно срывается, ломается или меняет качество",
+                reason: "Некоординированный переход между регистрами",
+                necessary: "Вам необходим плавный переход между регистрами без внезапного брейка (слома).",
+                solution: "Сделайте упражнение \"Сирена\" на звук [ng] на всём вашем диапазоне от самого нижнего до самого высокого звука, начиная с толстого смыкания и постепенно переходя в тонкое, отследите момент перехода, где звук \"ломается\". Пройдите этот отрезок максимально плавно и аккуратно. Вам будут необходимы тренировки и повторенияю. Затем используйте это упражнение в целевом слоге текста: [ng] замените на целевой слог. Сосредоточьтесь на ощущении непрерывности и плавности.",
+                difficulty: 2,
+                checkResult: "Переход между регистрами становится плавным, без резкого перелома.",
+                related: [7, 18, 19]
+            },
+            {
+                number: 21, title: "Не получается микст", category: ["height", "density", "comfort"], emoji: "🎼",
+                problem: "Грудным голосом наверху тяжело, головным получается слишком тонко, а промежуточное звучание не выходит",
+                reason: "Отсутствие координации между плотностью, высотой и интенсивностью звука",
+                necessary: "Вам необходим смешанный звук, сочетающий устойчивость грудного и лёгкость головного звучания.",
+                solution: "Используйте вводное в Микст упражнение: похнычьте, поплачьте, изобразите ноющего ребенка. Ваш звук должен отзываться и ощущаться в носоглотке, в центре головы. Чем выше нота в Миксте – тем выше он будет ощущаться. <em>Не брезгуйте назализацией, редуцируйте гласные буквы, сокращайте работу челюсти.</em> Примените найденный звук в целевой фразе сначала отдельно, затем увеличивайте контекст.",
+                difficulty: 3,
+                checkResult: "Появилось промежуточное качество между грудным и головным звуком.",
+                related: []
+            },
+            {
+                number: 22, title: "Не получается перенести технику в песню", category:  ["comfort"], emoji: "🎼",
+                problem: "Высокая нота или новая техника легко получается на распевке, но в конкретной песне срывается и не получается",
+                reason: "Техника не переносится на конкретный текст, гласную, ритм или музыкальную фразу, недостаточная тренировки и нехватка уделенного внимания на перенос техники в песню",
+                necessary: "Вам необходимо перенести рабочую координацию с упражнения непосредственно в буквы, слоги, ритм, эмоцию.",
+                solution: "Используйте последовательность переноса техники:<br>– Вводное упражнение – тренируем структуры и привыкаем к конфигурации;<br>– Часть сложной фразы – тренируем звучание и структуры в контексте фразы (слог, слово);<br>– Вся сложная фраза целиком – тренируем звучание и структуры в контексте отрывка песни, тренируем подход к сложному отрезку, сохряняя конфигурации;<br>– Вся песня – тренируем мышечную память, подход к сложному отрезку, фиксируем результат.",
+                difficulty: 2,
+                checkResult: "Та же высокая нота или новая техника начинает получаться непосредственно в песне.",
+                related: []
+            },
+            {
+                number: 23, title: "На одной гласной высокая нота получается, на другой — нет", category: ["height", "comfort"], emoji: "🎼",
+                problem: "Одинаковая по высоте нота легко получается на одной гласной, но срывается или зажимается на другой",
+                reason: "Неадаптированная глоточная форма гласной для конкретной высоты",
+                necessary: "Вам необходимо сохранить высоту и свободу звука независимо от гласной.",
+                solution: "Измените глоточную форму проблемной гласной.<br>– Для голосового качества Бэлт: преимущественно открытая, широкая глотка (чем выше – тем шире). <em>Удобные гласные для Бэлта: [o], [э]</em>.<br>– Для голосового качества Микст, Твенг, Спич: преимущественно закрытая, узкая глотка (чем выше – тем уже и выше в носоглотку). <em>Удобные гласные для Микста: [и], [а], [ю].</em><br>Примените найденную глоточную форму в целевой фразе сначала отдельно, затем увеличивайте контекст.",
+                difficulty: 2,
+                checkResult: "Проблемная гласная больше не вызывает срыв или зажим на высокой ноте.",
+                related: []
+            },
+            {
+                number: 24, title: "При смене гласной теряется высота", category: ["height", "beauty"], emoji: "🌟",
+                problem: "При смене гласной нота становится неточной, хотя по отдельности интонация стабильна",
+                reason: "Изменение положения языка, челюсти или формы глотки при артикуляции",
+                necessary: "Вам необходимо сохранить точную высоту при свободной артикуляции текста.",
+                solution: "Медленно пропойте смену гласных на одной ноте, минимизируя лишние движения челюсти, языка и глотки, как бы сокращая артикуляцию. <em>(как в слоу-мо)</em>.",
+                difficulty: 2,
+                checkResult: "Высота сохраняется при смене гласных.",
+                related: []
+            },
+            {
+                number: 25, title: "Не хватает воздуха", category: ["density", "loudness"], emoji: "🛟",
+                problem: "Воздуха не хватает, чтобы спокойно закончить музыкальную фразу",
+                reason: "Неэффективное распределение воздуха по фразе",
+                necessary: "Вам необходимо закончить фразу без панического добора воздуха и потери качества звука.",
+                solution: "Прослушайте оригинал на предмет вдохов, которые вы могли не заметить, УМЕНЬШИТЕ вдох перед проблемной фразой, если вам нужен плотной звук <em>(иногда большой вдох способствует большему расходу воздуха, в чем нет необходимости)</em>, спойте фразу в контексте песни, контролируя уменьшенный вдох и большую плотность звучания.",
+                difficulty: 1,
+                checkResult: "Фраза заканчивается без нехватки воздуха.",
+                related: []
+            },
+            {
+                number: 26, title: "Слишком много воздуха при попытке петь мощно", category: ["density", "loudness", "comfort"], emoji: "🎯",
+                problem: "Чтобы сделать звук громче, вы начинаете сильнее выдыхать, но звук становится воздушным или напряжённым",
+                reason: "Попытка получить громкость за счёт увеличения воздушного давления",
+                necessary: "Вам необходим мощный звук без чрезмерного расхода воздуха и ощущения давления.",
+                solution: "Сначала уменьшите вдох и найдите плотный устойчивый звук на средней громкости, затем постепенно увеличивайте интенсивность, сохраняя контроль над уменьшенным вдохом расходом воздуха (плотностью смыкания).",
+                difficulty: 2,
+                checkResult: "Звук стал мощнее без резкого увеличения расхода воздуха.",
+                related: []
+            },
+            {
+                number: 27, title: "К концу песни голос садится", category: ["comfort"], emoji: "🛟",
+                problem: "Первая часть песни звучит хорошо, но к финалу голос становится слабым, хриплым или тяжёлым",
+                reason: "Неравномерное распределение вокальной нагрузки по песне",
+                necessary: "Вам необходимо сохранять рабочее качество голоса до конца композиции.",
+                solution: "Проконтролируйте мышечный тонус и видимые зажимы в исполнении. При необходимости, воспользуйтесь зеркалом. Акцентируйте внимание на фрагментах песни, где включается лишний избыточный тонус в лице, шее, бровях, животе. Затем намеренно снизьте мышечную работу на этом участке песни <em>(можно спеть фразу с меньшей интенсивностью, не думая о сохранении качества звучания, как бы на отвали).</em><br>Затем постепенно верните исходную интенсивность, НАМЕРЕННО сохраняя ощущение лёгкости и свободы в теле.",
+                difficulty: 2,
+                checkResult: "К концу песни голос остаётся здоровым, без хрипоты и тяжести.",
+                related: []
+            },
+            {
+                number: 28, title: "Голос срывается на высоких нотах", category: ["height", "comfort"], emoji: "🎼",
+                problem: "На высоких нотах голос внезапно срывается, пропадает или переходит в другое качество",
+                reason: "Недостаток анкеровки торса или неустойчивая глоточная форма",
+                necessary: "Вам необходим стабильный верхний звук без внезапных срывов.",
+                solution: "Активируйте мышечный тонус в области торса для вашего голосового качества: <em>Бэлт требует больше тонуса, Микст и Твенг – меньше.</em><br>Затем проконтролируйте глоточную форму на проблемной ноте, используя либо широкую (для Бэлта), либо узкую (для Микста, Твенга, Спича) глотку, сокращая лишний тонус в лице. Используйте вводные упражнения, ищите бытовые звуки для устойчивой глоточной формы, применяйте найденное ощущение в исполнении.",
+                difficulty: 2,
+                checkResult: "Высокая нота проходит без внезапного срыва.",
+                related: []
+            },
+            {
+                number: 29, title: "Не появляется вибрато", category: ["beauty", "timbre"], emoji: "🌟",
+                problem: "Длинные ноты звучат совершенно прямолинейно, естественного вибрато не появляется",
+                reason: "Недостаточная свобода и координация устойчивого звука",
+                necessary: "Вам необходимо контролируемое вибрато как один из вариантов окраски длинных нот.",
+                solution: "Сначала стабилизируйте свободную длинную ноту, затем добавляйте небольшие естественные колебания <em>(можно использовать руки: потрясите воображаемого человека напротив вас за грудки, тело, гортань должны быть свободными – не пытайтесь стабилизировать звук).</em><br>Либо поимитируйте сирену, мигалку или сигнализацию, начиная с коротких колебаний и постепенно увеличивая их длительность.",
+                difficulty: 2,
+                checkResult: "На длинной ноте появляется контролируемое естественное колебание.",
+                related: []
+            },
+            {
+                number: 30, title: "Не могу петь низкие ноты", category: ["height", "density"], emoji: "🎼",
+                problem: "Нижние ноты становятся глубокими, тяжелыми, воздушными или вообще исчезают",
+                reason: "Занижение гортани на нижнем участке диапазона, недостаточная плотность смыкания",
+                necessary: "Вам необходим устойчивый нижний звук в пределах вашего рабочего диапазона.",
+                solution: "Начните с комфортной средней ноты и постепенно двигайтесь вниз в слайде, сохраняя устойчивое речевое ощущение, среднее или высокое положение гортани. Не пытаясь искусственно утяжелить звук, углубить его. Напротив: сузьте голосовой тракт, аккуратно сплющите звук, выводя его \"вперед\"",
+                difficulty: 2,
+                checkResult: "Нижние ноты стали стабильнее, ближе и не исчезают.",
+                related: []
+            },
+            {
+                number: 31, title: "Не могу управлять динамикой внутри одной фразы", category: ["loudness", "beauty"], emoji: "📢",
+                problem: "Фраза получается либо вся тихой, либо вся громкой, а плавно изменить громкость внутри неё не получается",
+                reason: "Недостаточный контроль интенсивности звука при сохранении стабильной координации",
+                necessary: "Вам необходимо плавно изменять громкость без изменения качества и высоты.",
+                solution: "Спойте короткую фразу с постепенным усилением или ослаблением, не меняя высоту и положение артикуляции. Представьте, что управляете ручкой громкости на микшере, плавно регулируя уровень громкости или яркости.",
+                difficulty: 2,
+                checkResult: "Громкость меняется постепенно, а высота и качество остаются стабильными.",
+                related: []
+            },
+            {
+                number: 32, title: "Не слышу себя под минусовку", category: ["comfort"], emoji: "🛟",
+                problem: "Без музыки поёте уверенно, но с минусовкой теряете высоту, ритм или начинаете петь слишком громко, меняя голосовое качество",
+                reason: "Изменение слухового контроля при появлении фонограммы",
+                necessary: "Вам необходимо сохранять контроль над голосом независимо от наличия и громкости минусовки.",
+                solution: "Сначала уменьшите громкость минусовки и спойте знакомый фрагмент, контролируйте себя и свой голос, УДЕЛИТЕ ВНИМАНИЕ ТЕХНИКЕ, а не музыке. Затем постепенно верните исходный уровень, контролируя голос и привыкая к конфигурации в контексте нового слухового окружения.",
+                difficulty: 1,
+                checkResult: "Голос остаётся стабильным и контролируемым на фоне минусовки.",
+                related: []
+            },
+            {
+                number: 33, title: "Не понимаю, где брать дыхание", category: ["comfort", "density"], emoji: "🛟",
+                problem: "В песне не хватает понятных мест для вдоха, из-за чего приходится прерывать фразы или делать резкие вдохи",
+                reason: "Отсутствие заранее спланированной фразировки",
+                necessary: "Вам необходимо заранее определить места вдохов, не разрушая музыкальную фразу.",
+                solution: "Прослушайте оригинал на предмет вдохов. Разметьте текст по смысловым и музыкальным фразам, заранее выберите короткие места для вдоха, следуйте тексту с пометками при исполнении.",
+                difficulty: 1,
+                checkResult: "Вдохи происходят заранее выбранных местах и не ломают музыкальную фразу.",
+                related: []
+            },
+    
+];
+
+        const categories = [
+            { key: 'loudness', title: 'Громкость', emoji: '📢' },
+            { key: 'density', title: 'Плотность', emoji: '🎯' },
+            { key: 'comfort', title: 'Удобство', emoji: '🛟' },
+            { key: 'beauty', title: 'Красота', emoji: '🌟' },
+            { key: 'brightness', title: 'Яркость', emoji: '✨' },
+            { key: 'height', title: 'Высота', emoji: '🎼' },
+            { key: 'timbre', title: 'Тембр', emoji: '🎵' }
+        ];
+
+        const difficultyLabels = { 1: 'Начальный', 2: 'Средний', 3: 'Продвинутый' };
+
+        const glossary = {
+            "анкеровка": "Устойчивое «заякоренное» положение мышц торса или шеи, которое даёт опору звуку без лишнего зажима.",
+            "бэлт": "Мощная, «пробивная» вокальная манера, похожая на крик, но свободная и стабильная.",
+            "микст": "Смешанный регистр звучания — а-ля \"между грудным и головным\", объединяет их энергию и силу и лёгкость и пластичность.",
+            "гортань": "Структура в области шеи, где расположены голосовые связки. Её положение сильно влияет на тембр и удобство звука.",
+            "сфинктер черпало-надгортанный": "Мышечное кольцо над голосовыми связками (СЧН). Его сужение делает звук ярче и «металличнее», расширение — прямым и полым.",
+            "атака": "Способ начала звука. Твёрдая атака — резкое чёткое начало, сбалансированная или придыхательная — с «подъездом» и утечкой воздуха.",
+            "мягкое нёбо": "Подвижная часть нёба в глубине рта с язычком. Поднимаясь, создаёт «купол» в глотке, убирает гнусавость и добавляет объём.",
+            "назализация": "Призвук «в нос», возникает при опущенном мягком нёбе.",
+            "Смыкание": "Плотность и толщина контакта голосовых связок между собой: тонкое смыкание даёт лёгкий мягкий звук, толстое — плотный «металлический».",
+            "ложные голосовые складки": "Складки над истинными голосовыми связками. Их неконтролируемое сужение вызывает сипение, першение и ощущение зажатости в горле.",
+            "щитовидный хрящ": "Хрящ гортани (в быту — «кадык»). Его положение и активация влияют на плотность и тонкость звука.",
+            "перстневидный хрящ": "Хрящ в основании гортани, участвует в утолщении ГС и мощности и пробиваемости звука."
+        };
+
+        const synonyms = {
+            гром: ["громк","мощ","сил","энерг","форте","крик","ор","бэлт","полет","пробив"],
+            громк: ["гром","мощ"],
+            мощ: ["гром","сил","энерг","бэлт","давлен"],
+            сил: ["мощ","гром"],
+            тих: ["слаб","шеп","не слыш","воздух"],
+            слаб: ["тих","немощ","без сил"],
+            энергия: ["мощ","гром"],
+            верх: ["верхн","высок","диапазон","микст","фальцет","голова"],
+            высок: ["верх","верхн","диапазон"],
+            диапаз: ["верх","высок"],
+            низ: ["ниж","низк","грудь"],
+            груд: ["низ"],
+            бол: ["болит","реж","жжет","устал","дав","кол","дискомфорт"],
+            болит: ["бол"],
+            реж: ["бол"],
+            жжет: ["бол"],
+            устал: ["бол","усталость"],
+            усталость: ["бол"],
+            дискомфорт: ["бол"],
+            горл: ["гортан","шея","кадык"],
+            гортан: ["горл","кадык","шея"],
+            кадык: ["горл","гортан"],
+            шея: ["горл","гортан"],
+            зажим: ["напряж","скован","сжат","перенапряж","тяжест"],
+            напряж: ["зажим","сжат"],
+            сжат: ["зажим"],
+            тяжест: ["зажим","давит"],
+            скован: ["зажим"],
+            расслаб: ["легк","свобод"],
+            воздух: ["воздуш","дых","сип","шип","выдох"],
+            дых: ["воздух"],
+            сип: ["воздух","сипл"],
+            сипл: ["сип","воздух"],
+            выдох: ["дых"],
+            нос: ["назал","гнус"],
+            назал: ["нос","гнус"],
+            гнус: ["нос"],
+            челюст: ["рот","лицо","зуб"],
+            рот: ["челюст","губ"],
+            губ: ["рот"],
+            язык: ["корень","языка"],
+            корень: ["язык"],
+            ярк: ["звон","резк","пронз","колк"],
+            звон: ["ярк"],
+            пронз: ["ярк"],
+            колк: ["ярк"],
+            тембр: ["окраск","характер","звук"],
+            окраск: ["тембр"],
+            звук: ["тембр","голос"],
+            голос: ["звук"],
+            срыв: ["лом","нестабил","провал","сорвал"],
+            лом: ["срыв"],
+            нестабил: ["срыв"],
+            сорвал: ["срыв"],
+            плот: ["толст","тонк","смыкан","металл"],
+            толст: ["плот"],
+            тонк: ["плот"],
+            смыкан: ["плот"],
+            металл: ["плот"],
+            комфорт: ["легк","свобод","удоб"],
+            легк: ["комфорт","свобод"],
+            свобод: ["комфорт"],
+            удоб: ["комфорт"],
+            крич: ["гром","бэлт"],
+            ору: ["гром"],
+            ор: ["гром"],
+            не: ["нет"],
+            хрип: ["сип","воздух"],
+            хриплю: ["сип"],
+            гряз: ["расщеп","сип"],
+            чист: ["без сип","без гряз"],
+            фальш: ["интонац"],
+            интонац: ["фальш"],
+            тяжело: ["тяжест","зажим"],
+            тяжесть: ["зажим"],
+            легко: ["легк","комфорт"],
+            плохо: ["проблем"],
+            красив: ["тембр","ярк"],
+            некрасив: ["тембр"],
+            высокий: ["верх"],
+            низкий: ["низ"]
+        };
+
+        // ===================== STATE =====================
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const problemsContainer = document.getElementById('problemsContainer');
+        const counter = document.getElementById('counter');
+        const tooltip = document.getElementById('termTooltip');
+
+        let currentFilter = 'all';
+        let bookmarks = new Set();
+
+        try {
+            const saved = JSON.parse(localStorage.getItem('vocalGuideBookmarks') || '[]');
+            bookmarks = new Set(saved);
+        } catch (e) { bookmarks = new Set(); }
+
+        function saveBookmarks() {
+            try {
+                localStorage.setItem('vocalGuideBookmarks', JSON.stringify([...bookmarks]));
+            } catch (e) { /* localStorage unavailable, skip persistence */ }
+        }
+
+        // ===================== INIT =====================
+        function init() {
+            renderStats();
+            renderGlossary();
+            attachEventListeners();
+            renderProblems();
+            handleInitialHash();
+        }
+
+        function renderStats() {
+            const statsBar = document.getElementById('statsBar');
+            statsBar.innerHTML = `
+                <span class="stat-chip">📚 ${problems.length} проблем в справочнике</span>
+                <span class="stat-chip">🗂️ ${categories.length} категорий</span>
+                <span class="stat-chip">🔖 ${bookmarks.size} в избранном</span>
+            `;
+        }
+
+        function renderGlossary() {
+            const list = document.getElementById('glossaryList');
+            list.innerHTML = Object.entries(glossary).map(([term, def]) => `
+                <dt>${capitalize(term)}</dt>
+                <dd>${def}</dd>
+            `).join('');
+        }
+
+        function capitalize(s) {
+            return s.charAt(0).toUpperCase() + s.slice(1);
+        }
+
+        // ===================== SEARCH SCORING =====================
+        function searchScore(problem, query) {
+            if (!query.trim()) return 1;
+
+            query = query.toLowerCase().replace(/ё/g, "е");
+
+            const title = problem.title.toLowerCase().replace(/ё/g, "е");
+            const symptoms = problem.problem.toLowerCase().replace(/ё/g, "е");
+            const reason = problem.reason.toLowerCase().replace(/ё/g, "е");
+            const necessary = problem.necessary.toLowerCase().replace(/ё/g, "е");
+            const solution = problem.solution.toLowerCase().replace(/ё/g, "е");
+
+            const words = query.split(/\s+/).filter(Boolean);
+            let score = 0;
+
+            words.forEach(word => {
+                const root = word.substring(0, 4);
+
+                if (title.includes(word)) { score += 250; return; }
+                if (root.length >= 3 && title.includes(root)) { score += 180; return; }
+
+                if (symptoms.includes(word)) { score += 150; return; }
+                if (root.length >= 3 && symptoms.includes(root)) { score += 120; return; }
+
+                if (reason.includes(word)) { score += 100; return; }
+                if (root.length >= 3 && reason.includes(root)) { score += 80; return; }
+
+                if (necessary.includes(word)) { score += 40; return; }
+                if (solution.includes(word)) { score += 20; return; }
+
+                for (const key in synonyms) {
+                    if (word.startsWith(key) || key.startsWith(root)) {
+                        if (synonyms[key].some(s => title.includes(s))) { score += 180; return; }
+                        if (synonyms[key].some(s => symptoms.includes(s))) { score += 120; return; }
+                        if (synonyms[key].some(s => reason.includes(s))) { score += 80; return; }
+                    }
+                }
+            });
+
+            return score;
+        }
+
+        // ===================== RENDER =====================
+        function renderProblems() {
+            problemsContainer.innerHTML = '';
+            let totalVisible = 0;
+
+            if (currentFilter === 'bookmarked') {
+                const list = problems
+                    .filter(p => bookmarks.has(p.number))
+                    .map(p => ({ problem: p, score: searchScore(p, searchInput.value) }))
+                    .filter(item => item.score > 0)
+                    .sort((a, b) => b.score - a.score)
+                    .map(item => item.problem);
+
+                if (list.length > 0) {
+                    const section = buildCategorySection({ title: 'Избранное', emoji: '🔖' }, list, null);
+                    problemsContainer.appendChild(section);
+                    totalVisible = list.length;
+                }
+            } else {
+                categories.forEach(cat => {
+                    if (currentFilter !== 'all' && currentFilter !== cat.key) return;
+
+                    const categoryProblems = problems
+                        .map(problem => {
+                             if (!problem.category.includes(cat.key)) return null;
+                            return { problem, score: searchScore(problem, searchInput.value) };
+                        })
+                        .filter(item => item && item.score > 0)
+                        .sort((a, b) => b.score - a.score)
+                        .map(item => item.problem);
+
+                    if (categoryProblems.length > 0) {
+                        const section = buildCategorySection(cat, categoryProblems, cat.key);
+                        problemsContainer.appendChild(section);
+                        totalVisible += categoryProblems.length;
+                    }
+                });
+            }
+
+            counter.textContent = totalVisible;
+
+            if (totalVisible === 0) {
+                problemsContainer.appendChild(buildNoResults());
+            }
+        }
+
+        function buildCategorySection(cat, problemList, catKey) {
+            const section = document.createElement('div');
+            section.className = 'category-section active';
+            if (catKey) section.classList.add('cat-' + catKey);
+            if (catKey) section.style.setProperty('--cat-color', `var(--c-${catKey})`);
+
+            const title = document.createElement('div');
+            title.className = 'category-title';
+            if (catKey) title.style.setProperty('--cat-color', `var(--c-${catKey})`);
+            title.innerHTML = `<span class="category-emoji">${cat.emoji}</span> ${cat.title}`;
+
+            const grid = document.createElement('div');
+            grid.className = 'problems-grid';
+
+            problemList.forEach(problem => grid.appendChild(createProblemCard(problem)));
+
+            section.appendChild(title);
+            section.appendChild(grid);
+            return section;
+        }
+
+        function buildNoResults() {
+            const wrap = document.createElement('div');
+            wrap.className = 'no-results';
+            wrap.innerHTML = `
+                <div class="nr-emoji">🔍🤔</div>
+                <h3>Ничего не нашлось</h3>
+                <p>Попробуйте другую формулировку — например, опишите ощущение своими словами:<br>
+                «тяжело», «сипит», «болит горло», «не хватает высоты».</p>
+            `;
+            return wrap;
+        }
+
+        function highlightTerms(text) {
+            let result = text;
+            Object.keys(glossary)
+                .sort((a, b) => b.length - a.length)
+                .forEach(term => {
+                    const re = new RegExp(`(${term})`, 'gi');
+                    result = result.replace(re, `<span class="term" data-term="${term}">$1</span>`);
+                });
+            return result;
+        }
+
+        function createProblemCard(problem) {
+    const card = document.createElement('div');
+
+    // Если у карточки несколько категорий,
+    // первая используется как основная для цвета карточки
+    const primaryCategory = Array.isArray(problem.category)
+        ? problem.category[0]
+        : problem.category;
+
+    card.className = `problem-card visible cat-${primaryCategory}`;
+    card.id = `problem-${problem.number}`;
+
+    card.style.setProperty(
+        '--cat-color',
+        `var(--c-${primaryCategory})`
+    );
+
+    card.style.setProperty(
+        '--cat-bg',
+        `var(--bg-${primaryCategory})`
+    );
+
+    const isBookmarked = bookmarks.has(problem.number);
+    const diffClass = `difficulty-${problem.difficulty}`;
+    const diffLabel = difficultyLabels[problem.difficulty];
+
+    // Все категории карточки
+    const categoryBadges = (Array.isArray(problem.category)
+        ? problem.category
+        : [problem.category]
+    )
+        .map(key => {
+            const cat = categories.find(c => c.key === key);
+            if (!cat) return '';
+
+            return `
+                <span class="problem-category"
+                      style="
+                        --cat-color: var(--c-${key});
+                        --cat-bg: var(--bg-${key});
+                      ">
+                    ${cat.emoji} ${cat.title}
+                </span>
+            `;
+        })
+        .join('');
+
+    const relatedHtml = (problem.related && problem.related.length)
+        ? `<div class="related-row">
+            Похожие проблемы:
+            ${problem.related
+                .map(n => `<a data-goto="${n}">№${n}</a>`)
+                .join(', ')}
+           </div>`
+        : '';
+
+    card.innerHTML = `
+        <div class="card-top-row">
+            <div class="problem-number">${problem.number}</div>
+
+            <div class="card-actions">
+                <button
+                    class="icon-btn bookmark-btn ${isBookmarked ? 'bookmarked' : ''}"
+                    title="Добавить в избранное">
+                    ${isBookmarked ? '⭐' : '☆'}
+                </button>
+
+                <button
+                    class="icon-btn link-btn"
+                    title="Скопировать ссылку на карточку">
+                    🔗
+                </button>
+            </div>
+        </div>
+
+        <div class="problem-title">
+            ${problem.title}
+        </div>
+
+        <div class="badge-row">
+            ${categoryBadges}
+
+            <div class="difficulty-badge ${diffClass}">
+                🎓 ${diffLabel}
+            </div>
+        </div>
+
+        <button class="expand-btn">
+            Подробнее и решение ▼
+        </button>
+
+        <div class="expanded-content">
+
+            <div class="problem-item">
+                <div class="problem-label">
+                    💬 Симптомы
+                </div>
+
+                <div class="problem-text">
+                    ${highlightTerms(problem.problem)}
+                </div>
+            </div>
+
+            <div class="problem-item">
+                <div class="problem-label">
+                    🔍 Причина
+                </div>
+
+                <div class="problem-text">
+                    ${highlightTerms(problem.reason)}
+                </div>
+            </div>
+
+            <div class="problem-item">
+                <div class="problem-label">
+                    🎯 Что необходимо
+                </div>
+
+                <div class="problem-text">
+                    ${highlightTerms(problem.necessary)}
+                </div>
+            </div>
+
+            <div class="solution-content">
+                <div class="problem-item" style="margin-top:0;">
+
+                    <div class="problem-label">
+                        ✅ Варианты решения
+                    </div>
+
+                    <div class="problem-text">
+                        ${highlightTerms(problem.solution)}
+                    </div>
+
+                    <div class="check-result">
+                        🧭 Как понять, что сработало:
+                        ${problem.checkResult}
+                    </div>
+
+                </div>
+            </div>
+
+            ${relatedHtml}
+
+        </div>
+    `;
+
+    // =========================
+    // РАСКРЫТИЕ КАРТОЧКИ
+    // =========================
+
+    const expandBtn = card.querySelector('.expand-btn');
+    const expanded = card.querySelector('.expanded-content');
+
+    expandBtn.addEventListener('click', () => {
+        expanded.classList.toggle('show');
+
+        expandBtn.textContent =
+            expanded.classList.contains('show')
+                ? 'Скрыть ▲'
+                : 'Подробнее и решение ▼';
+    });
+
+    // =========================
+    // ИЗБРАННОЕ
+    // =========================
+
+    const bookmarkBtn = card.querySelector('.bookmark-btn');
+
+    bookmarkBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleBookmark(problem.number, bookmarkBtn);
+    });
+
+    // =========================
+    // ССЫЛКА
+    // =========================
+
+    const linkBtn = card.querySelector('.link-btn');
+
+    linkBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        copyCardLink(problem.number, linkBtn);
+    });
+
+    // =========================
+    // СВЯЗАННЫЕ КАРТОЧКИ
+    // =========================
+
+    card.querySelectorAll('[data-goto]').forEach(a => {
+        a.addEventListener('click', () => {
+            goToProblem(parseInt(a.dataset.goto, 10));
+        });
+    });
+
+    return card;
+}
+
+        function toggleBookmark(number, btn) {
+            if (bookmarks.has(number)) {
+                bookmarks.delete(number);
+                btn.classList.remove('bookmarked');
+                btn.textContent = '☆';
+            } else {
+                bookmarks.add(number);
+                btn.classList.add('bookmarked');
+                btn.textContent = '⭐';
+            }
+            saveBookmarks();
+            renderStats();
+            if (currentFilter === 'bookmarked') renderProblems();
+        }
+
+        function copyCardLink(number, btn) {
+            const url = `${location.origin}${location.pathname}#problem-${number}`;
+            const original = btn.textContent;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    btn.textContent = '✅';
+                    setTimeout(() => { btn.textContent = original; }, 1200);
+                }).catch(() => {
+                    prompt('Скопируйте ссылку:', url);
+                });
+            } else {
+                prompt('Скопируйте ссылку:', url);
+            }
+        }
+
+        function goToProblem(number) {
+            currentFilter = 'all';
+            searchInput.value = '';
+            filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+            renderProblems();
+            scrollToAndExpand(number);
+        }
+
+        function scrollToAndExpand(number) {
+            setTimeout(() => {
+                const el = document.getElementById(`problem-${number}`);
+                if (!el) return;
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const expanded = el.querySelector('.expanded-content');
+                const btn = el.querySelector('.expand-btn');
+                if (expanded && !expanded.classList.contains('show')) {
+                    expanded.classList.add('show');
+                    btn.textContent = 'Скрыть ▲';
+                }
+                el.style.boxShadow = '0 0 0 3px #d4731f, 0 22px 60px rgba(0,0,0,.12)';
+                setTimeout(() => { el.style.boxShadow = ''; }, 1600);
+            }, 50);
+        }
+
+        function handleInitialHash() {
+            const hash = location.hash;
+            const match = hash.match(/^#problem-(\d+)$/);
+            if (match) scrollToAndExpand(parseInt(match[1], 10));
+        }
+
+        // ===================== TOOLTIP =====================
+        function showTermTooltip(target) {
+            const key = target.dataset.term;
+            const def = glossary[key];
+            if (!def) return;
+            tooltip.textContent = def;
+            const rect = target.getBoundingClientRect();
+            tooltip.style.left = Math.min(rect.left, window.innerWidth - 300) + 'px';
+            tooltip.style.top = (rect.bottom + 8) + 'px';
+            tooltip.classList.add('show');
+        }
+
+        function hideTermTooltip() {
+            tooltip.classList.remove('show');
+        }
+
+        // ===================== EVENTS =====================
+        function attachEventListeners() {
+            searchInput.addEventListener('input', () => renderProblems());
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    renderProblems();
+                });
+            });
+
+            document.querySelectorAll('.search-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    searchInput.value = chip.dataset.q;
+                    currentFilter = 'all';
+                    filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+                    renderProblems();
+                    searchInput.focus();
+                });
+            });
+
+            document.getElementById('glossaryToggle').addEventListener('click', () => {
+                document.getElementById('glossaryPanel').classList.toggle('show');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('term')) {
+                    showTermTooltip(e.target);
+                } else if (!e.target.closest('.term-tooltip')) {
+                    hideTermTooltip();
+                }
+            });
+
+            window.addEventListener('scroll', hideTermTooltip, { passive: true });
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
