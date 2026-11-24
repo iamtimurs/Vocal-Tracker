@@ -1,0 +1,2916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гид по устранению вокальных проблем — Система вокала</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --c-loudness: #d4731f;    --bg-loudness: #fff6eb;
+            --c-density: #6a4fb3;     --bg-density: #f4f0fb;
+            --c-comfort: #1f8f78;     --bg-comfort: #eafaf6;
+            --c-beauty: #c2437a;      --bg-beauty: #fdeef4;
+            --c-brightness: #c99a1f;  --bg-brightness: #fdf7e6;
+            --c-height: #2f6fd4;      --bg-height: #eaf1fd;
+            --c-timbre: #8a5a2f;      --bg-timbre: #f6efe6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #faf7f2 0%, #f0ebe5 50%, #e8dfd2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #2c2c2c;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* HEADER SECTION */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 0.6s ease;
+        }
+
+        .header-logo {
+    display: block;
+    width: 200px;
+    height: 48px;
+    object-fit: contain;
+    object-position: left center;
+}
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .course-logo {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            display: block;
+            transition: .35s ease;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,.15));
+        }
+
+        .course-logo:hover {
+            transform: scale(1.03);
+        }
+
+        .logo-fallback {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #6c5946;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            font-weight: 700;
+            color: #5a4a3a;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #7a6a5a;
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 18px;
+        }
+
+        /* Единая тёмная плашка */
+.hero-dark {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    min-height: 560px;
+    margin: 0 0 30px;
+    padding: clamp(38px, 6vw, 76px) clamp(24px, 5vw, 64px);
+
+    border: 1px solid rgba(232,177,111,.2);
+    border-radius: 26px;
+
+    background:
+        radial-gradient(
+            ellipse at 78% 48%,
+            rgba(176,102,48,.34),
+            transparent 37%
+        ),
+        linear-gradient(
+            115deg,
+            #11100f 0%,
+            #211813 60%,
+            #120f0d 100%
+        );
+
+    box-shadow: 0 24px 70px #0008;
+
+    display: block;
+}
+
+/* Существующий декоративный фон */
+.hero-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background:
+        linear-gradient(90deg, rgba(13,12,11,.08), transparent 60%),
+        radial-gradient(circle at 85% 85%, rgba(225,156,82,.15), transparent 28%);
+}
+
+/* Фотография — фоновый слой этой же плашки */
+.hero-photo {
+    position: absolute;
+    z-index: 1;
+
+    right: 0;
+    bottom: 0;
+
+    width: 58%;
+    height: 100%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    pointer-events: none;
+}
+
+/* Прозрачный вырезанный портрет */
+.hero-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: right bottom;
+
+    /* Фотография плавно сливается с фоном */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0,0,0,.35) 15%,
+        black 42%
+    );
+
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0,0,0,.35) 15%,
+        black 42%
+    );
+}
+
+/* Текст поверх фотографии */
+.hero-copy {
+    position: relative;
+    z-index: 2;
+
+    max-width: 720px;
+    width: 64%;
+}
+
+/* Убираем прежнюю отдельную декоративную иллюстрацию */
+.hero-art {
+    display: none;
+}
+
+        /* STATS BAR */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stat-chip {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid #e2d3bd;
+            border-radius: 30px;
+            padding: 7px 16px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: #7a5a3a;
+        }
+
+        /* GLOSSARY */
+        .glossary-toggle {
+            display: block;
+            margin: 0 auto 20px;
+            background: none;
+            border: 2px dashed #d4a574;
+            color: #8a6a45;
+            border-radius: 12px;
+            padding: 10px 18px;
+            font-weight: 600;
+            font-size: 0.92em;
+            cursor: pointer;
+            transition: .25s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glossary-toggle:hover {
+            background: #fff6eb;
+            border-color: #d4731f;
+        }
+
+        .glossary-panel {
+            display: none;
+            background: #fffdfa;
+            border: 1px solid #eaddc7;
+            border-radius: 16px;
+            padding: 22px 26px;
+            margin-bottom: 25px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .glossary-panel.show { display: block; }
+
+        .glossary-panel h3 {
+            font-family: 'Playfair Display', serif;
+            color: #5a4a3a;
+            margin-bottom: 14px;
+            font-size: 1.3em;
+        }
+
+        .glossary-list dt {
+            font-weight: 700;
+            color: #d4731f;
+            margin-top: 10px;
+        }
+
+        .glossary-list dd {
+            color: #555;
+            line-height: 1.6;
+            margin-left: 0;
+        }
+
+        /* SEARCH SECTION */
+        .search-box {
+            margin-bottom: 14px;
+            animation: slideUp 0.6s ease 0.1s both;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 18px 24px;
+            font-size: 1.05em;
+            border: 2px solid #d4a574;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #d4731f;
+            box-shadow: 0 8px 30px rgba(212, 115, 31, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .search-box input::placeholder {
+            color: #b8a892;
+        }
+
+        /* SEARCH CHIPS */
+        .chips-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            animation: slideUp 0.6s ease 0.15s both;
+        }
+
+        .chips-label {
+            font-size: 0.85em;
+            color: #9a8a75;
+            align-self: center;
+            margin-right: 4px;
+        }
+
+        .search-chip {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid #e2d3bd;
+            color: #7a5a3a;
+            border-radius: 30px;
+            padding: 7px 14px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: .2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-chip:hover {
+            background: #d4731f;
+            border-color: #d4731f;
+            color: white;
+        }
+
+        /* FILTER BUTTONS */
+        .filters-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: 40px;
+            animation: slideUp 0.6s ease 0.2s both;
+        }
+
+        .filter-btn {
+            padding: 18px 12px;
+            border: 2px solid #d4a574;
+            background: rgba(255, 255, 255, 0.85);
+            color: #5a4a3a;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .filter-btn:hover {
+            background: linear-gradient(135deg, #e8a76a 0%, #d4a574 100%);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(212, 115, 31, 0.2);
+            border-color: #d4731f;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--cat-color, #d4731f) 0%, #e67e22 100%);
+            color: white;
+            border-color: var(--cat-color, #d4731f);
+            box-shadow: 0 8px 25px rgba(212, 115, 31, 0.3);
+        }
+
+        .filter-emoji {
+            font-size: 1.8em;
+        }
+
+        .filter-label {
+            font-size: 0.85em;
+            line-height: 1.2;
+        }
+
+        /* PROBLEMS SECTION */
+        .problems-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .category-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .category-section.active {
+            display: block;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2em;
+            font-weight: 700;
+            color: #5a4a3a;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--cat-color, #d4731f);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-emoji {
+            font-size: 1.8em;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 20px;
+        }
+
+        /* NO RESULTS */
+        .no-results {
+            text-align: center;
+            padding: 50px 20px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .no-results .nr-emoji {
+            font-size: 3em;
+            margin-bottom: 12px;
+        }
+
+        .no-results h3 {
+            font-family: 'Playfair Display', serif;
+            color: #5a4a3a;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .no-results p {
+            color: #8a7a65;
+            margin-bottom: 16px;
+        }
+
+        /* ---------- PROBLEM CARD ---------- */
+        .problem-card {
+            background: #fff;
+            border-radius: 22px;
+            padding: 28px;
+            border: none;
+            box-shadow: 0 12px 40px rgba(0,0,0,.07);
+            transition: .35s;
+            display: none;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .problem-card.visible {
+            display: block;
+            animation: fadeIn .4s ease;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 60px rgba(0,0,0,.12);
+        }
+
+        .problem-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--cat-color, #d4731f), #ffb14b);
+        }
+
+        .card-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .problem-number {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--cat-color, #d4731f);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid #eaddc7;
+            background: #fffdfa;
+            cursor: pointer;
+            font-size: 1.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .2s;
+        }
+
+        .icon-btn:hover {
+            background: #fff6eb;
+            transform: scale(1.08);
+        }
+
+        .icon-btn.bookmarked {
+            background: #fff2d6;
+            border-color: #e0b23a;
+        }
+
+        .problem-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #2f2f2f;
+            line-height: 1.45;
+            margin-bottom: 16px;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .problem-category {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--cat-bg, #fff6eb);
+            color: var(--cat-color, #d4731f);
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+
+        .difficulty-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .difficulty-1 { background: #eaf7ec; color: #2f9145; }
+        .difficulty-2 { background: #fdf3df; color: #b3811a; }
+        .difficulty-3 { background: #fbe9e6; color: #c14a34; }
+
+        .problem-item {
+            margin-top: 18px;
+        }
+
+        .problem-label {
+            color: var(--cat-color, #d4731f);
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .problem-text {
+            color: #555;
+            line-height: 1.75;
+        }
+
+        .term {
+            border-bottom: 1px dotted var(--cat-color, #d4731f);
+            cursor: help;
+            font-weight: 600;
+        }
+
+        .related-row {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px dashed #ecdfc9;
+            font-size: 0.88em;
+        }
+
+        .related-row a {
+            color: var(--cat-color, #d4731f);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .related-row a:hover {
+            text-decoration: underline;
+        }
+
+        .expand-btn {
+            width: 100%;
+            margin-top: 25px;
+            border: none;
+            border-radius: 14px;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            background: var(--cat-color, #d4731f);
+            color: #fff;
+            transition: .3s;
+        }
+
+        .expand-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(0.92);
+        }
+
+        .expanded-content {
+            display: none;
+        }
+
+        .expanded-content.show {
+            display: block;
+        }
+
+        .solution-content {
+            margin-top: 18px;
+            background: var(--cat-bg, #fff6eb);
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+
+        .check-result {
+            margin-top: 10px;
+            font-size: 0.92em;
+            color: #4a7a52;
+            background: #eef8ef;
+            border-radius: 10px;
+            padding: 10px 14px;
+        }
+
+        /* TOOLTIP */
+        .term-tooltip {
+            position: fixed;
+            max-width: 280px;
+            background: #2c2416;
+            color: #fdf7ec;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.88em;
+            line-height: 1.5;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            z-index: 999;
+            display: none;
+        }
+
+        .term-tooltip.show {
+            display: block;
+            animation: fadeIn 0.15s ease;
+        }
+
+        /* COUNTER */
+        .counter {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.95em;
+            color: #7a6a5a;
+            font-weight: 500;
+        }
+
+        .counter strong {
+            color: #d4731f;
+            font-weight: 700;
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        
+/* =========================================
+   КОМПАКТНАЯ НАВИГАЦИЯ ДЛЯ ПЛАНШЕТОВ И ТЕЛЕФОНОВ
+   ========================================= */
+
+/* До 480px — сохраняем горизонтальную навигацию */
+@media (max-width: 720px) {
+    .site-nav {
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 16px;
+        min-height: 0;
+    }
+
+    .site-brand {
+        flex: 0 1 auto;
+        min-width: 0;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+
+    .site-brand img,
+    .header-logo {
+        width: 125px;
+        height: auto;
+        max-height: 42px;
+        object-fit: contain;
+    }
+
+    /* Бургер пока не нужен */
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+
+    /* Все ссылки в одну горизонтальную линию */
+    .site-nav-links {
+        display: flex !important;
+        position: static;
+        flex: 1 1 auto;
+        width: auto;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: clamp(8px, 2vw, 18px);
+        padding: 0;
+        margin: 0;
+        background: none;
+        border: 0;
+    }
+
+    .site-nav-links > a:not(.nav-cta) {
+        display: inline-flex;
+        padding: 5px 0;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .nav-socials {
+        display: none !important;
+    }
+
+    .site-nav .nav-cta {
+        display: inline-flex;
+        flex: 0 0 auto;
+        width: auto;
+        margin: 0;
+        padding: 9px 12px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+}
+
+/* =========================================
+   БУРГЕР ТОЛЬКО НА ОЧЕНЬ УЗКИХ ЭКРАНАХ
+   ========================================= */
+
+@media (max-width: 480px) {
+    .site-nav {
+        flex-wrap: nowrap;
+        padding: 10px 14px;
+    }
+
+    .site-brand img,
+    .header-logo {
+        width: 115px;
+        max-height: 38px;
+    }
+
+    .mobile-menu-toggle {
+        display: grid !important;
+        flex: 0 0 auto;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        margin-left: auto;
+    }
+
+    /* Меню закрыто по умолчанию */
+    .site-nav-links {
+        display: none !important;
+    }
+
+    /* Открытое меню */
+    .site-nav-links.open {
+        display: flex !important;
+        position: absolute;
+        z-index: 100;
+        top: calc(100% + 8px);
+        left: 10px;
+        right: 10px;
+        width: auto;
+
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+
+        padding: 16px;
+        border: 1px solid rgba(232,177,111,.25);
+        border-radius: 14px;
+        background: #17120f;
+        box-shadow: 0 15px 35px rgba(0,0,0,.4);
+    }
+
+    .site-nav-links.open > a:not(.nav-cta) {
+        display: flex;
+        padding: 9px 4px;
+        font-size: 14px;
+    }
+
+    .site-nav-links.open .site-nav .nav-cta,
+    .site-nav-links.open .nav-cta {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 4px 0 0;
+        padding: 11px;
+        font-size: 13px;
+    }
+}
+
+
+
+        /* =========================================================
+           ДОПОЛНЕНИЯ: НОВЫЙ ДИЗАЙН И РАЗДЕЛЫ
+           Базовая архитектура и исходные данные problems не меняются.
+           ========================================================= */
+        :root {
+            --c-loudness:#d97719; --bg-loudness:#fff5e9;
+            --c-density:#9b7954; --bg-density:#f7f0e7;
+            --c-comfort:#71836d; --bg-comfort:#eef3eb;
+            --c-beauty:#a58b69; --bg-beauty:#f5f0e7;
+            --c-brightness:#c38b35; --bg-brightness:#fbf4e6;
+            --c-height:#817c62; --bg-height:#f1f0e8;
+            --c-timbre:#876c55; --bg-timbre:#f4eee8;
+        }
+        body { background:#f7f3ec; color:#493d32; padding:0 18px 36px; }
+        .container { max-width:1180px; }
+        .site-nav { position:sticky; top:0; z-index:20; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:14px 22px; margin:0 -18px 22px; background:rgba(247,243,236,.94); border-bottom:1px solid #e8ddce; backdrop-filter:blur(12px); }
+        .site-brand { font:700 18px 'Playfair Display',serif; letter-spacing:.06em; color:#594838; white-space:nowrap; }
+        .site-brand small { display:block; font:600 9px 'Inter',sans-serif; letter-spacing:.2em; color:#918b70; margin-top:3px; }
+        .site-nav-links { display:flex; align-items:center; gap:19px; flex-wrap:wrap; }
+        .site-nav a { color:#675746; text-decoration:none; font-size:13px; font-weight:600; transition:.2s; }
+        .site-nav a:hover { color:#d97719; }
+        .site-nav .nav-cta { background:#d97719; color:#fff; border-radius:30px; padding:10px 16px; }
+        .header { padding:28px 12px 24px; margin-bottom:20px; border-radius:0 0 28px 28px; background:radial-gradient(ellipse at 50% 0%,#efe3d2 0%,rgba(247,243,236,0) 68%); }
+        .header h1 { font-size:clamp(2.1rem,5vw,3.55rem); line-height:1.1; color:#514132; letter-spacing:-1.5px; }
+        .header p { max-width:760px; margin:0 auto 20px; line-height:1.6; color:#887966; font-size:1rem; }
+        .course-logo { max-width:360px; filter:drop-shadow(0 8px 18px rgba(0,0,0,.08)); }
+        .stat-chip { background:#fffdf9; border-color:#e8d8c4; color:#795d40; }
+        .glossary-toggle { background:#fffaf3; border-color:#e3b77f; color:#896640; }
+        .glossary-panel { background:#fffdf9; border-color:#eadfce; box-shadow:0 10px 28px rgba(77,57,35,.05); }
+        .search-box input { border:1.5px solid #d99a5b; border-radius:14px; box-shadow:0 8px 25px rgba(77,57,35,.07); background:#fff; }
+        .search-box input:focus { transform:none; }
+        .search-chip { background:#fffdf9; border-color:#e6d5bf; color:#785b3e; }
+        .filters-container { grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:11px; margin-bottom:34px; }
+        .filter-btn { border:1.5px solid #dfad78; background:#fffdf9; border-radius:14px; box-shadow:0 5px 14px rgba(77,57,35,.045); padding:15px 10px; }
+        .filter-btn:hover { background:#f4e5d3; color:#5b4735; transform:translateY(-2px); box-shadow:0 8px 20px rgba(77,57,35,.08); }
+        .filter-btn.active { background:#d97719; color:#fff; border-color:#d97719; box-shadow:0 8px 20px rgba(217,119,25,.2); }
+        .category-title { color:#514132; border-bottom-width:2px; padding-bottom:14px; }
+        .problem-card { border:1px solid #eee5d9; border-radius:20px; box-shadow:0 9px 28px rgba(64,47,30,.07); padding:25px; }
+        .problem-card:hover { transform:translateY(-4px); box-shadow:0 16px 38px rgba(64,47,30,.1); }
+        .problem-title { color:#35302b; line-height:1.35; }
+        .expand-btn { border-radius:12px; background:#d97719; }
+        .expand-btn:hover { background:#c96912; }
+        .solution-content { background:#fff7ed; border-color:#f0dfc9; }
+        .check-result { background:#eef4eb; color:#527a53; }
+        .counter { color:#877966; }
+        .extra-section { margin:48px 0 0; scroll-margin-top:85px; }
+        .extra-heading { display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:17px; padding-bottom:13px; border-bottom:2px solid #d97719; }
+        .extra-heading h2 { font:700 clamp(1.7rem,3vw,2.25rem) 'Playfair Display',serif; color:#514132; }
+        .extra-heading p { color:#92816d; font-size:13px; }
+        .extra-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+        .extra-card { background:#fffdf9; border:1px solid #eadfce; border-radius:18px; padding:22px; box-shadow:0 7px 22px rgba(77,57,35,.045); }
+        .extra-card h3 { font:700 21px 'Playfair Display',serif; margin:7px 0 9px; color:#514132; }
+        .extra-card p { color:#817363; font-size:14px; line-height:1.65; }
+        .extra-icon { font-size:25px; }
+        .extra-btn { display:inline-block; border:0; border-radius:11px; background:#d97719; color:white; padding:11px 16px; margin-top:14px; cursor:pointer; font:600 13px 'Inter',sans-serif; text-decoration:none; }
+        .extra-btn.secondary { background:#fff8ef; color:#72563a; border:1px solid #e7d5be; }
+        .extra-form { display:grid; gap:12px; margin-top:14px; }
+        .extra-form label { color:#756553; font-size:13px; font-weight:600; }
+        .extra-form input,.extra-form select,.extra-form textarea { width:100%; margin-top:5px; border:1px solid #e3d5c3; background:#fff; border-radius:10px; padding:11px 12px; font:14px 'Inter',sans-serif; color:#493d32; }
+        .extra-form textarea { min-height:85px; resize:vertical; }
+        .extra-result { display:none; background:#f0f4eb; border:1px solid #dce7d5; border-radius:12px; padding:14px; margin-top:13px; color:#526c4d; font-size:14px; line-height:1.6; }
+        .extra-result.show { display:block; }
+        .check-list { display:grid; gap:9px; margin-top:12px; }
+        .check-list label { display:flex; gap:9px; align-items:flex-start; font-size:14px; color:#65594d; cursor:pointer; }
+        .diary-entry { border-top:1px solid #eee4d7; padding:12px 0; margin-top:10px; }
+        .diary-entry strong { color:#5a4939; }
+        .diary-entry small { display:block; color:#9b8b78; margin:3px 0; }
+        .diary-entry button { border:0; background:none; color:#bd5f22; cursor:pointer; margin:6px 12px 0 0; }
+        .course-banner { background:linear-gradient(120deg,#f1e2ce,#fffaf2 70%); border:1px solid #e6d2b8; border-radius:22px; padding:clamp(22px,4vw,38px); display:grid; grid-template-columns:1.5fr 1fr; gap:22px; align-items:center; }
+        .course-banner h2 { font:700 clamp(1.8rem,4vw,2.7rem) 'Playfair Display',serif; color:#4e3e30; margin:8px 0 12px; }
+        .course-banner p { color:#796b5b; line-height:1.7; }
+        .course-facts { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+        .course-facts span { border:1px solid #e1c9a9; background:#fffaf3; border-radius:30px; padding:7px 12px; font-size:12px; color:#765b3e; }
+        .course-actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:18px; }
+        .course-actions a { text-decoration:none; }
+        .author-row { display:flex; align-items:center; gap:18px; }
+        .author-placeholder { width:76px; height:76px; border-radius:50%; background:#e9dece; display:grid; place-items:center; font-size:30px; flex-shrink:0; }
+        .site-footer { margin:48px -18px -36px; padding:28px 20px; background:#eee6da; text-align:center; color:#887966; }
+        .footer-links { display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin:14px 0; }
+        .footer-links a { color:#71563c; text-decoration:none; font-size:14px; font-weight:600; }
+        .footer-links a:hover { color:#d97719; }
+        .muted-note { font-size:12px; color:#9b8b78; }
+        @media(max-width:850px){ .extra-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.course-banner{grid-template-columns:1fr;} }
+        @media(max-width:650px){
+            body{padding:0 12px 28px}.site-nav{margin:0 -12px 12px;padding:12px;align-items:flex-start}.site-nav-links{gap:9px 13px;justify-content:flex-end}.site-nav-links a{font-size:11px}.site-nav .nav-cta{padding:7px 10px}.site-brand{font-size:15px}.header{padding:24px 4px 18px}.header h1{font-size:2.15rem}.header p{font-size:.92rem}.extra-grid{grid-template-columns:1fr}.extra-heading{align-items:flex-start;flex-direction:column}.extra-card{padding:18px}.site-footer{margin-left:-12px;margin-right:-12px;margin-bottom:-28px}.course-banner{padding:22px}.problems-grid{grid-template-columns:1fr}.problem-card{padding:21px}
+        }
+
+
+        /* =========================================================
+           DARK / GOLD REDESIGN + MOBILE-FIRST OVERRIDES
+           Базовая архитектура, массив problems и основные функции сохранены.
+           ========================================================= */
+        :root{
+          --gold:#e9ad62;--gold-bright:#ffc77e;--dark:#100e0d;--dark-2:#191513;
+          --dark-3:#241d18;--cream:#f7efe4;--cream-2:#fffaf3;--ink:#2e251e;
+          --muted-gold:#bca17f;
+        }
+        html{scroll-behavior:smooth;scroll-padding-top:82px;background:var(--dark)}
+        body{padding:0 22px 34px;background:radial-gradient(ellipse at 72% 3%,#39261a 0,transparent 36%),linear-gradient(135deg,#0d0c0b,#191411 58%,#0d0c0b);color:#f6eee5;overflow-x:hidden}
+        .container{max-width:1320px}
+        .site-nav{position:sticky;top:0;z-index:50;margin:0 -22px 20px;padding:14px 30px;background:rgba(15,13,12,.94);border:0;border-bottom:1px solid rgba(233,173,98,.18);backdrop-filter:blur(16px);min-height:76px}
+        .site-brand{font:700 18px 'Playfair Display',serif;color:#f4e8d9;letter-spacing:.08em}
+        .site-brand small{color:var(--gold);font-size:9px;letter-spacing:.23em}
+        .site-nav-links{display:flex;align-items:center;gap:clamp(14px,2.4vw,32px)}
+        .site-nav-links>a:not(.nav-cta){color:#e7d8c8;font-size:14px;font-weight:500}
+        .site-nav-links>a:not(.nav-cta):hover{color:var(--gold-bright)}
+        .nav-socials{display:flex;align-items:center;gap:9px}
+        .nav-socials a{display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(233,173,98,.35);border-radius:50%;color:var(--gold-bright);font-size:17px;text-decoration:none}
+        .nav-socials a:hover{background:var(--gold);color:#1b120b}
+        .site-nav .nav-cta{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f5c889,#df9b4d);color:#21150d;border-radius:30px;padding:13px 20px;font-size:13px;font-weight:800;box-shadow:0 7px 24px #d88d3b30}
+        .mobile-menu-toggle{display:none}
+        .hero-dark{position:relative;isolation:isolate;overflow:hidden;min-height:500px;margin:0 0 30px;padding:clamp(38px,6vw,76px) clamp(24px,5vw,64px);border:1px solid rgba(232,177,111,.2);border-radius:26px;background:radial-gradient(ellipse at 78% 48%,rgba(176,102,48,.34),transparent 37%),linear-gradient(115deg,#11100f 0%,#211813 60%,#120f0d 100%);box-shadow:0 24px 70px #0008;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:24px}
+        .hero-dark:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(13,12,11,.08),transparent 60%),radial-gradient(circle at 85% 85%,rgba(225,156,82,.15),transparent 28%)}
+        .hero-copy{position:relative;z-index:2;max-width:720px}
+        .hero-eyebrow,.section-kicker{font-size:11px;font-weight:800;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}
+        .hero-dark h1{font:700 clamp(42px,6vw,76px)/1.04 'Playfair Display',Georgia,serif;letter-spacing:-1.5px;color:#fff7ed;margin:22px 0 18px}
+        .hero-dark h1 span{color:#e9ad62}
+        .hero-dark p{max-width:590px;color:#d2c2b1;font-size:clamp(15px,1.5vw,18px);line-height:1.65;margin-bottom:22px}
+        .hero-stats{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0 27px}
+        .hero-stats .stat-chip{background:rgba(255,255,255,.045);border:1px solid rgba(232,177,111,.28);color:#f0d4b1;border-radius:12px;padding:9px 13px;font-size:12px}
+        .hero-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+        .hero-primary{display:inline-flex;gap:20px;align-items:center;background:linear-gradient(135deg,#ffd49a,#e5a65d);color:#26170c;text-decoration:none;border-radius:40px;padding:16px 23px;font-weight:800;box-shadow:0 9px 30px #e4a45b38}
+        .hero-primary span{font-size:20px}
+        .hero-secondary{color:#e8d4bd;text-decoration:none;font-size:13px;font-weight:600}
+        .hero-signature{font:italic 18px 'Playfair Display',serif;color:#e6ae6d;margin-top:25px;transform:rotate(-3deg);display:inline-block}
+        .hero-art{position:relative;min-height:340px;display:grid;place-items:center}
+        .hero-orbit{position:absolute;border:1px solid rgba(235,174,104,.28);border-radius:50%;transform:rotate(-25deg)}
+        .orbit-one{width:min(33vw,390px);height:min(33vw,390px)}.orbit-two{width:min(25vw,290px);height:min(25vw,290px);border-color:rgba(235,174,104,.16)}
+        .hero-mic{position:relative;z-index:2;width:145px;height:190px;display:grid;place-items:center;border-radius:90px 90px 65px 65px;border:2px solid #e7b36f;color:#f2c17f;font-size:80px;text-shadow:0 0 28px #e6a75c;box-shadow:0 0 70px #d98e4333,inset 0 0 35px #e8ae6230;background:linear-gradient(145deg,#302017,#110e0c)}
+        .hero-mic:after{content:"";position:absolute;width:95px;height:60px;bottom:-38px;border-bottom:3px solid #e7b36f;border-left:3px solid #e7b36f;border-right:3px solid #e7b36f;border-radius:0 0 50px 50px}
+        .hero-wave{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#e4a55e,transparent);filter:drop-shadow(0 0 8px #e4a55e)}
+        .wave-one{top:30%;transform:rotate(-13deg)}.wave-two{bottom:26%;transform:rotate(12deg)}
+        .hero-caption{position:absolute;bottom:2%;right:0;color:#dcb27e;text-align:right;font-size:10px;letter-spacing:.2em;line-height:1.8}
+        .guide-panel{background:linear-gradient(145deg,#f9f2e8,#eee2d2);color:#382b20;border:1px solid #e9cda8;border-radius:25px;padding:clamp(20px,3.5vw,42px);box-shadow:0 22px 60px #0005;scroll-margin-top:88px}
+        .guide-intro{margin-bottom:22px}.guide-intro h2{font:700 clamp(28px,4vw,42px)/1.1 'Playfair Display',serif;color:#38291d;margin:8px 0}.guide-intro p{color:#8a755e;font-size:14px}
+        .glossary-toggle{background:#fffaf3;border:1px dashed #c99a64;color:#795a39;border-radius:12px}
+        .glossary-panel{background:#fffaf3;border-color:#e4d2bb}
+        .search-box input{background:#fffdf9;border:1.5px solid #d9a46b;border-radius:13px;color:#34271d;min-height:56px;font-size:16px}
+        .chips-row{gap:8px;margin-bottom:24px}.chips-label{color:#8b755e}.search-chip{background:#fffaf3;color:#705234;border-color:#e3cfb5}
+        .filters-container{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:28px}
+        .filter-btn{background:#fffaf3;border:1px solid #ddc5a7;border-radius:13px;color:#57422e;padding:13px 8px;box-shadow:0 4px 12px #65492a0b}
+        .filter-btn .filter-emoji{font-size:23px}.filter-btn .filter-label{font-size:13px}
+        .filter-btn.active{background:linear-gradient(135deg,#df9b4d,#c77a2c);border-color:#c77a2c;color:white}
+        .category-title{font-size:clamp(23px,3vw,31px);color:#493526;border-bottom:2px solid var(--cat-color,#c9853e);padding-bottom:12px;margin-bottom:17px}
+        .problems-container{display:block!important}
+        .category-section{display:block!important;animation:fadeIn .3s ease}
+        .problems-grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+        .problem-card,.problem-card.visible{display:flex!important;flex-direction:column;min-width:0;background:#fffdf9;border:1px solid #eadbc8;border-radius:17px;padding:20px 18px;box-shadow:0 8px 22px #60452b12;color:#3c3026}
+        .problem-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px #60452b1d}
+        .problem-title{font-size:17px;line-height:1.35;color:#33271e;overflow-wrap:anywhere}
+        .problem-number{background:#d9822d;color:#fff}
+        .icon-btn{background:#fff9f0;border-color:#e5d1b6;color:#735638}
+        .problem-category{border-radius:30px;font-size:11px;padding:6px 9px}
+        .difficulty-badge{font-size:11px}
+        .expand-btn{margin-top:auto;background:#d77e2c;border-radius:10px;padding:12px 14px;font-size:13px}
+        .expanded-content{margin-top:14px}.problem-item{margin-bottom:14px}.problem-label{font-size:13px;color:#bd6d28}.problem-text{font-size:14px;line-height:1.65;color:#5c5147;overflow-wrap:anywhere}
+        .solution-content{background:#fbf0e3;border:1px solid #efdfca;border-radius:13px;padding:14px}
+        .check-result{background:#edf4eb;border-radius:10px;padding:11px;color:#52764e;font-size:13px}
+        .related-row{font-size:13px;color:#786752}.related-row a{color:#c06c25}
+        .counter{color:#806d58;text-align:right;margin:14px 0 0}
+        .extra-section{scroll-margin-top:90px;margin:40px 0 0;padding:0 2px}
+        .extra-heading{border-bottom-color:#d99a55}.extra-heading h2{color:#f4e5d2}.extra-heading p{color:#c2a98d}
+        .extra-card{background:linear-gradient(145deg,#fffaf3,#f3e7d8);border:1px solid #e8cfaf;border-radius:18px;color:#3a2c20;box-shadow:0 10px 30px #0003}
+        .extra-card h3{color:#493426}.extra-card p{color:#776553}.extra-form label{color:#735d45}.extra-form input,.extra-form select,.extra-form textarea{background:#fffdf9;border-color:#dfc8aa;color:#3a2b1e}
+        .extra-result{background:#edf4eb;color:#4e7049}
+        .course-banner{background:linear-gradient(120deg,#f8ead8,#fffaf3 70%);border-color:#e7cba7;box-shadow:0 12px 35px #0003}
+        .course-banner h2{color:#493426}.course-banner p{color:#786653}
+        .author-row{color:#3a2c20}.author-row h3{color:#493426}
+        .site-footer{margin:48px -22px -34px;padding:35px 20px;background:#0b0a09;border-top:1px solid rgba(233,173,98,.2);color:#bca88f}
+        .footer-links a{color:#e9bd83}.muted-note{color:#9e8a72}
+        .term-tooltip{z-index:100}
+        /* Ensure dynamically rendered cards never inherit the old hidden state. */
+        #problemsContainer .problem-card{visibility:visible!important;opacity:1!important}
+        @media(max-width:1000px){.problems-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-art{min-height:280px}}
+        @media(max-width:720px){
+          body{padding:0 12px 24px}
+          .site-nav{margin:0 -12px 12px;padding:12px 15px;min-height:64px;align-items:center;flex-wrap:wrap}
+          .site-brand{font-size:15px}.site-brand small{font-size:8px}
+          .mobile-menu-toggle{display:grid;place-items:center;width:40px;height:40px;border:1px solid rgba(233,173,98,.4);border-radius:10px;background:#201812;color:#f4c486;font-size:20px;margin-left:auto}
+          .site-nav-links{display:none;order:3;width:100%;padding:12px 2px 4px;flex-direction:column;align-items:stretch;gap:13px}
+          .site-nav-links.open{display:flex}.site-nav-links>a:not(.nav-cta){font-size:15px;padding:5px 0}
+          .nav-socials{padding:3px 0}.nav-socials a{width:38px;height:38px}
+          .site-nav .nav-cta{width:100%;padding:14px}
+          .hero-dark{min-height:0;grid-template-columns:1fr;margin-bottom:15px;padding:32px 22px 27px;border-radius:20px;gap:0}
+          .hero-dark h1{font-size:clamp(37px,10vw,53px);letter-spacing:-.8px;margin:17px 0 13px}
+          .hero-dark p{font-size:15px;line-height:1.55;margin-bottom:16px}
+          .hero-stats{gap:7px;margin:16px 0 20px}.hero-stats .stat-chip{font-size:11px;padding:8px 10px}
+          .hero-actions{align-items:stretch;flex-direction:column;gap:13px}.hero-primary{justify-content:center;padding:15px 18px}.hero-secondary{text-align:center;padding:4px}
+          .hero-signature{font-size:16px;margin-top:19px}
+          .hero-art{min-height:130px;margin-top:5px}.orbit-one{width:145px;height:145px}.orbit-two{width:108px;height:108px}.hero-mic{width:58px;height:77px;font-size:35px;border-radius:40px 40px 30px 30px}.hero-mic:after{width:38px;height:24px;bottom:-17px;border-width:2px}.hero-caption{font-size:8px;bottom:0;right:0}
+          .guide-panel{padding:20px 14px;border-radius:19px}.guide-intro h2{font-size:29px}.guide-intro p{font-size:13px}
+          .glossary-toggle{width:100%;font-size:12px;padding:11px 10px;margin-bottom:14px}
+          .search-box input{padding:15px 14px;min-height:52px;font-size:15px}
+          .chips-row{gap:7px;margin-bottom:19px}.chips-label{width:100%;font-size:12px}.search-chip{font-size:12px;padding:7px 10px}
+          .filters-container{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:23px}
+          .filter-btn{min-height:70px;padding:10px 6px;gap:5px}.filter-btn .filter-emoji{font-size:21px}.filter-btn .filter-label{font-size:12px}
+          .category-title{font-size:24px;margin-bottom:13px}.problems-grid{grid-template-columns:1fr!important;gap:11px}
+          .problem-card,.problem-card.visible{padding:17px 15px;border-radius:15px}
+          .problem-title{font-size:16px;margin:10px 0}.card-top-row{gap:8px}.card-actions{gap:6px}.icon-btn{width:34px;height:34px}
+          .badge-row{gap:6px}.problem-category,.difficulty-badge{font-size:10px;padding:5px 8px}
+          .expand-btn{width:100%;padding:13px;font-size:13px;margin-top:12px}
+          .expanded-content{padding-top:13px}.problem-text{font-size:14px;line-height:1.6}
+          .counter{font-size:13px;margin-top:12px}
+          .extra-section{margin-top:32px}.extra-heading{gap:6px}.extra-heading h2{font-size:27px}.extra-heading p{font-size:12px}
+          .extra-grid{grid-template-columns:1fr;gap:11px}.extra-card{padding:17px}.extra-card h3{font-size:20px}.extra-card p{font-size:13px}
+          .extra-form input,.extra-form select,.extra-form textarea{font-size:16px;min-height:46px}
+          .extra-btn{width:100%;text-align:center;padding:13px}
+          .course-banner{grid-template-columns:1fr;padding:21px 17px;border-radius:18px}.course-banner h2{font-size:29px}.course-actions{flex-direction:column}.course-actions a{width:100%;text-align:center}
+          .author-row{align-items:flex-start;gap:12px}.author-placeholder{width:54px;height:54px;font-size:22px}.author-row p{font-size:13px}
+          .site-footer{margin:35px -12px -24px;padding:27px 15px}.footer-links{gap:12px}.footer-links a{font-size:13px}
+        }
+        @media(max-width:360px){.hero-dark h1{font-size:34px}.guide-panel{padding:17px 11px}.problem-card,.problem-card.visible{padding:15px 12px}}
+
+
+
+        /* FINAL NAVIGATION OVERRIDE
+           Горизонтальное меню сохраняется почти на всех мобильных экранах.
+           Бургер включается только на узких экранах до 430px. */
+        @media (max-width: 720px) {
+          .site-nav {
+            display:flex !important;
+            flex-direction:row !important;
+            flex-wrap:nowrap !important;
+            align-items:center !important;
+            justify-content:space-between !important;
+            gap:10px !important;
+            min-height:0 !important;
+            margin:0 -12px 12px !important;
+            padding:9px 12px !important;
+            position:sticky;
+          }
+          .site-brand {
+            display:flex !important;
+            flex:0 1 auto !important;
+            min-width:0 !important;
+            align-items:center !important;
+            white-space:nowrap !important;
+            margin:0 !important;
+          }
+          .site-brand .header-logo {
+            display:block !important;
+            width:clamp(92px, 22vw, 138px) !important;
+            height:auto !important;
+            max-height:42px !important;
+            object-fit:contain !important;
+          }
+          .mobile-menu-toggle { display:none !important; }
+          .site-nav-links {
+            display:flex !important;
+            position:static !important;
+            flex:1 1 auto !important;
+            order:initial !important;
+            width:auto !important;
+            min-width:0 !important;
+            flex-direction:row !important;
+            flex-wrap:nowrap !important;
+            align-items:center !important;
+            justify-content:flex-end !important;
+            gap:clamp(7px, 1.7vw, 14px) !important;
+            margin:0 !important;
+            padding:0 !important;
+            border:0 !important;
+            background:transparent !important;
+            box-shadow:none !important;
+          }
+          .site-nav-links > a:not(.nav-cta) {
+            display:inline-flex !important;
+            flex:0 0 auto !important;
+            padding:4px 0 !important;
+            font-size:clamp(10px, 1.65vw, 12px) !important;
+            white-space:nowrap !important;
+          }
+          .site-nav-links .nav-socials { display:none !important; }
+          .site-nav-links .nav-cta {
+            display:inline-flex !important;
+            flex:0 0 auto !important;
+            width:auto !important;
+            margin:0 !important;
+            padding:8px 9px !important;
+            font-size:clamp(9px, 1.45vw, 11px) !important;
+            line-height:1.15 !important;
+            white-space:nowrap !important;
+          }
+        }
+
+        /* Только действительно узкие телефоны переходят на бургер */
+        @media (max-width: 430px) {
+          .site-nav { gap:8px !important; }
+          .site-brand .header-logo {
+            width:clamp(105px, 34vw, 132px) !important;
+            max-height:40px !important;
+          }
+          .mobile-menu-toggle {
+            display:grid !important;
+            flex:0 0 38px !important;
+            place-items:center !important;
+            width:38px !important;
+            height:38px !important;
+            margin:0 0 0 auto !important;
+            border:1px solid rgba(233,173,98,.4) !important;
+            border-radius:10px !important;
+            background:#201812 !important;
+            color:#f4c486 !important;
+            font-size:20px !important;
+          }
+          .site-nav-links { display:none !important; }
+          .site-nav-links.open {
+            display:flex !important;
+            position:absolute !important;
+            z-index:100 !important;
+            top:calc(100% + 7px) !important;
+            left:10px !important;
+            right:10px !important;
+            width:auto !important;
+            flex-direction:column !important;
+            align-items:stretch !important;
+            gap:9px !important;
+            margin:0 !important;
+            padding:14px !important;
+            border:1px solid rgba(232,177,111,.25) !important;
+            border-radius:14px !important;
+            background:#17120f !important;
+            box-shadow:0 15px 35px rgba(0,0,0,.4) !important;
+          }
+          .site-nav-links.open > a:not(.nav-cta) {
+            display:flex !important;
+            padding:8px 4px !important;
+            font-size:14px !important;
+          }
+          .site-nav-links.open .nav-cta {
+            display:flex !important;
+            justify-content:center !important;
+            width:100% !important;
+            margin:4px 0 0 !important;
+            padding:11px !important;
+            font-size:13px !important;
+          }
+        }
+
+        /* Золотые иконки социальных сетей */
+
+.nav-socials {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+    padding: 3px;
+
+    background: transparent;
+    border: none;
+}
+
+.nav-socials a img {
+    display: block;
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+
+    filter: drop-shadow(0 1px 4px rgba(226,190,126,.25));
+    transition: transform .2s ease;
+}
+
+.nav-socials a:hover img {
+    transform: translateY(-2px);
+}
+
+/* Узкая горизонтальная навигация */
+@media (min-width: 431px) and (max-width: 720px) {
+    .nav-socials {
+        display: none !important;
+    }
+}
+
+/* Иконки внутри раскрытого мобильного меню */
+@media (max-width: 430px) {
+    .site-nav-links.open .nav-socials {
+        display: flex !important;
+        gap: 14px;
+        padding: 8px 0;
+    }
+
+    .site-nav-links.open .nav-socials a img {
+        width: 29px;
+        height: 29px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container" id="top">
+        <!-- ДОПОЛНЕНИЕ: верхняя навигация -->
+        <nav class="site-nav" aria-label="Основная навигация">
+            <a class="site-brand" href="#top">
+    <img src="logo.png" alt="Логотип Тимура" class="header-logo">
+    </a>
+            <button class="mobile-menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false">☰</button>
+            <div class="site-nav-links" id="siteNavLinks">
+                <a href="#guide">Гид</a><a href="#course">Курс</a><a href="#author">Обо мне</a>
+                <span class="nav-socials" aria-label="Социальные сети">
+
+    <a data-link="instagram" href="#" aria-label="Instagram" title="Instagram">
+        <img src="instagram-gold.png" alt="">
+    </a>
+
+    <a data-link="telegram" href="#" aria-label="Telegram" title="Telegram">
+        <img src="telegram-gold.png" alt="">
+    </a>
+
+    <a data-link="youtube" href="#" aria-label="YouTube" title="YouTube">
+        <img src="youtube-gold.png" alt="">
+    </a>
+
+</span>
+                <a class="nav-cta" href="#course">Записаться на курс →</a>
+            </div>
+        </nav>
+
+        <!-- HERO -->
+        <section class="hero-dark">
+            <div class="hero-copy">
+                <div class="hero-eyebrow">ИНТЕРАКТИВНЫЙ ГИД ДЛЯ ВОКАЛИСТОВ</div>
+                <h1>Гид по решению<br><span>вокальных проблем</span></h1>
+                <p>Полный справочник, диагностика и инструменты для осознанной работы над голосом.</p>
+                <div class="hero-stats" id="statsBar"></div>
+                <div class="hero-actions">
+                    <a class="hero-primary" href="#tools">Начать диагностику <span>→</span></a>
+                    <a class="hero-secondary" href="#guide">Перейти к справочнику ↓</a>
+                </div>
+                </div>
+
+<div class="hero-photo">
+    <img src="timur.png" alt="Тимур Сираев — вокальный тренер">
+</div>
+        </section>
+
+        <section class="guide-panel" id="guide">
+        <div class="guide-intro"><span class="section-kicker">СПРАВОЧНИК</span><h2>Найди свою вокальную задачу</h2><p>Выбери категорию или опиши проблему своими словами.</p></div>
+        <!-- GLOSSARY -->
+        <button class="glossary-toggle" id="glossaryToggle">📖 Словарь терминов — не понимаете слово в тексте? Загляните сюда</button>
+        <div class="glossary-panel" id="glossaryPanel">
+            <h3>Словарь вокальных терминов</h3>
+            <dl class="glossary-list" id="glossaryList"></dl>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Опишите проблему... (например: 'боль в горле', 'плохое пение', 'тяжелый звук')">
+        </div>
+        <div class="chips-row">
+            <span class="chips-label">Частые запросы:</span>
+            <button class="search-chip" data-q="боль в горле">боль в горле</button>
+            <button class="search-chip" data-q="срывы на крике">срывы на крике</button>
+            <button class="search-chip" data-q="тяжелый звук">тяжелый звук</button>
+            <button class="search-chip" data-q="гнусавость">гнусавость</button>
+            <button class="search-chip" data-q="воздушный звук">воздушный звук</button>
+            <button class="search-chip" data-q="высокие ноты">высокие ноты</button>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filters-container" id="filtersContainer">
+            <button class="filter-btn active" data-filter="all">
+                <span class="filter-emoji">📋</span>
+                <span class="filter-label">Все</span>
+            </button>
+            <button class="filter-btn cat-loudness" data-filter="loudness">
+                <span class="filter-emoji">📢</span>
+                <span class="filter-label">Громкость</span>
+            </button>
+            <button class="filter-btn cat-density" data-filter="density">
+                <span class="filter-emoji">🎯</span>
+                <span class="filter-label">Плотность</span>
+            </button>
+            <button class="filter-btn cat-comfort" data-filter="comfort">
+                <span class="filter-emoji">🛟</span>
+                <span class="filter-label">Удобство</span>
+            </button>
+            <button class="filter-btn cat-beauty" data-filter="beauty">
+                <span class="filter-emoji">🌟</span>
+                <span class="filter-label">Красота</span>
+            </button>
+            <button class="filter-btn cat-brightness" data-filter="brightness">
+                <span class="filter-emoji">✨</span>
+                <span class="filter-label">Яркость</span>
+            </button>
+            <button class="filter-btn cat-height" data-filter="height">
+                <span class="filter-emoji">🎼</span>
+                <span class="filter-label">Высота</span>
+            </button>
+            <button class="filter-btn cat-timbre" data-filter="timbre">
+                <span class="filter-emoji">🎵</span>
+                <span class="filter-label">Тембр</span>
+            </button>
+            <button class="filter-btn" data-filter="bookmarked">
+                <span class="filter-emoji">🔖</span>
+                <span class="filter-label">Избранное</span>
+            </button>
+        </div>
+
+        <!-- PROBLEMS -->
+        <div class="problems-container" id="problemsContainer"></div>
+
+        <!-- COUNTER -->
+        <div class="counter">
+            Найдено: <strong id="counter">0</strong> проблем
+        </div>
+        </section>
+
+        <!-- =====================================================
+             ДОПОЛНЕНИЕ: ИНСТРУМЕНТЫ, БАЗА ЗНАНИЙ И КУРС.
+             Существующий каталог problems и его функции не изменены.
+             ===================================================== -->
+        <section class="extra-section" id="tools">
+            <div class="extra-heading"><h2>Инструменты вокалиста</h2><p>Практические инструменты для осознанной работы с голосом</p></div>
+            <div class="extra-grid">
+                   
+<article class="extra-card">
+    <div class="extra-icon">🧭</div>
+    <h3>Мини-диагностика</h3>
+    <p>Ответь на несколько вопросов и получи подборку подходящих материалов из справочника. Это навигация по возможным направлениям работы, а не медицинский диагноз.</p>
+
+    <form class="extra-form" id="diagnosticForm">
+        <label>Что сейчас беспокоит?
+            <select id="diagConcern">
+                <option value="high">Не получаются высокие ноты</option>
+                <option value="breaks">Срываются даже невысокие ноты</option>
+                <option value="loud">Не хватает громкости или мощности</option>
+                <option value="density">Не хватает плотности звучания</option>
+                <option value="air">Звук слишком воздушный</option>
+                <option value="tension">Звук получается напряжённым</option>
+                <option value="brightness">Не хватает яркости и звонкости</option>
+                <option value="vowel">Неудобно петь определённые гласные</option>
+                <option value="register">Сложно переходить между регистрами</option>
+                <option value="belt">Не получается белт или микст</option>
+                <option value="timbre">Не устраивает тембр</option>
+                <option value="nasal">Избыточная гнусавость</option>
+                <option value="other">Другая проблема</option>
+            </select>
+        </label>
+
+        <label>В каком контексте это проявляется?
+            <select id="diagContext">
+                <option value="">Сначала выбери проблему</option>
+            </select>
+        </label>
+
+        <button class="extra-btn" type="submit">
+            Подобрать материалы →
+        </button>
+    </form>
+
+    <div class="extra-result" id="diagnosticResult" aria-live="polite"></div>
+</article>
+
+                <article class="extra-card">
+                    <div class="extra-icon">☑️</div><h3>Проверка результата</h3>
+                    <p>После упражнения отметь, что удалось изменить. Это поможет отслеживать собственные наблюдения.</p>
+                    <div class="check-list" id="resultChecklist">
+                        <label><input type="checkbox"> Звук стал ближе к желаемому</label>
+                        <label><input type="checkbox"> Сохранилась стабильность</label>
+                        <label><input type="checkbox"> Получилось повторить результат</label>
+                        <label><input type="checkbox"> Получилось перенести результат в песню</label>
+                    </div>
+                    <button class="extra-btn secondary" type="button" id="resetChecklist">Сбросить отметки</button>
+                </article>
+                <article class="extra-card">
+                    <div class="extra-icon">📓</div><h3>Вокальный дневник</h3>
+                    <p>Сохраняй задачи и наблюдения после занятий. Записи хранятся в этом браузере на твоём устройстве.</p>
+                    <form class="extra-form" id="diaryForm">
+                        <label>Вокальная задача<input id="diaryGoal" required placeholder="Над чем работал(а)?"></label>
+                        <label>Что получилось / что заметил(а)?<textarea id="diaryNote" required placeholder="Опиши свои наблюдения..."></textarea></label>
+                        <button class="extra-btn" type="submit">Сохранить запись</button>
+                    </form>
+                    <div id="diaryEntries"></div>
+                </article>
+                <article class="extra-card">
+                    <div class="extra-icon">🧩</div><h3>Конструктор тренировки</h3>
+                    <p>Последовательно пройди путь от формулировки задачи до переноса найденного звучания в песню.</p>
+                    <div class="check-list" id="practiceChecklist">
+                        <label><input type="checkbox"> Сформулировать вокальную задачу</label>
+                        <label><input type="checkbox"> Найти простой входной звук</label>
+                        <label><input type="checkbox"> Проверить целевое звучание</label>
+                        <label><input type="checkbox"> Перенести координацию в песню</label>
+                        <label><input type="checkbox"> Оценить и записать результат</label>
+                    </div>
+                    <button class="extra-btn secondary" type="button" id="resetPractice">Начать заново</button>
+                </article>
+                <article class="extra-card">
+                    <div class="extra-icon">🔖</div><h3>Твои сохранённые материалы</h3>
+                    <p>Добавляй полезные проблемы в избранное с помощью звёздочки в карточках. Они сохраняются между посещениями.</p>
+                    <button class="extra-btn" type="button" id="showBookmarks">Открыть избранное →</button>
+                </article>
+            </div>
+        </section>
+
+        <section class="extra-section" id="knowledge">
+            <div class="extra-heading"><h2>База знаний</h2><p>Разбирайся не только в симптомах, но и в принципах работы голоса</p></div>
+            <div class="extra-grid">
+                <article class="extra-card"><div class="extra-icon">🧠</div><h3>13 структур</h3><p>Отдельный образовательный раздел для изучения структур, участвующих в формировании голоса. </p><span class="muted-note">Скоро здесь будут материалы😌
+                </span></article>
+                <article class="extra-card"><div class="extra-icon">🎼</div><h3>6 вокальных качеств</h3><p>Раздел для системного изучения вокальных качеств, их различий и практического применения в песнях.</p><span class="muted-note">Скоро здесь будут материалы😌</span></article>
+                <article class="extra-card"><div class="extra-icon">📖</div><h3>Словарь вокалиста</h3><p>Словарь терминов уже есть в этом гиде. Нажми на кнопку выше, чтобы открыть определения. Термины, выделенные в карточках, также можно нажимать.</p><button class="extra-btn secondary" type="button" id="openGlossary">Открыть словарь</button></article>
+            </div>
+        </section>
+
+        <section class="extra-section" id="course">
+            <div class="course-banner">
+                <div>
+                    <div class="muted-note" style="letter-spacing:.16em;text-transform:uppercase;font-weight:700">Следующий шаг в развитии голоса</div>
+                    <h2>От отдельных решений — к целостной системе</h2>
+                    <p>Гид помогает сориентироваться в конкретной вокальной проблеме. Курс «Система вокала» помогает связать теорию и практику: разобраться в устройстве голоса, понять вокальную задачу и осознанно выстраивать работу над песнями.</p>
+                    <div class="course-facts"><span>13 структур</span><span>6 вокальных качеств</span><span>Вокальная задача</span><span>Метод входных упражнений</span></div>
+                    <div class="course-actions"><a class="extra-btn" data-link="course" href="#" target="_blank" rel="noopener">Посмотреть программу →</a><a class="extra-btn secondary" data-link="application" href="#" target="_blank" rel="noopener">Оставить заявку</a></div>
+                </div>
+                <div class="extra-card" style="background:rgba(255,253,249,.75)"><div class="extra-icon">🎤</div><h3>Система вокала</h3><p>Не набор случайных упражнений, а последовательный способ понимать, что ты делаешь, зачем выполняешь упражнение и как переносишь результат в музыку.</p><p class="muted-note">Стоимость и условия обучения — на официальной странице курса.</p></div>
+            </div>
+        </section>
+
+        <section class="extra-section" id="author">
+            <div class="extra-heading"><h2>Об авторе</h2><p>Методика и материалы гида</p></div>
+            <div class="extra-card author-row"><div class="author-placeholder">🎙️</div><div><h3>Тимур Сираев</h3><p>Вокальный тренер, артист музыкального театра, музыкант. Помогаю вокалистам не просто выполнять упражнения, а понимать, как устроен их голос и как осознанно управлять вокальным развитием.</p></div></div>
+        </section>
+
+    </div>
+
+
+    <footer class="site-footer">
+        <div class="site-brand">СИСТЕМА ВОКАЛА<small>ИНТЕРАКТИВНЫЙ НАВИГАТОР</small></div>
+        <div class="footer-links">
+            <a data-link="course" href="#" target="_blank" rel="noopener">Курс</a>
+            <a data-link="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+            <a data-link="telegram" href="#" target="_blank" rel="noopener">Telegram</a>
+            <a data-link="youtube" href="#" target="_blank" rel="noopener">YouTube</a>
+        </div>
+        <div class="muted-note">Автор проекта — Тимур Сираев · Материалы предназначены для образовательных целей.<br>Деятельность компании Meta Platforms Inc. по реализации продуктов социальных сетей Facebook и Instagram по решению суда признана экстремистской на территории Российской Федерации.</div>
+    </footer>
+
+    <div class="term-tooltip" id="termTooltip"></div>
+
+    <script>
+        // ===================== DATA =====================
+        // number, title, category, problem, reason, necessary, solution, difficulty(1-3), checkResult, related[]
+        const problems = [
+    {
+        number: 1,
+        title: "Нехватка мощности звука",
+        category: ["loudness"],
+        emoji: "📢",
+        problem: "Нехватка мощности звука, стабильности звука (срывы), слишком мягкий, тихий или неполётный звук",
+        reason: "Отсутствие анкеровки торса",
+        necessary: "Вам необходим мощный, громкий, полетный и стабильный звук без срывов для, возможно, кульминационной части вашей песни. Бэлт, Микст-Бэлт или толстое смыкание.",
+        solution: "Создайте тонус в области торса: активируйте широчайшие мышцы спины (расправьте руки в стороны, как будто хотите обнять кого-то или как будто готовитесь взять что-то тяжелое), почувствуйте тонус в корпусе, примените это положение в исполнении",
+        difficulty: 2,
+        checkResult: "Звук стал мощнее, появилась опора в корпусе, высокоинтенсивный звук не срывается.",
+        related: [2, 9]
+    },
+{
+        number: 2,
+        title: "Слишком мягкий, нежный звук",
+        category: ["loudness", "timbre"],
+        emoji: "🎯",
+        problem: "Слишком мягкий, нежный звук при необходимом мощном металлическом. (Часто встречается у тихо, мягко разговаривающих девушек)",
+        reason: "Толщина смыкания",
+        necessary: "Вам необходим плотный толстый (металлизированный) звук.",
+        solution: "Утолщите смыкание агрессивно поговорив, покричав, примените ощущение в исполнении или Усильте атаку на острую гортанную",
+        difficulty: 2,
+        checkResult: "В нужных местах звук стал плотным и «металлическим».",
+        related: [9, 20]
+    },
+     {
+        number: 3,
+        title: "Ватное начало звука, нет остроты, колкости, полётности",
+        category: ["loudness", "brightness"],
+        emoji: "🛟",
+        problem: "Ватное начало звука, отсутствие остроты, колкости, полётности",
+        reason: "Недостаток твердой атаки",
+        necessary: "Вам необходим резкий, твердый, монументальный звук. Возможно вы поете песню с темпераментным звучанием вокала.",
+        solution: "Усильте атаку на острую гортанную, исключите придыхание, сократите вдох",
+        difficulty: 2,
+        checkResult: "Звук начинается чётко и сразу, без «подъезда» и придыхания.",
+        related: [12]
+    },
+    {
+        number: 4,
+        title: "Отсутствие полётности, мощности, энергии",
+        category: ["loudness", "comfort", "timbre"],
+        emoji: "📢",
+        problem: "Отсутствие полётности, мощности, энергии в звуке",
+        reason: "Деактивированный перстневидный хрящ",
+        necessary: "Вам необходим мощный, громкий, полетный и стабильный звук без срывов для, возможно, кульминационной части вашей песни.",
+        solution: "Позовите кого-нибудь на \"Эй\" или \"Эгегей\", примените это ощущение в исполнении",
+        difficulty: 3,
+        checkResult: "Звук зазвучал легче, ушла придавленность, появилась «полётность» и энергия.",
+        related: [19]
+    },
+{
+        number: 5,
+        title: "Слишком воздушный звук",
+        category: ["density"],
+        emoji: "🎯",
+        problem: "Слишком воздушный звук при необходимом плотном",
+        reason: "Деактивированный щитовидный хрящ",
+        necessary: "Вам необходим плотный звук без признаков лишнего воздуха, без \"сиплости\" в звуке.",
+        solution: "Мягко риплакните или порыдайте на фразе, следите за гортанью (не опускайте ее), примените ощущение в исполнении",
+        difficulty: 2,
+        checkResult: "Ушла лишняя «воздушность» и сипение, звук стал плотным.",
+        related: [5, 11]
+    },
+    {
+        number: 6,
+        title: "Перенапряжение в звуке и теле",
+        category: ["comfort"],
+        emoji: "🛟",
+        problem: "Перенапряжение в звуке и в теле, отсутствие подвижности и легкости, комфорта. Зажим",
+        reason: "Избыток анкеровки торса – напряжение в теле",
+        necessary: "Вам необходим стабильный звук, легкое и подвижное тело, удобство при исполнении (в том числе и сложных технически отрезков)",
+        solution: "Снимите напряжение движением тела во время исполнения (походите на месте, покачайтесь в стороны туда-сюда), попробуйте обмануть мозг, спев сложную фразу с невиданной легкостью, в максимально расслабленном состоянии",
+        difficulty: 2,
+        checkResult: "Тело свободно двигается во время пения, зажим ушёл, звук берется легко.",
+        related: [4]
+    },
+
+    {
+        number: 7,
+        title: "Тяжесть звука и боль в шее",
+        category: ["comfort"],
+        emoji: "🛟",
+        problem: "Тяжесть звука, болезненные ощущения в области шеи и гортани, голова поднимается вверх",
+        reason: "Избыток напряжения в области шеи, отсутствие физиологичной анкеровки",
+        necessary: "Вам необходим стабильный звук, легкость в шее, удобство при исполнении (в том числе и сложных технически отрезков)",
+        solution: "Опустите голову параллельно полу и приведите шею в анкерованное положение. Можно слегка наклонить голову вниз, но не тянуть её вверх. Или поставить кулак ко лбу и слегка надавить, чтобы голова не тянулась вверх и вперед",
+        difficulty: 1,
+        checkResult: "Шея не напряжена, голова не тянется вверх, боль прошла.",
+        related: [3, 7]
+    },
+{
+        number: 8,
+        title: "Болезненные режущие ощущения над кадыком",
+        category: ["comfort"],
+        emoji: "🌟",
+        problem: "Болезненные режущие ощущения над кадыком, расщепление звука. (Иногда сопровождается 'грязью' в звучании)",
+        reason: "Неконтролируемое сужение ложных голосовых складок",
+        necessary: "Вам необходим чистый, удобный и комфортный звук без дополнительных признаков расщепления: 'грязи звука'.",
+        solution: "Сделайте маневр по расслаблению (упражнение голосовой замок) или Посмейтесь, почувствуйте свободу прохождения воздуха, примените ощущение радости в исполнении",
+        difficulty: 3,
+        checkResult: "Звук чистый, без расщепления и режущей боли над кадыком.",
+        related: [6]
+    },
+{
+        number: 9,
+        title: "Тяжесть на высоких звуках, фальш в верхнем диапазоне",
+        category: ["comfort", "height"],
+        emoji: "🎼",
+        problem: "Тяжесть на высоких звуках, 'грязь' в интонировании верхнего диапазона",
+        reason: "Заниженная гортань",
+        necessary: "Вам необходимы легкие, чистые и удобные верхние ноты в любом голосовом качестве и любой громкости, плотности и яркости.",
+        solution: "Спойте сложный отрезок более детским голосом. Сделайте маневр по расслаблению языка, поднимите корень и высуньте кончик наружу, примените в исполнении, сохраняя положение языка и гортани",
+        difficulty: 2,
+        checkResult: "Верхний диапазон интонируется чисто, без напряжения.",
+        related: [2, 7]
+    },
+    {
+        number: 10,
+        title: "Тяжесть на высоких нотах, завал звука \"назад\"",
+        category: ["comfort"],
+        emoji: "🛟",
+        problem: "Тяжесть звука, 'грязь' в интонировании высоких нот. 'Заваленные назад', тяжелые гласные звуки.",
+        reason: "Опущенный, зажатый корень языка. АНАЛОГИЧНО ОПУЩЕННОЙ ГОРТАНИ",
+        necessary: "Вам необходим свободный, яркий, полетный звук на высоких нотах без выраженных дополнительных призвуков (назальность, объем).",
+        solution: "Сделайте маневр по расслаблению языка, поднимите корень и высуньте кончик наружу, примените высокий язык исполнении",
+        difficulty: 2,
+        checkResult: "Высокие ноты звучат свободно и чисто, без «завала назад» и тяжести.",
+        related: [4, 19]
+    },
+    {
+        number: 11,
+        title: "Пение 'сквозь зубы', избыток напряжения в лице и челюсти",
+        category: ["comfort"],
+        emoji: "🛟",
+        problem: "Пение 'сквозь зубы', болезненные ощущения в лице, челюсти",
+        reason: "Зажим челюсти",
+        necessary: "Вам необходим свободный, комфортный звук и дикция, как в разговорной речи, без дополнительных сжатий, призвуков",
+        solution: "Сделайте маневр по расслаблению челюсти, проговорите фразу в расслабленном виде: 'на отвали', примените положение в исполнении",
+        difficulty: 1,
+        checkResult: "Челюсть и лицо свободны, дикция естественная, как в речи.",
+        related: [7, 16]
+    },
+
+    {
+        number: 12,
+        title: "Чрезмерная назальность, гнусавость",
+        category: ["beauty", "timbre"],
+        emoji: "🌟",
+        problem: "Чрезмерная назальность, гнусавость звука",
+        reason: "Опущенное мягкое нёбо",
+        necessary: "Вам необходим чуть объемный 'горловой' звук без признаков назализации. НЕМНОГО походит на академический вокал. Звук открытый, свободный, без эффекта гнусавости",
+        solution: "Поднимите мягкое нёбо, создав купол в глотке, позевав, (следите за гортанью, не опускайте ее)",
+        difficulty: 1,
+        checkResult: "Гнусавость ушла, звук естественный, но не потерял яркости.",
+        related: [15, 17]
+    },
+{
+        number: 13,
+        title: "Слишком 'близкий' звук, отсутствие объема",
+        category: ["beauty"],
+        emoji: "🌟",
+        problem: "Слишком 'близкий' звук, отсутствие объема звука",
+        reason: "Вытянутые губы или их зажатое состояние",
+        necessary: "Вам необходим чуть объемный, свободный звук, комфортный на разных звуковысотах. Возможно, более глубокая глоточная форма (как в Бэлте)",
+        solution: "Сделайте трель губами, расслабьте их, проговорите фразу в речевой форме, примените в исполнении. Чем более вогнутые губы вовнутрь, тем более глубокий звук. Аналогично наоборот.",
+        difficulty: 2,
+        checkResult: "В звуке появился объём, ушла излишняя «плоскость».",
+        related: [14]
+    },
+    {
+        number: 14,
+        title: "Отсутствие яркости, звонкости звука",
+        category: ["brightness", "timbre"],
+        emoji: "✨",
+        problem: "Отсутствие яркости, звонкости или назальной окраски звука",
+        reason: "Широкий СЧН",
+        necessary: "Вам необходим назализированный в разных пропорциях звук. Яркий, звонкий, пронзительный, при этом легкий.",
+        solution: "Сузьте СЧН, имитируя ведьмочку, мяукая, максимально утрированно, примените в исполнении",
+        difficulty: 1,
+        checkResult: "Звук стал звонче и ярче без потери лёгкости.",
+        related: [14]
+    },
+    {
+        number: 15,
+        title: "Слишком 'металлический', острый звук",
+        category: ["timbre"],
+        emoji: "🎵",
+        problem: "Слишком 'металлический' звук при необходимой тонкости",
+        reason: "Толщина смыкания",
+        necessary: "Вам необходим мягкий, нежный и тонкий звук, зачастую тихий, в тихом музыкальном фрагменте",
+        solution: "Утончите смыкание нежно поговорив или имитируя высокий 'девчачий' голос",
+        difficulty: 1,
+        checkResult: "Звук стал мягче и тоньше в нужном тихом фрагменте.",
+        related: [9, 10]
+    },
+    {
+        number: 16,
+        title: "Слишком 'мультяшный' детский звук",
+        category: ["timbre"],
+        emoji: "🎯",
+        problem: "Слишком 'мультяшный', сплющенный или детский звук, отсутствие объема",
+        reason: "Чрезмерно завышенная гортань",
+        necessary: "Вам необходим классический звук любого голосового качества любых параметров без ярко выраженной характерной окраски звука (мультяшности, противности, детскости)",
+        solution: "Поимитируйте 'деда мороза', опустив гортань, сократите полученную окраску на ~50%, примените в исполнении. Или Расслабьтесь, проговорите сложный отрезок обычной речью, примените это среднее положение гортани в исполнении",
+        difficulty: 2,
+        checkResult: "Звук стал спокойнее и «взрослее», характерная детскость ушла.",
+        related: [10]
+    },
+                {
+                number: 17, title: "Занижаю ноту", category: ["height"], emoji: "🎼",
+                problem: "Регулярно не дотягиваете нужную ноту, особенно на высоких или протяжных звуках. Дискомфорта и боли при этом нет.",
+                reason: "Недостаточная точность интонирования и потеря тонусной организации звука",
+                necessary: "Вам необходимо стабильно попадать точно в заданную высоту в выбранном голосовом качестве.",
+                solution: "Прослушайте нужный отрезок в оригинале. Пропойте нужную ноту отдельно и коротко на удобной громкости в целевых буквах (можно изменить голосовое качество, т.е. взять звук, например, тоньше). Затем повторите её в контексте фразы, сохраняя то же ощущение высоты. Затем постепенно увеличивайте громкость и возвращайте нужное голосовое качество.",
+                difficulty: 1,
+                checkResult: "Нота начинает звучать точно, без заметного занижения в нужном голосовом качестве.",
+                related: [5, 19]
+            },
+            {
+                number: 18, title: "Завышаю ноту", category: ["height"], emoji: "🎼",
+                problem: "Регулярно перелетаете нужную ноту вверх, особенно при эмоциональном или громком исполнении",
+                reason: "Избыточная интенсивность атаки и мышечного тонуса, как следствие – потеря контроля над высотой звука",
+                necessary: "Вам необходимо сохранять точную высоту ноты независимо от эмоциональности и громкости.",
+                solution: "Уменьшите интенсивность атаки, используйте более сбалансированные и мягкие атаки, снизьте громкость, убавьте коэффициент мышечного тонуса, спойте проблемную ноту, затем постепенно верните необходимую громкость и голосовое качество.",
+                difficulty: 2,
+                checkResult: "Высота ноты сохраняется точно даже при увеличении громкости и энергетики.",
+                related: [17]
+            },
+            {
+                number: 19, title: "Подъезд к звуку", category: ["height"], emoji: "🎼",
+                problem: "Перед нужной нотой появляется подъезд, слайд и неточное начало",
+                reason: "Нестабильная атака или недостаточная координация слуха и голосового аппарата",
+                necessary: "Вам необходимо сразу попадать в нужную ноту без подъезда и лишних попыток.",
+                solution: "Примените более острую и твердую атаку. Возьмите проблемную ноту отдельно, коротко и на удобной громкости, затем повторите её в контексте фразы, сохраняя то же ощущение острой атаки и высоты. Острая атака характеризуется быстрым и точным началом звука без подъезда, лишнего воздуха, с звукового \"хлопка\" в начале.",
+                difficulty: 1,
+                checkResult: "Нота начинается сразу на нужной высоте.",
+                related: [17,18]
+            },
+            {
+                number: 20, title: "Голос ломается на переходе", category: ["height", "comfort"], emoji: "🎼",
+                problem: "При движении вверх или вниз голос внезапно срывается, ломается или меняет качество",
+                reason: "Некоординированный переход между регистрами",
+                necessary: "Вам необходим плавный переход между регистрами без внезапного брейка (слома).",
+                solution: "Сделайте упражнение \"Сирена\" на звук [ng] на всём вашем диапазоне от самого нижнего до самого высокого звука, начиная с толстого смыкания и постепенно переходя в тонкое, отследите момент перехода, где звук \"ломается\". Пройдите этот отрезок максимально плавно и аккуратно. Вам будут необходимы тренировки и повторенияю. Затем используйте это упражнение в целевом слоге текста: [ng] замените на целевой слог. Сосредоточьтесь на ощущении непрерывности и плавности.",
+                difficulty: 2,
+                checkResult: "Переход между регистрами становится плавным, без резкого перелома.",
+                related: [7, 18, 19]
+            },
+            {
+                number: 21, title: "Не получается микст", category: ["height", "density", "comfort"], emoji: "🎼",
+                problem: "Грудным голосом наверху тяжело, головным получается слишком тонко, а промежуточное звучание не выходит",
+                reason: "Отсутствие координации между плотностью, высотой и интенсивностью звука",
+                necessary: "Вам необходим смешанный звук, сочетающий устойчивость грудного и лёгкость головного звучания.",
+                solution: "Используйте вводное в Микст упражнение: похнычьте, поплачьте, изобразите ноющего ребенка. Ваш звук должен отзываться и ощущаться в носоглотке, в центре головы. Чем выше нота в Миксте – тем выше он будет ощущаться. <em>Не брезгуйте назализацией, редуцируйте гласные буквы, сокращайте работу челюсти.</em> Примените найденный звук в целевой фразе сначала отдельно, затем увеличивайте контекст.",
+                difficulty: 3,
+                checkResult: "Появилось промежуточное качество между грудным и головным звуком.",
+                related: []
+            },
+            {
+                number: 22, title: "Не получается перенести технику в песню", category:  ["comfort"], emoji: "🎼",
+                problem: "Высокая нота или новая техника легко получается на распевке, но в конкретной песне срывается и не получается",
+                reason: "Техника не переносится на конкретный текст, гласную, ритм или музыкальную фразу, недостаточная тренировки и нехватка уделенного внимания на перенос техники в песню",
+                necessary: "Вам необходимо перенести рабочую координацию с упражнения непосредственно в буквы, слоги, ритм, эмоцию.",
+                solution: "Используйте последовательность переноса техники:<br>– Вводное упражнение – тренируем структуры и привыкаем к конфигурации;<br>– Часть сложной фразы – тренируем звучание и структуры в контексте фразы (слог, слово);<br>– Вся сложная фраза целиком – тренируем звучание и структуры в контексте отрывка песни, тренируем подход к сложному отрезку, сохряняя конфигурации;<br>– Вся песня – тренируем мышечную память, подход к сложному отрезку, фиксируем результат.",
+                difficulty: 2,
+                checkResult: "Та же высокая нота или новая техника начинает получаться непосредственно в песне.",
+                related: []
+            },
+            {
+                number: 23, title: "На одной гласной высокая нота получается, на другой — нет", category: ["height", "comfort"], emoji: "🎼",
+                problem: "Одинаковая по высоте нота легко получается на одной гласной, но срывается или зажимается на другой",
+                reason: "Неадаптированная глоточная форма гласной для конкретной высоты",
+                necessary: "Вам необходимо сохранить высоту и свободу звука независимо от гласной.",
+                solution: "Измените глоточную форму проблемной гласной.<br>– Для голосового качества Бэлт: преимущественно открытая, широкая глотка (чем выше – тем шире). <em>Удобные гласные для Бэлта: [o], [э]</em>.<br>– Для голосового качества Микст, Твенг, Спич: преимущественно закрытая, узкая глотка (чем выше – тем уже и выше в носоглотку). <em>Удобные гласные для Микста: [и], [а], [ю].</em><br>Примените найденную глоточную форму в целевой фразе сначала отдельно, затем увеличивайте контекст.",
+                difficulty: 2,
+                checkResult: "Проблемная гласная больше не вызывает срыв или зажим на высокой ноте.",
+                related: []
+            },
+            {
+                number: 24, title: "При смене гласной теряется высота", category: ["height", "beauty"], emoji: "🌟",
+                problem: "При смене гласной нота становится неточной, хотя по отдельности интонация стабильна",
+                reason: "Изменение положения языка, челюсти или формы глотки при артикуляции",
+                necessary: "Вам необходимо сохранить точную высоту при свободной артикуляции текста.",
+                solution: "Медленно пропойте смену гласных на одной ноте, минимизируя лишние движения челюсти, языка и глотки, как бы сокращая артикуляцию. <em>(как в слоу-мо)</em>.",
+                difficulty: 2,
+                checkResult: "Высота сохраняется при смене гласных.",
+                related: []
+            },
+            {
+                number: 25, title: "Не хватает воздуха", category: ["density", "loudness"], emoji: "🛟",
+                problem: "Воздуха не хватает, чтобы спокойно закончить музыкальную фразу",
+                reason: "Неэффективное распределение воздуха по фразе",
+                necessary: "Вам необходимо закончить фразу без панического добора воздуха и потери качества звука.",
+                solution: "Прослушайте оригинал на предмет вдохов, которые вы могли не заметить, УМЕНЬШИТЕ вдох перед проблемной фразой, если вам нужен плотной звук <em>(иногда большой вдох способствует большему расходу воздуха, в чем нет необходимости)</em>, спойте фразу в контексте песни, контролируя уменьшенный вдох и большую плотность звучания.",
+                difficulty: 1,
+                checkResult: "Фраза заканчивается без нехватки воздуха.",
+                related: []
+            },
+            {
+                number: 26, title: "Слишком много воздуха при попытке петь мощно", category: ["density", "loudness", "comfort"], emoji: "🎯",
+                problem: "Чтобы сделать звук громче, вы начинаете сильнее выдыхать, но звук становится воздушным или напряжённым",
+                reason: "Попытка получить громкость за счёт увеличения воздушного давления",
+                necessary: "Вам необходим мощный звук без чрезмерного расхода воздуха и ощущения давления.",
+                solution: "Сначала уменьшите вдох и найдите плотный устойчивый звук на средней громкости, затем постепенно увеличивайте интенсивность, сохраняя контроль над уменьшенным вдохом расходом воздуха (плотностью смыкания).",
+                difficulty: 2,
+                checkResult: "Звук стал мощнее без резкого увеличения расхода воздуха.",
+                related: []
+            },
+            {
+                number: 27, title: "К концу песни голос садится", category: ["comfort"], emoji: "🛟",
+                problem: "Первая часть песни звучит хорошо, но к финалу голос становится слабым, хриплым или тяжёлым",
+                reason: "Неравномерное распределение вокальной нагрузки по песне",
+                necessary: "Вам необходимо сохранять рабочее качество голоса до конца композиции.",
+                solution: "Проконтролируйте мышечный тонус и видимые зажимы в исполнении. При необходимости, воспользуйтесь зеркалом. Акцентируйте внимание на фрагментах песни, где включается лишний избыточный тонус в лице, шее, бровях, животе. Затем намеренно снизьте мышечную работу на этом участке песни <em>(можно спеть фразу с меньшей интенсивностью, не думая о сохранении качества звучания, как бы на отвали).</em><br>Затем постепенно верните исходную интенсивность, НАМЕРЕННО сохраняя ощущение лёгкости и свободы в теле.",
+                difficulty: 2,
+                checkResult: "К концу песни голос остаётся здоровым, без хрипоты и тяжести.",
+                related: []
+            },
+            {
+                number: 28, title: "Голос срывается на высоких нотах", category: ["height", "comfort"], emoji: "🎼",
+                problem: "На высоких нотах голос внезапно срывается, пропадает или переходит в другое качество",
+                reason: "Недостаток анкеровки торса или неустойчивая глоточная форма",
+                necessary: "Вам необходим стабильный верхний звук без внезапных срывов.",
+                solution: "Активируйте мышечный тонус в области торса для вашего голосового качества: <em>Бэлт требует больше тонуса, Микст и Твенг – меньше.</em><br>Затем проконтролируйте глоточную форму на проблемной ноте, используя либо широкую (для Бэлта), либо узкую (для Микста, Твенга, Спича) глотку, сокращая лишний тонус в лице. Используйте вводные упражнения, ищите бытовые звуки для устойчивой глоточной формы, применяйте найденное ощущение в исполнении.",
+                difficulty: 2,
+                checkResult: "Высокая нота проходит без внезапного срыва.",
+                related: []
+            },
+            {
+                number: 29, title: "Не появляется вибрато", category: ["beauty", "timbre"], emoji: "🌟",
+                problem: "Длинные ноты звучат совершенно прямолинейно, естественного вибрато не появляется",
+                reason: "Недостаточная свобода и координация устойчивого звука",
+                necessary: "Вам необходимо контролируемое вибрато как один из вариантов окраски длинных нот.",
+                solution: "Сначала стабилизируйте свободную длинную ноту, затем добавляйте небольшие естественные колебания <em>(можно использовать руки: потрясите воображаемого человека напротив вас за грудки, тело, гортань должны быть свободными – не пытайтесь стабилизировать звук).</em><br>Либо поимитируйте сирену, мигалку или сигнализацию, начиная с коротких колебаний и постепенно увеличивая их длительность.",
+                difficulty: 2,
+                checkResult: "На длинной ноте появляется контролируемое естественное колебание.",
+                related: []
+            },
+            {
+                number: 30, title: "Не могу петь низкие ноты", category: ["height", "density"], emoji: "🎼",
+                problem: "Нижние ноты становятся глубокими, тяжелыми, воздушными или вообще исчезают",
+                reason: "Занижение гортани на нижнем участке диапазона, недостаточная плотность смыкания",
+                necessary: "Вам необходим устойчивый нижний звук в пределах вашего рабочего диапазона.",
+                solution: "Начните с комфортной средней ноты и постепенно двигайтесь вниз в слайде, сохраняя устойчивое речевое ощущение, среднее или высокое положение гортани. Не пытаясь искусственно утяжелить звук, углубить его. Напротив: сузьте голосовой тракт, аккуратно сплющите звук, выводя его \"вперед\"",
+                difficulty: 2,
+                checkResult: "Нижние ноты стали стабильнее, ближе и не исчезают.",
+                related: []
+            },
+            {
+                number: 31, title: "Не могу управлять динамикой внутри одной фразы", category: ["loudness", "beauty"], emoji: "📢",
+                problem: "Фраза получается либо вся тихой, либо вся громкой, а плавно изменить громкость внутри неё не получается",
+                reason: "Недостаточный контроль интенсивности звука при сохранении стабильной координации",
+                necessary: "Вам необходимо плавно изменять громкость без изменения качества и высоты.",
+                solution: "Спойте короткую фразу с постепенным усилением или ослаблением, не меняя высоту и положение артикуляции. Представьте, что управляете ручкой громкости на микшере, плавно регулируя уровень громкости или яркости.",
+                difficulty: 2,
+                checkResult: "Громкость меняется постепенно, а высота и качество остаются стабильными.",
+                related: []
+            },
+            {
+                number: 32, title: "Не слышу себя под минусовку", category: ["comfort"], emoji: "🛟",
+                problem: "Без музыки поёте уверенно, но с минусовкой теряете высоту, ритм или начинаете петь слишком громко, меняя голосовое качество",
+                reason: "Изменение слухового контроля при появлении фонограммы",
+                necessary: "Вам необходимо сохранять контроль над голосом независимо от наличия и громкости минусовки.",
+                solution: "Сначала уменьшите громкость минусовки и спойте знакомый фрагмент, контролируйте себя и свой голос, УДЕЛИТЕ ВНИМАНИЕ ТЕХНИКЕ, а не музыке. Затем постепенно верните исходный уровень, контролируя голос и привыкая к конфигурации в контексте нового слухового окружения.",
+                difficulty: 1,
+                checkResult: "Голос остаётся стабильным и контролируемым на фоне минусовки.",
+                related: []
+            },
+            {
+                number: 33, title: "Не понимаю, где брать дыхание", category: ["comfort", "density"], emoji: "🛟",
+                problem: "В песне не хватает понятных мест для вдоха, из-за чего приходится прерывать фразы или делать резкие вдохи",
+                reason: "Отсутствие заранее спланированной фразировки",
+                necessary: "Вам необходимо заранее определить места вдохов, не разрушая музыкальную фразу.",
+                solution: "Прослушайте оригинал на предмет вдохов. Разметьте текст по смысловым и музыкальным фразам, заранее выберите короткие места для вдоха, следуйте тексту с пометками при исполнении.",
+                difficulty: 1,
+                checkResult: "Вдохи происходят заранее выбранных местах и не ломают музыкальную фразу.",
+                related: []
+            },
+    
+];
+
+        const categories = [
+            { key: 'loudness', title: 'Громкость', emoji: '📢' },
+            { key: 'density', title: 'Плотность', emoji: '🎯' },
+            { key: 'comfort', title: 'Удобство', emoji: '🛟' },
+            { key: 'beauty', title: 'Красота', emoji: '🌟' },
+            { key: 'brightness', title: 'Яркость', emoji: '✨' },
+            { key: 'height', title: 'Высота', emoji: '🎼' },
+            { key: 'timbre', title: 'Тембр', emoji: '🎵' }
+        ];
+
+        const difficultyLabels = { 1: 'Начальный', 2: 'Средний', 3: 'Продвинутый' };
+
+        const glossary = {
+            "анкеровка": "Устойчивое «заякоренное» положение мышц торса или шеи, которое даёт опору звуку без лишнего зажима.",
+            "бэлт": "Мощная, «пробивная» вокальная манера, похожая на крик, но свободная и стабильная.",
+            "микст": "Смешанный регистр звучания — а-ля \"между грудным и головным\", объединяет их энергию и силу и лёгкость и пластичность.",
+            "гортань": "Структура в области шеи, где расположены голосовые связки. Её положение сильно влияет на тембр и удобство звука.",
+            "сфинктер черпало-надгортанный": "Мышечное кольцо над голосовыми связками (СЧН). Его сужение делает звук ярче и «металличнее», расширение — прямым и полым.",
+            "атака": "Способ начала звука. Твёрдая атака — резкое чёткое начало, сбалансированная или придыхательная — с «подъездом» и утечкой воздуха.",
+            "мягкое нёбо": "Подвижная часть нёба в глубине рта с язычком. Поднимаясь, создаёт «купол» в глотке, убирает гнусавость и добавляет объём.",
+            "назализация": "Призвук «в нос», возникает при опущенном мягком нёбе.",
+            "Смыкание": "Плотность и толщина контакта голосовых связок между собой: тонкое смыкание даёт лёгкий мягкий звук, толстое — плотный «металлический».",
+            "ложные голосовые складки": "Складки над истинными голосовыми связками. Их неконтролируемое сужение вызывает сипение, першение и ощущение зажатости в горле.",
+            "щитовидный хрящ": "Хрящ гортани (в быту — «кадык»). Его положение и активация влияют на плотность и тонкость звука.",
+            "перстневидный хрящ": "Хрящ в основании гортани, участвует в утолщении ГС и мощности и пробиваемости звука."
+        };
+
+        const synonyms = {
+            гром: ["громк","мощ","сил","энерг","форте","крик","ор","бэлт","полет","пробив"],
+            громк: ["гром","мощ"],
+            мощ: ["гром","сил","энерг","бэлт","давлен"],
+            сил: ["мощ","гром"],
+            тих: ["слаб","шеп","не слыш","воздух"],
+            слаб: ["тих","немощ","без сил"],
+            энергия: ["мощ","гром"],
+            верх: ["верхн","высок","диапазон","микст","фальцет","голова"],
+            высок: ["верх","верхн","диапазон"],
+            диапаз: ["верх","высок"],
+            низ: ["ниж","низк","грудь"],
+            груд: ["низ"],
+            бол: ["болит","реж","жжет","устал","дав","кол","дискомфорт"],
+            болит: ["бол"],
+            реж: ["бол"],
+            жжет: ["бол"],
+            устал: ["бол","усталость"],
+            усталость: ["бол"],
+            дискомфорт: ["бол"],
+            горл: ["гортан","шея","кадык"],
+            гортан: ["горл","кадык","шея"],
+            кадык: ["горл","гортан"],
+            шея: ["горл","гортан"],
+            зажим: ["напряж","скован","сжат","перенапряж","тяжест"],
+            напряж: ["зажим","сжат"],
+            сжат: ["зажим"],
+            тяжест: ["зажим","давит"],
+            скован: ["зажим"],
+            расслаб: ["легк","свобод"],
+            воздух: ["воздуш","дых","сип","шип","выдох"],
+            дых: ["воздух"],
+            сип: ["воздух","сипл"],
+            сипл: ["сип","воздух"],
+            выдох: ["дых"],
+            нос: ["назал","гнус"],
+            назал: ["нос","гнус"],
+            гнус: ["нос"],
+            челюст: ["рот","лицо","зуб"],
+            рот: ["челюст","губ"],
+            губ: ["рот"],
+            язык: ["корень","языка"],
+            корень: ["язык"],
+            ярк: ["звон","резк","пронз","колк"],
+            звон: ["ярк"],
+            пронз: ["ярк"],
+            колк: ["ярк"],
+            тембр: ["окраск","характер","звук"],
+            окраск: ["тембр"],
+            звук: ["тембр","голос"],
+            голос: ["звук"],
+            срыв: ["лом","нестабил","провал","сорвал"],
+            лом: ["срыв"],
+            нестабил: ["срыв"],
+            сорвал: ["срыв"],
+            плот: ["толст","тонк","смыкан","металл"],
+            толст: ["плот"],
+            тонк: ["плот"],
+            смыкан: ["плот"],
+            металл: ["плот"],
+            комфорт: ["легк","свобод","удоб"],
+            легк: ["комфорт","свобод"],
+            свобод: ["комфорт"],
+            удоб: ["комфорт"],
+            крич: ["гром","бэлт"],
+            ору: ["гром"],
+            ор: ["гром"],
+            не: ["нет"],
+            хрип: ["сип","воздух"],
+            хриплю: ["сип"],
+            гряз: ["расщеп","сип"],
+            чист: ["без сип","без гряз"],
+            фальш: ["интонац"],
+            интонац: ["фальш"],
+            тяжело: ["тяжест","зажим"],
+            тяжесть: ["зажим"],
+            легко: ["легк","комфорт"],
+            плохо: ["проблем"],
+            красив: ["тембр","ярк"],
+            некрасив: ["тембр"],
+            высокий: ["верх"],
+            низкий: ["низ"]
+        };
+
+        // ===================== STATE =====================
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const problemsContainer = document.getElementById('problemsContainer');
+        const counter = document.getElementById('counter');
+        const tooltip = document.getElementById('termTooltip');
+
+        let currentFilter = 'all';
+        let bookmarks = new Set();
+
+        try {
+            const saved = JSON.parse(localStorage.getItem('vocalGuideBookmarks') || '[]');
+            bookmarks = new Set(saved);
+        } catch (e) { bookmarks = new Set(); }
+
+        function saveBookmarks() {
+            try {
+                localStorage.setItem('vocalGuideBookmarks', JSON.stringify([...bookmarks]));
+            } catch (e) { /* localStorage unavailable, skip persistence */ }
+        }
+
+        // ===================== INIT =====================
+        function init() {
+            renderStats();
+            renderGlossary();
+            attachEventListeners();
+            renderProblems();
+            handleInitialHash();
+        }
+
+        function renderStats() {
+            const statsBar = document.getElementById('statsBar');
+            statsBar.innerHTML = `
+                <span class="stat-chip">📚 ${problems.length} проблем в справочнике</span>
+                <span class="stat-chip">🗂️ ${categories.length} категорий</span>
+                <span class="stat-chip">🔖 ${bookmarks.size} в избранном</span>
+            `;
+        }
+
+        function renderGlossary() {
+            const list = document.getElementById('glossaryList');
+            list.innerHTML = Object.entries(glossary).map(([term, def]) => `
+                <dt>${capitalize(term)}</dt>
+                <dd>${def}</dd>
+            `).join('');
+        }
+
+        function capitalize(s) {
+            return s.charAt(0).toUpperCase() + s.slice(1);
+        }
+
+        // ===================== SEARCH SCORING =====================
+        function searchScore(problem, query) {
+            if (!query.trim()) return 1;
+
+            query = query.toLowerCase().replace(/ё/g, "е");
+
+            const title = problem.title.toLowerCase().replace(/ё/g, "е");
+            const symptoms = problem.problem.toLowerCase().replace(/ё/g, "е");
+            const reason = problem.reason.toLowerCase().replace(/ё/g, "е");
+            const necessary = problem.necessary.toLowerCase().replace(/ё/g, "е");
+            const solution = problem.solution.toLowerCase().replace(/ё/g, "е");
+
+            const words = query.split(/\s+/).filter(Boolean);
+            let score = 0;
+
+            words.forEach(word => {
+                const root = word.substring(0, 4);
+
+                if (title.includes(word)) { score += 250; return; }
+                if (root.length >= 3 && title.includes(root)) { score += 180; return; }
+
+                if (symptoms.includes(word)) { score += 150; return; }
+                if (root.length >= 3 && symptoms.includes(root)) { score += 120; return; }
+
+                if (reason.includes(word)) { score += 100; return; }
+                if (root.length >= 3 && reason.includes(root)) { score += 80; return; }
+
+                if (necessary.includes(word)) { score += 40; return; }
+                if (solution.includes(word)) { score += 20; return; }
+
+                for (const key in synonyms) {
+                    if (word.startsWith(key) || key.startsWith(root)) {
+                        if (synonyms[key].some(s => title.includes(s))) { score += 180; return; }
+                        if (synonyms[key].some(s => symptoms.includes(s))) { score += 120; return; }
+                        if (synonyms[key].some(s => reason.includes(s))) { score += 80; return; }
+                    }
+                }
+            });
+
+            return score;
+        }
+
+        // ===================== RENDER =====================
+        function renderProblems() {
+            problemsContainer.innerHTML = '';
+            let totalVisible = 0;
+
+            if (currentFilter === 'bookmarked') {
+                const list = problems
+                    .filter(p => bookmarks.has(p.number))
+                    .map(p => ({ problem: p, score: searchScore(p, searchInput.value) }))
+                    .filter(item => item.score > 0)
+                    .sort((a, b) => b.score - a.score)
+                    .map(item => item.problem);
+
+                if (list.length > 0) {
+                    const section = buildCategorySection({ title: 'Избранное', emoji: '🔖' }, list, null);
+                    problemsContainer.appendChild(section);
+                    totalVisible = list.length;
+                }
+            } else {
+                categories.forEach(cat => {
+                    if (currentFilter !== 'all' && currentFilter !== cat.key) return;
+
+                    const categoryProblems = problems
+                        .map(problem => {
+                             if (!problem.category.includes(cat.key)) return null;
+                            return { problem, score: searchScore(problem, searchInput.value) };
+                        })
+                        .filter(item => item && item.score > 0)
+                        .sort((a, b) => b.score - a.score)
+                        .map(item => item.problem);
+
+                    if (categoryProblems.length > 0) {
+                        const section = buildCategorySection(cat, categoryProblems, cat.key);
+                        problemsContainer.appendChild(section);
+                        totalVisible += categoryProblems.length;
+                    }
+                });
+            }
+
+            counter.textContent = totalVisible;
+
+            if (totalVisible === 0) {
+                problemsContainer.appendChild(buildNoResults());
+            }
+        }
+
+        function buildCategorySection(cat, problemList, catKey) {
+            const section = document.createElement('div');
+            section.className = 'category-section active';
+            if (catKey) section.classList.add('cat-' + catKey);
+            if (catKey) section.style.setProperty('--cat-color', `var(--c-${catKey})`);
+
+            const title = document.createElement('div');
+            title.className = 'category-title';
+            if (catKey) title.style.setProperty('--cat-color', `var(--c-${catKey})`);
+            title.innerHTML = `<span class="category-emoji">${cat.emoji}</span> ${cat.title}`;
+
+            const grid = document.createElement('div');
+            grid.className = 'problems-grid';
+
+            problemList.forEach(problem => grid.appendChild(createProblemCard(problem)));
+
+            section.appendChild(title);
+            section.appendChild(grid);
+            return section;
+        }
+
+        function buildNoResults() {
+            const wrap = document.createElement('div');
+            wrap.className = 'no-results';
+            wrap.innerHTML = `
+                <div class="nr-emoji">🔍🤔</div>
+                <h3>Ничего не нашлось</h3>
+                <p>Попробуйте другую формулировку — например, опишите ощущение своими словами:<br>
+                «тяжело», «сипит», «болит горло», «не хватает высоты».</p>
+            `;
+            return wrap;
+        }
+
+        function highlightTerms(text) {
+            let result = text;
+            Object.keys(glossary)
+                .sort((a, b) => b.length - a.length)
+                .forEach(term => {
+                    const re = new RegExp(`(${term})`, 'gi');
+                    result = result.replace(re, `<span class="term" data-term="${term}">$1</span>`);
+                });
+            return result;
+        }
+
+        function createProblemCard(problem) {
+    const card = document.createElement('div');
+
+    // Если у карточки несколько категорий,
+    // первая используется как основная для цвета карточки
+    const primaryCategory = Array.isArray(problem.category)
+        ? problem.category[0]
+        : problem.category;
+
+    card.className = `problem-card visible cat-${primaryCategory}`;
+    card.id = `problem-${problem.number}`;
+
+    card.style.setProperty(
+        '--cat-color',
+        `var(--c-${primaryCategory})`
+    );
+
+    card.style.setProperty(
+        '--cat-bg',
+        `var(--bg-${primaryCategory})`
+    );
+
+    const isBookmarked = bookmarks.has(problem.number);
+    const diffClass = `difficulty-${problem.difficulty}`;
+    const diffLabel = difficultyLabels[problem.difficulty];
+
+    // Все категории карточки
+    const categoryBadges = (Array.isArray(problem.category)
+        ? problem.category
+        : [problem.category]
+    )
+        .map(key => {
+            const cat = categories.find(c => c.key === key);
+            if (!cat) return '';
+
+            return `
+                <span class="problem-category"
+                      style="
+                        --cat-color: var(--c-${key});
+                        --cat-bg: var(--bg-${key});
+                      ">
+                    ${cat.emoji} ${cat.title}
+                </span>
+            `;
+        })
+        .join('');
+
+    const relatedHtml = (problem.related && problem.related.length)
+        ? `<div class="related-row">
+            Похожие проблемы:
+            ${problem.related
+                .map(n => `<a data-goto="${n}">№${n}</a>`)
+                .join(', ')}
+           </div>`
+        : '';
+
+    card.innerHTML = `
+        <div class="card-top-row">
+            <div class="problem-number">${problem.number}</div>
+
+            <div class="card-actions">
+                <button
+                    class="icon-btn bookmark-btn ${isBookmarked ? 'bookmarked' : ''}"
+                    title="Добавить в избранное">
+                    ${isBookmarked ? '⭐' : '☆'}
+                </button>
+
+                <button
+                    class="icon-btn link-btn"
+                    title="Скопировать ссылку на карточку">
+                    🔗
+                </button>
+            </div>
+        </div>
+
+        <div class="problem-title">
+            ${problem.title}
+        </div>
+
+        <div class="badge-row">
+            ${categoryBadges}
+
+            <div class="difficulty-badge ${diffClass}">
+                🎓 ${diffLabel}
+            </div>
+        </div>
+
+        <button class="expand-btn">
+            Подробнее и решение ▼
+        </button>
+
+        <div class="expanded-content">
+
+            <div class="problem-item">
+                <div class="problem-label">
+                    💬 Симптомы
+                </div>
+
+                <div class="problem-text">
+                    ${highlightTerms(problem.problem)}
+                </div>
+            </div>
+
+            <div class="problem-item">
+                <div class="problem-label">
+                    🔍 Причина
+                </div>
+
+                <div class="problem-text">
+                    ${highlightTerms(problem.reason)}
+                </div>
+            </div>
+
+            <div class="problem-item">
+                <div class="problem-label">
+                    🎯 Что необходимо
+                </div>
+
+                <div class="problem-text">
+                    ${highlightTerms(problem.necessary)}
+                </div>
+            </div>
+
+            <div class="solution-content">
+                <div class="problem-item" style="margin-top:0;">
+
+                    <div class="problem-label">
+                        ✅ Варианты решения
+                    </div>
+
+                    <div class="problem-text">
+                        ${highlightTerms(problem.solution)}
+                    </div>
+
+                    <div class="check-result">
+                        🧭 Как понять, что сработало:
+                        ${problem.checkResult}
+                    </div>
+
+                </div>
+            </div>
+
+            ${relatedHtml}
+
+        </div>
+    `;
+
+    // =========================
+    // РАСКРЫТИЕ КАРТОЧКИ
+    // =========================
+
+    const expandBtn = card.querySelector('.expand-btn');
+    const expanded = card.querySelector('.expanded-content');
+
+    expandBtn.addEventListener('click', () => {
+        expanded.classList.toggle('show');
+
+        expandBtn.textContent =
+            expanded.classList.contains('show')
+                ? 'Скрыть ▲'
+                : 'Подробнее и решение ▼';
+    });
+
+    // =========================
+    // ИЗБРАННОЕ
+    // =========================
+
+    const bookmarkBtn = card.querySelector('.bookmark-btn');
+
+    bookmarkBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleBookmark(problem.number, bookmarkBtn);
+    });
+
+    // =========================
+    // ССЫЛКА
+    // =========================
+
+    const linkBtn = card.querySelector('.link-btn');
+
+    linkBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        copyCardLink(problem.number, linkBtn);
+    });
+
+    // =========================
+    // СВЯЗАННЫЕ КАРТОЧКИ
+    // =========================
+
+    card.querySelectorAll('[data-goto]').forEach(a => {
+        a.addEventListener('click', () => {
+            goToProblem(parseInt(a.dataset.goto, 10));
+        });
+    });
+
+    return card;
+}
+
+        function toggleBookmark(number, btn) {
+            if (bookmarks.has(number)) {
+                bookmarks.delete(number);
+                btn.classList.remove('bookmarked');
+                btn.textContent = '☆';
+            } else {
+                bookmarks.add(number);
+                btn.classList.add('bookmarked');
+                btn.textContent = '⭐';
+            }
+            saveBookmarks();
+            renderStats();
+            if (currentFilter === 'bookmarked') renderProblems();
+        }
+
+        function copyCardLink(number, btn) {
+            const url = `${location.origin}${location.pathname}#problem-${number}`;
+            const original = btn.textContent;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    btn.textContent = '✅';
+                    setTimeout(() => { btn.textContent = original; }, 1200);
+                }).catch(() => {
+                    prompt('Скопируйте ссылку:', url);
+                });
+            } else {
+                prompt('Скопируйте ссылку:', url);
+            }
+        }
+
+        function goToProblem(number) {
+            currentFilter = 'all';
+            searchInput.value = '';
+            filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+            renderProblems();
+            scrollToAndExpand(number);
+        }
+
+        function scrollToAndExpand(number) {
+            setTimeout(() => {
+                const el = document.getElementById(`problem-${number}`);
+                if (!el) return;
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const expanded = el.querySelector('.expanded-content');
+                const btn = el.querySelector('.expand-btn');
+                if (expanded && !expanded.classList.contains('show')) {
+                    expanded.classList.add('show');
+                    btn.textContent = 'Скрыть ▲';
+                }
+                el.style.boxShadow = '0 0 0 3px #d4731f, 0 22px 60px rgba(0,0,0,.12)';
+                setTimeout(() => { el.style.boxShadow = ''; }, 1600);
+            }, 50);
+        }
+
+        function handleInitialHash() {
+            const hash = location.hash;
+            const match = hash.match(/^#problem-(\d+)$/);
+            if (match) scrollToAndExpand(parseInt(match[1], 10));
+        }
+
+        // ===================== TOOLTIP =====================
+        function showTermTooltip(target) {
+            const key = target.dataset.term;
+            const def = glossary[key];
+            if (!def) return;
+            tooltip.textContent = def;
+            const rect = target.getBoundingClientRect();
+            tooltip.style.left = Math.min(rect.left, window.innerWidth - 300) + 'px';
+            tooltip.style.top = (rect.bottom + 8) + 'px';
+            tooltip.classList.add('show');
+        }
+
+        function hideTermTooltip() {
+            tooltip.classList.remove('show');
+        }
+
+        // ===================== EVENTS =====================
+        function attachEventListeners() {
+            searchInput.addEventListener('input', () => renderProblems());
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    renderProblems();
+                });
+            });
+
+            document.querySelectorAll('.search-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    searchInput.value = chip.dataset.q;
+                    currentFilter = 'all';
+                    filterBtns.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+                    renderProblems();
+                    searchInput.focus();
+                });
+            });
+
+            document.getElementById('glossaryToggle').addEventListener('click', () => {
+                document.getElementById('glossaryPanel').classList.toggle('show');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('term')) {
+                    showTermTooltip(e.target);
+                } else if (!e.target.closest('.term-tooltip')) {
+                    hideTermTooltip();
+                }
+            });
+
+            window.addEventListener('scroll', hideTermTooltip, { passive: true });
+        }
+
+        // Start
+        init();
+    </script>
+
+
+    <!-- =========================================================
+         ДОПОЛНИТЕЛЬНЫЙ JS-МОДУЛЬ
+         Не вмешивается в исходный массив problems и основные функции.
+         Ссылки и новые инструменты собраны отдельно для простого редактирования.
+         ========================================================= -->
+    <script>
+        // ЗАМЕНИ ССЫЛКИ НИЖЕ НА СВОИ. Пустая строка скрывает кнопку.
+        const LINKS = {
+            course: "https://vocalsystem.getcourse.ru/page4?fromWebinar=eyJsaW5rIjoiXC9wYWdlNCIsImlkIjozMzQ1ODQ1LCJsYXVuY2hOdW1iZXIiOjV9.b5a6bc895c2ad88fcd08b32e5aa53bad057db322de184e478c7adfa0c4ec1826",
+            application: "",
+            instagram: "https://www.instagram.com/_iamtimurs_/",
+            telegram: "https://t.me/iamtimurs_vocal",
+            youtube: "https://www.youtube.com/@iamtimursvocal"
+        };
+
+        (function initExtraFeatures() {
+            // Подключение внешних ссылок из одного места.
+            document.querySelectorAll('[data-link]').forEach(link => {
+                const url = LINKS[link.dataset.link];
+                if (url && /^https?:\/\//i.test(url)) {
+                    link.href = url;
+                    link.style.display = '';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+
+            
+// =====================================================
+// МИНИ-ДИАГНОСТИКА
+// Контекст зависит от выбранной проблемы.
+// Результаты учитывают и проблему, и контекст.
+// =====================================================
+
+const concernSelect = document.getElementById('diagConcern');
+const contextSelect = document.getElementById('diagContext');
+
+const contextOptions = {
+    high: [
+        'На определённых гласных',
+        'При увеличении громкости',
+        'При попытке спеть мощно и плотно',
+        'При переходе из нижнего регистра в верхний',
+        'На одной конкретной ноте',
+        'При длительном удержании ноты',
+        'Даже на тихом звуке',
+        'В конкретном месте песни',
+        'Во время упражнений'
+    ],
+
+    breaks: [
+        'На отдельных нотах',
+        'При переходе между регистрами',
+        'Когда пытаюсь увеличить громкость',
+        'На определённых гласных',
+        'В конце фразы или после нескольких повторов',
+        'И в упражнениях, и в песнях'
+    ],
+
+    loud: [
+        'Звук становится громче, но теряет плотность',
+        'При увеличении громкости появляется зажим',
+        'На верхних нотах звук становится тонким',
+        'Не получается сохранить громкость на длинной фразе',
+        'Не хватает громкости во всём диапазоне'
+    ],
+
+    density: [
+        'На верхних нотах',
+        'На тихом звучании',
+        'При увеличении громкости',
+        'На отдельных гласных',
+        'В определённом голосовом качестве'
+    ],
+
+    air: [
+        'На всём диапазоне',
+        'На верхних нотах',
+        'При тихом пении',
+        'На отдельных гласных',
+        'В конце фразы'
+    ],
+
+    tension: [
+        'На верхних нотах',
+        'При увеличении громкости',
+        'На определённых гласных',
+        'В области челюсти или языка',
+        'После нескольких повторов'
+    ],
+
+    brightness: [
+        'Звук кажется глухим во всём диапазоне',
+        'На верхних нотах',
+        'При попытке увеличить громкость',
+        'На отдельных гласных',
+        'В конкретной песне'
+    ],
+
+    vowel: [
+        'На гласной А',
+        'На гласной Э',
+        'На гласной И',
+        'На гласной О или У',
+        'При переходе между гласными',
+        'В конкретном слове песни'
+    ],
+
+    register: [
+        'При движении снизу вверх',
+        'При движении сверху вниз',
+        'На определённых нотах',
+        'При увеличении громкости',
+        'В конкретной фразе песни'
+    ],
+
+    belt: [
+        'Не получается начать звук',
+        'Звук получается крикливым или жёстким',
+        'Не хватает плотности',
+        'Не получается удержать качество на верхних нотах',
+        'Сложно перенести качество в песню'
+    ],
+
+    timbre: [
+        'Звук слишком тёмный',
+        'Звук слишком резкий или яркий',
+        'Звучание нестабильно от ноты к ноте',
+        'Не нравится тембр на отдельных гласных',
+        'Только в определённых песнях'
+    ],
+
+    nasal: [
+        'На гласных А и Э',
+        'На гласных И и Е',
+        'На всём диапазоне',
+        'Только на верхних нотах',
+        'В конкретных словах'
+    ],
+
+    other: [
+        'В упражнениях',
+        'В песнях',
+        'На отдельных нотах или гласных',
+        'Почти постоянно'
+    ]
+};
+
+
+// Обновляем контекст при изменении проблемы.
+function updateDiagnosticContexts() {
+    const options =
+        contextOptions[concernSelect.value] || contextOptions.other;
+
+    contextSelect.innerHTML = options
+        .map(item =>
+            `<option value="${escapeExtraHtml(item)}">${escapeExtraHtml(item)}</option>`
+        )
+        .join('');
+}
+
+concernSelect.addEventListener('change', () => {
+    updateDiagnosticContexts();
+
+    document
+        .getElementById('diagnosticResult')
+        .classList.remove('show');
+});
+
+updateDiagnosticContexts();
+
+
+// Ключевые слова для поиска в базе проблем.
+const diagnosticKeywords = {
+    high: [
+        'высок', 'верхн', 'гортан',
+        'щитовид', 'перстневид', 'twang', 'belt'
+    ],
+
+    breaks: [
+        'срыв', 'стабиль', 'анкеров',
+        'торс', 'смыкан', 'регист'
+    ],
+
+    loud: [
+        'мощн', 'громк', 'полет',
+        'анкеров', 'торс', 'смыкан'
+    ],
+
+    density: [
+        'плотн', 'смыкан', 'мягк',
+        'воздуш', 'громк'
+    ],
+
+    air: [
+        'воздуш', 'смыкан', 'мягк', 'плотн'
+    ],
+
+    tension: [
+        'напряж', 'зажим', 'язык',
+        'гортан', 'челюст', 'комфорт'
+    ],
+
+    brightness: [
+        'ярк', 'звонк', 'twang', 'счн', 'сфинктер'
+    ],
+
+    vowel: [
+        'гласн', 'язык', 'мягк',
+        'нёб', 'формант'
+    ],
+
+    register: [
+        'регистр', 'переход',
+        'срыв', 'смыкан', 'гортан'
+    ],
+
+    belt: [
+        'belt', 'бэлт', 'мощн',
+        'громк', 'смыкан', 'twang'
+    ],
+
+    timbre: [
+        'тембр', 'ярк', 'мягк', 'глух', 'гласн'
+    ],
+
+    nasal: [
+        'гнусав', 'нёб', 'мягк', 'резон'
+    ],
+
+    other: []
+};
+
+
+// Подбор материалов.
+const diagnosticForm =
+    document.getElementById('diagnosticForm');
+
+diagnosticForm.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const concern = concernSelect.value;
+    const context = contextSelect.value;
+
+    const keywords =
+        diagnosticKeywords[concern] || [];
+
+    // Разбиваем контекст на отдельные значимые слова.
+    const contextWords = context
+        .toLowerCase()
+        .replace(/ё/g, 'е')
+        .split(/[^а-яa-z]+/)
+        .filter(word => word.length > 3);
+
+    // Сравниваем ответы с содержанием карточек справочника.
+    const matches = problems
+        .map(problem => {
+            const haystack = [
+                problem.title,
+                problem.problem,
+                problem.reason,
+                problem.necessary,
+                problem.solution
+            ]
+                .join(' ')
+                .toLowerCase()
+                .replace(/ё/g, 'е');
+
+            let score = keywords.reduce((sum, word) => {
+                if (haystack.includes(word)) {
+                    return sum +
+                        (problem.title.toLowerCase().includes(word) ? 5 : 2);
+                }
+
+                return sum;
+            }, 0);
+
+            // Дополнительные баллы за совпадения с контекстом.
+            contextWords.forEach(word => {
+                if (haystack.includes(word)) {
+                    score += 1;
+                }
+            });
+
+            return { problem, score };
+        })
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 4);
+
+    const result =
+        document.getElementById('diagnosticResult');
+
+    const contextLine =
+        `<strong>Контекст:</strong> ${escapeExtraHtml(context)}<br><br>`;
+
+    if (!matches.length) {
+        result.innerHTML =
+            contextLine +
+            '<strong>Точного совпадения в справочнике пока нет.</strong><br>' +
+            'Попробуй выбрать более общий контекст или воспользуйся поиском по справочнику.';
+    } else {
+        result.innerHTML =
+            contextLine +
+            '<strong>Материалы, с которых стоит начать</strong><br>' +
+            matches.map(item =>
+                `<a href="#problem-${item.problem.number}" data-extra-problem="${item.problem.number}">№${item.problem.number} — ${escapeExtraHtml(item.problem.title)}</a>`
+            ).join('<br>') +
+            '<br><br><small>Подборка учитывает выбранную проблему и контекст. Это навигация по материалам, а не диагноз и не подтверждение причины.</small>';
+    }
+
+    result.classList.add('show');
+
+    // Переход к выбранной карточке справочника.
+    result.querySelectorAll('[data-extra-problem]')
+        .forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+
+                goToProblem(
+                    Number(link.dataset.extraProblem)
+                );
+            });
+        });
+});
+
+
+            // Конструктор вокальной задачи.
+            document.getElementById('taskForm').addEventListener('submit', event => {
+                event.preventDefault();
+                const goal = document.getElementById('taskGoal').value;
+                const song = document.getElementById('taskSong').value.trim() || 'выбранный фрагмент песни';
+                const result = document.getElementById('taskResult');
+                result.innerHTML = `<strong>Моя вокальная задача</strong><br>Исследовать, как добиться цели «${escapeExtraHtml(goal.toLowerCase())}» в фрагменте «${escapeExtraHtml(song)}».<br><br><strong>Порядок работы:</strong><br>1. Выбрать короткий фрагмент.<br>2. Сформулировать желаемое звучание.<br>3. Найти простой входной звук.<br>4. Проверить результат и перенести его в песню.`;
+                result.classList.add('show');
+            });
+
+            // Чек-листы.
+            document.getElementById('resetChecklist').addEventListener('click', () => {
+                document.querySelectorAll('#resultChecklist input').forEach(input => input.checked = false);
+            });
+            document.getElementById('resetPractice').addEventListener('click', () => {
+                document.querySelectorAll('#practiceChecklist input').forEach(input => input.checked = false);
+            });
+
+            // Вокальный дневник: хранение только в браузере пользователя.
+            const diaryKey = 'vocalGuideDiary';
+            let diary = [];
+            try { diary = JSON.parse(localStorage.getItem(diaryKey) || '[]'); } catch (error) { diary = []; }
+            const renderDiary = () => {
+                const box = document.getElementById('diaryEntries');
+                if (!diary.length) { box.innerHTML = '<p class="muted-note" style="margin-top:12px">Пока нет записей. Первая запись появится здесь.</p>'; return; }
+                box.innerHTML = diary.map((entry, index) => `<div class="diary-entry"><strong>${escapeExtraHtml(entry.goal)}</strong><small>${escapeExtraHtml(entry.date)}</small><p>${escapeExtraHtml(entry.note)}</p><button type="button" data-edit-diary="${index}">Изменить</button><button type="button" data-delete-diary="${index}">Удалить</button></div>`).join('');
+                box.querySelectorAll('[data-delete-diary]').forEach(button => button.addEventListener('click', () => {
+                    diary.splice(Number(button.dataset.deleteDiary), 1); saveDiary(); renderDiary();
+                }));
+                box.querySelectorAll('[data-edit-diary]').forEach(button => button.addEventListener('click', () => {
+                    const index = Number(button.dataset.editDiary); const entry = diary[index];
+                    document.getElementById('diaryGoal').value = entry.goal;
+                    document.getElementById('diaryNote').value = entry.note;
+                    diary.splice(index, 1); saveDiary(); renderDiary();
+                }));
+            };
+            const saveDiary = () => { try { localStorage.setItem(diaryKey, JSON.stringify(diary)); } catch (error) {} };
+            document.getElementById('diaryForm').addEventListener('submit', event => {
+                event.preventDefault();
+                diary.unshift({ goal: document.getElementById('diaryGoal').value.trim(), note: document.getElementById('diaryNote').value.trim(), date: new Date().toLocaleString('ru-RU') });
+                saveDiary(); renderDiary(); event.target.reset();
+            });
+            renderDiary();
+
+            // Переход к избранному и словарю с использованием исходных функций.
+            document.getElementById('showBookmarks').addEventListener('click', () => {
+                currentFilter = 'bookmarked';
+                filterBtns.forEach(button => button.classList.toggle('active', button.dataset.filter === 'bookmarked'));
+                renderProblems();
+                document.getElementById('problemsContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+            document.getElementById('openGlossary').addEventListener('click', () => {
+                const panel = document.getElementById('glossaryPanel');
+                panel.classList.add('show');
+                panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            });
+        })();
+
+        function escapeExtraHtml(value) {
+            return String(value).replace(/[&<>"']/g, character => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[character]));
+        }
+    </script>
+
+
+    <script>
+      // Небольшое дополнение интерфейса: мобильное меню и страховка отображения каталога.
+      (function(){
+        const toggle=document.querySelector('.mobile-menu-toggle');
+        const menu=document.getElementById('siteNavLinks');
+        if(toggle && menu){
+          toggle.addEventListener('click',()=>{
+            const open=menu.classList.toggle('open');
+            toggle.setAttribute('aria-expanded',String(open));
+            toggle.textContent=open?'×':'☰';
+          });
+          menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+            menu.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰';
+          }));
+        }
+        // Некоторые мобильные браузеры/режимы предпросмотра могут прервать init.
+        // Если карточки не появились, повторно запускаем штатный рендер исходного массива.
+        window.addEventListener('load',()=>{
+          window.setTimeout(()=>{
+            const box=document.getElementById('problemsContainer');
+            if(box && !box.querySelector('.problem-card') && typeof renderProblems==='function'){
+              try{renderProblems();}catch(error){console.error('Не удалось отобразить карточки гида:',error);}
+            }
+          },80);
+        });
+      })();
+    </script>
+
+</body>
+</html>
